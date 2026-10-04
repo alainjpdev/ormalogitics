@@ -1086,4 +1086,231 @@ footer#colophon a:hover {
   border-color: #94a3b8;
 }
 
+/* ========================================================
+   Interactive Branches & Map Section (Sucursales)
+   ======================================================== */
+.branches-map-section {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.branch-filter-pills {
+  margin-bottom: 24px;
+}
+
+.branch-pill {
+  background: #f1f5f9;
+  color: #334155;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 25px;
+  padding: 8px 18px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.branch-pill .hq-dot {
+  color: #c32637;
+  font-size: 13px;
+}
+
+.branch-pill:hover {
+  background: #e2e8f0;
+  color: #00235a;
+  border-color: #cbd5e1;
+}
+
+.branch-pill.active {
+  background: #c32637;
+  color: #ffffff;
+  border-color: #c32637;
+  box-shadow: 0 4px 14px rgba(195, 38, 55, 0.28);
+}
+
+.branch-pill.active .hq-dot {
+  color: #ffffff;
+}
+
+.branch-map-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 35, 90, 0.1);
+  border: 1px solid #e2e8f0;
+  background: #e2e8f0;
+}
+
+.branch-map-canvas {
+  width: 100%;
+  height: 420px;
+  z-index: 1;
+}
+
+@media (max-width: 767px) {
+  .branch-map-canvas {
+    height: 350px;
+  }
+}
+
+.branch-card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 22px 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.branch-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 35, 90, 0.12);
+  border-color: #c32637;
+}
+
+.branch-card.is-selected {
+  border-color: #c32637;
+  box-shadow: 0 0 0 2px rgba(195, 38, 55, 0.2), 0 12px 28px rgba(0, 35, 90, 0.12);
+  background: #fffafa;
+}
+
+.branch-badge {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.branch-badge.badge-hq {
+  background: rgba(195, 38, 55, 0.12);
+  color: #c32637;
+  border: 1px solid rgba(195, 38, 55, 0.25);
+}
+
+.branch-badge.badge-reg {
+  background: rgba(0, 35, 90, 0.08);
+  color: #00235a;
+  border: 1px solid rgba(0, 35, 90, 0.18);
+}
+
+.branch-focus-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  padding: 4px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.branch-card:hover .branch-focus-btn,
+.branch-card.is-selected .branch-focus-btn {
+  color: #c32637;
+}
+
+.branch-card-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #00235a;
+  margin-bottom: 12px;
+  line-height: 1.35;
+}
+
+.branch-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.45;
+  flex-grow: 1;
+}
+
+.branch-card-info .info-icon {
+  color: #c32637;
+  margin-top: 2px;
+}
+
+.branch-card-info a {
+  color: #1e293b;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.branch-card-info a:hover {
+  color: #c32637;
+}
+
+.branch-card-actions {
+  border-top: 1px solid #f1f5f9;
+}
+
+.branch-action-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: #f8fafc;
+  color: #00235a;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  flex: 1;
+  transition: all 0.2s ease;
+}
+
+.branch-action-link:hover {
+  background: #00235a;
+  color: #ffffff;
+  border-color: #00235a;
+}
+
+.branch-action-wa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(37, 211, 102, 0.12);
+  color: #15803d;
+  border: 1px solid rgba(37, 211, 102, 0.3);
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.branch-action-wa:hover {
+  background: #25d366;
+  color: #ffffff;
+  border-color: #25d366;
+}
+
+/* Card 1 Email hover fix in post-944.css */
+.elementor-944 .elementor-element.elementor-element-406ab6b:hover .elementor-icon-box-title a {
+  color: #ffffff !important;
+}
+
+
 
