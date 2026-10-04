@@ -118,8 +118,22 @@ export default function Navbar({ onOpenQuote }) {
             </div>
 
             {/* Mobile Hamburger Column */}
-            <div className="d-block d-lg-none col-sm-1 col-md-8 col-6">
+            <div className="d-block d-lg-none col-sm-7 col-md-8 col-6">
               <div className="mobile-nav-wrap">
+                {/* Language Switcher next to Hamburger */}
+                <button
+                  type="button"
+                  className="lang-pill-btn mobile-header-lang-btn"
+                  onClick={toggleLanguage}
+                  title={language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
+                  aria-label="Cambiar idioma"
+                >
+                  <i className="fal fa-globe me-1"></i>
+                  <span className={`lang-badge ${language === 'es' ? 'active' : ''}`}>ES</span>
+                  <span className="lang-sep">|</span>
+                  <span className={`lang-badge ${language === 'en' ? 'active' : ''}`}>EN</span>
+                </button>
+
                 <div
                   id="hamburger"
                   onClick={() => setMobileNavOpen(true)}

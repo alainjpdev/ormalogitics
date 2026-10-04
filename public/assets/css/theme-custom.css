@@ -129,6 +129,29 @@ header.header-1.sticky .logo img {
   justify-content: flex-end;
   align-items: center;
   width: 100%;
+  gap: 12px;
+}
+
+.mobile-header-lang-btn {
+  padding: 5px 12px;
+  font-size: 13px;
+  background: rgba(195, 38, 55, 0.08);
+  border: 1px solid rgba(195, 38, 55, 0.35);
+  border-radius: 20px;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1.2;
+  transition: all 0.2s ease;
+}
+
+.mobile-header-lang-btn:hover,
+.mobile-header-lang-btn:active {
+  background: rgba(195, 38, 55, 0.18);
+  border-color: #c32637;
+  transform: scale(1.03);
 }
 
 #hamburger {
