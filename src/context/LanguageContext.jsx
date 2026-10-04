@@ -141,6 +141,18 @@ export function LanguageProvider({ children }) {
   useEffect(() => {
     localStorage.setItem('orma_lang', language);
     document.documentElement.lang = language;
+    document.title = language === 'en'
+      ? 'Orma Logistics – Heavy Machinery Rental & Logistics Solutions'
+      : 'orma logistics – orma logistics';
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute(
+        'content',
+        language === 'en'
+          ? 'Orma Logistics: Heavy machinery rental, personnel transportation, water tank trucks, and comprehensive logistics services for construction projects in Mexico.'
+          : 'Orma Logistics: Renta de maquinaria pesada, transporte de personal, pipas de agua y servicios integrales de logística para proyectos de construcción en México.'
+      );
+    }
   }, [language]);
 
   const toggleLanguage = () => {

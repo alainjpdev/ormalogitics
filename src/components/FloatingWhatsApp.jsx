@@ -1,13 +1,20 @@
 import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function FloatingWhatsApp() {
+  const { language } = useLanguage();
+  const textMsg = language === 'en'
+    ? 'Hello Orma Logistics, I would like to request information about your services.'
+    : 'Hola Orma Logistics, me gustaría solicitar información sobre sus servicios.';
+
   return (
     <a
-      href="https://api.whatsapp.com/send?phone=524427999440&text=Hola,%20me%20gustar%C3%ADa%20solicitar%20informaci%C3%B3n%20sobre%20sus%20servicios."
+      href={`https://api.whatsapp.com/send?phone=524427999440&text=${encodeURIComponent(textMsg)}`}
       target="_blank"
       rel="noreferrer"
       className="whatsapp-float floating-whatsapp"
-      aria-label="Contactar por WhatsApp"
+      aria-label={language === 'en' ? 'Contact via WhatsApp' : 'Contactar por WhatsApp'}
+      title={language === 'en' ? 'Chat on WhatsApp' : 'Contactar por WhatsApp'}
     >
       <i className="fab fa-whatsapp"></i>
     </a>

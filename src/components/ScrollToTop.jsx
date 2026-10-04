@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function ScrollToTop() {
   const { pathname } = useLocation();
+  const { language } = useLanguage();
   const [showScroll, setShowScroll] = useState(false);
 
   useEffect(() => {
@@ -31,7 +33,12 @@ export default function ScrollToTop() {
   return (
     <>
       {showScroll && (
-        <button id="scrollUp" onClick={scrollTop} aria-label="Volver arriba">
+        <button
+          id="scrollUp"
+          onClick={scrollTop}
+          aria-label={language === 'en' ? 'Scroll to top' : 'Volver arriba'}
+          title={language === 'en' ? 'Scroll to top' : 'Volver arriba'}
+        >
           <i className="fal fa-arrow-up"></i>
         </button>
       )}
