@@ -133,26 +133,9 @@ header.header-1.sticky .logo img {
 }
 
 .mobile-header-lang-btn {
-  padding: 6px 14px;
-  font-size: 13px;
-  background: rgba(195, 38, 55, 0.08);
-  border: 1px solid rgba(195, 38, 55, 0.35);
-  border-radius: 20px;
-  cursor: pointer;
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  line-height: 1.2;
-  transition: all 0.2s ease;
+  padding: 2px 3px;
   margin-right: 6px;
-}
-
-.mobile-header-lang-btn:hover,
-.mobile-header-lang-btn:active {
-  background: rgba(195, 38, 55, 0.18);
-  border-color: #c32637;
-  transform: scale(1.03);
+  flex-shrink: 0;
 }
 
 #hamburger {
@@ -715,90 +698,147 @@ footer#colophon a:hover {
 }
 
 .lang-pill-btn {
-  background: rgba(195, 38, 55, 0.08);
-  border: 1px solid rgba(195, 38, 55, 0.35);
-  border-radius: 20px;
-  padding: 6px 14px;
-  cursor: pointer;
-  font-family: 'Poppins', sans-serif;
-  font-size: 13px;
-  font-weight: 600;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  padding: 3px 4px;
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  color: #333333;
+  gap: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   transition: all 0.25s ease;
 }
 
 .lang-pill-btn:hover {
-  background: rgba(195, 38, 55, 0.16);
-  border-color: #c32637;
-  transform: translateY(-1px);
+  border-color: #cbd5e1;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
-.lang-pill-btn i {
+.lang-option {
+  border: none;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 8px;
+  border-radius: 18px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+  line-height: 1;
+}
+
+.lang-option:hover {
+  color: #1e293b;
+}
+
+.lang-option.active {
+  background: #ffffff;
   color: #c32637;
-  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-.lang-pill-btn .lang-badge {
-  color: #666666;
-  transition: color 0.2s ease, font-weight 0.2s ease;
+.lang-option .minimal-flag-svg {
+  opacity: 0.82;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.lang-pill-btn .lang-badge.active {
-  color: #c32637;
-  font-weight: 800;
+.lang-option:hover .minimal-flag-svg,
+.lang-option.active .minimal-flag-svg {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.lang-option .lang-code {
+  letter-spacing: 0.5px;
+  line-height: 1;
 }
 
 .lang-pill-btn .lang-sep {
-  color: #aaaaaa;
+  color: #cbd5e1;
+  font-size: 10px;
+  user-select: none;
+}
+
+/* Mobile Header Language Switcher */
+.mobile-header-lang-btn {
+  padding: 2px 3px;
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+
+.mobile-header-lang-btn .lang-option {
+  padding: 3px 6px;
   font-size: 11px;
+  gap: 4px;
 }
 
 /* Mobile Drawer Language Switcher */
 .mobile-lang-wrap {
   padding-bottom: 15px;
   margin-bottom: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .mobile-lang-btn {
-  background: rgba(0, 0, 0, 0.22);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #ffffff;
-  border-radius: 20px;
-  padding: 8px 14px;
-  font-family: 'Poppins', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  display: flex;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  padding: 4px 6px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 4px;
   width: 100%;
+  box-sizing: border-box;
+}
+
+.mobile-lang-opt {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  border-radius: 18px;
+  padding: 8px 12px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
+  outline: none;
 }
 
-.mobile-lang-btn:hover {
-  background: rgba(0, 0, 0, 0.35);
-  border-color: #ffffff;
+.mobile-lang-opt:hover {
+  color: #ffffff;
 }
 
-.mobile-lang-btn .lang-text {
-  opacity: 0.7;
-  transition: opacity 0.2s ease;
+.mobile-lang-opt.active {
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-.mobile-lang-btn .lang-text.active {
+.mobile-lang-opt .minimal-flag-svg {
+  opacity: 0.85;
+}
+
+.mobile-lang-opt.active .minimal-flag-svg {
   opacity: 1;
-  font-weight: 800;
-  text-decoration: underline;
-  text-underline-offset: 4px;
 }
 
 .mobile-lang-btn .lang-sep {
-  opacity: 0.5;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 11px;
 }
 
 /* 11. Modern Minimalist Loading System (Top Bar, Preloader & Image Pill) */

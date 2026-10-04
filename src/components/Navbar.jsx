@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+import { FlagMexico, FlagUSA } from './FlagIcons';
 
 export default function Navbar({ onOpenQuote }) {
   const [isSticky, setIsSticky] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const { language, toggleLanguage, t } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -101,18 +102,29 @@ export default function Navbar({ onOpenQuote }) {
 
                 {/* Language Switcher */}
                 <div className="header-lang-switcher ms-4">
-                  <button
-                    type="button"
-                    className="lang-pill-btn"
-                    onClick={toggleLanguage}
-                    title={language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
-                    aria-label="Cambiar idioma"
-                  >
-                    <i className="fal fa-globe me-1"></i>
-                    <span className={`lang-badge ${language === 'es' ? 'active' : ''}`}>ES</span>
+                  <div className="lang-pill-btn" role="group" aria-label="Selector de idioma">
+                    <button
+                      type="button"
+                      className={`lang-option ${language === 'es' ? 'active' : ''}`}
+                      onClick={() => setLanguage('es')}
+                      title="Español (México)"
+                      aria-label="Cambiar a Español"
+                    >
+                      <FlagMexico size={12} />
+                      <span className="lang-code">ES</span>
+                    </button>
                     <span className="lang-sep">|</span>
-                    <span className={`lang-badge ${language === 'en' ? 'active' : ''}`}>EN</span>
-                  </button>
+                    <button
+                      type="button"
+                      className={`lang-option ${language === 'en' ? 'active' : ''}`}
+                      onClick={() => setLanguage('en')}
+                      title="English (USA)"
+                      aria-label="Switch to English"
+                    >
+                      <FlagUSA size={12} />
+                      <span className="lang-code">EN</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -121,18 +133,29 @@ export default function Navbar({ onOpenQuote }) {
             <div className="d-block d-lg-none col-sm-7 col-md-8 col-6">
               <div className="mobile-nav-wrap">
                 {/* Language Switcher next to Hamburger */}
-                <button
-                  type="button"
-                  className="lang-pill-btn mobile-header-lang-btn"
-                  onClick={toggleLanguage}
-                  title={language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
-                  aria-label="Cambiar idioma"
-                >
-                  <i className="fal fa-globe me-1"></i>
-                  <span className={`lang-badge ${language === 'es' ? 'active' : ''}`}>ES</span>
+                <div className="lang-pill-btn mobile-header-lang-btn" role="group" aria-label="Selector de idioma">
+                  <button
+                    type="button"
+                    className={`lang-option ${language === 'es' ? 'active' : ''}`}
+                    onClick={() => setLanguage('es')}
+                    title="Español"
+                    aria-label="Español"
+                  >
+                    <FlagMexico size={11} />
+                    <span className="lang-code">ES</span>
+                  </button>
                   <span className="lang-sep">|</span>
-                  <span className={`lang-badge ${language === 'en' ? 'active' : ''}`}>EN</span>
-                </button>
+                  <button
+                    type="button"
+                    className={`lang-option ${language === 'en' ? 'active' : ''}`}
+                    onClick={() => setLanguage('en')}
+                    title="English"
+                    aria-label="English"
+                  >
+                    <FlagUSA size={11} />
+                    <span className="lang-code">EN</span>
+                  </button>
+                </div>
 
                 <div
                   id="hamburger"
@@ -155,17 +178,33 @@ export default function Navbar({ onOpenQuote }) {
                   <nav className="sidebar-nav">
                     {/* Mobile Language Switcher */}
                     <div className="mobile-lang-wrap mb-3">
-                      <button
-                        type="button"
-                        className="mobile-lang-btn"
-                        onClick={toggleLanguage}
-                        aria-label="Cambiar idioma"
-                      >
-                        <i className="fal fa-globe me-2"></i>
-                        <span className={`lang-text ${language === 'es' ? 'active' : ''}`}>Español</span>
+                      <div className="mobile-lang-btn" role="group" aria-label="Selector de idioma">
+                        <button
+                          type="button"
+                          className={`mobile-lang-opt ${language === 'es' ? 'active' : ''}`}
+                          onClick={() => {
+                            setLanguage('es');
+                            closeMobile();
+                          }}
+                          aria-label="Cambiar a Español"
+                        >
+                          <FlagMexico size={14} />
+                          <span className="lang-text">Español</span>
+                        </button>
                         <span className="lang-sep mx-2">|</span>
-                        <span className={`lang-text ${language === 'en' ? 'active' : ''}`}>English</span>
-                      </button>
+                        <button
+                          type="button"
+                          className={`mobile-lang-opt ${language === 'en' ? 'active' : ''}`}
+                          onClick={() => {
+                            setLanguage('en');
+                            closeMobile();
+                          }}
+                          aria-label="Switch to English"
+                        >
+                          <FlagUSA size={14} />
+                          <span className="lang-text">English</span>
+                        </button>
+                      </div>
                     </div>
 
                     <ul className="metismenu" id="mobile-menu">
