@@ -476,10 +476,116 @@ header.header-1.sticky .logo img {
 }
 
 .mask-outline h1 {
-  font-size: clamp(100px, 15vw, 190px);
   font-weight: 900;
   margin: 0;
   line-height: 0.9;
+}
+
+/* Mobile & Tablet Centering for Mask Outline Counter (33 & 31) */
+@media (max-width: 991px) {
+  /* Parent widget & container centering */
+  .elementor-widget-modina_mask_countup,
+  .elementor-element-858bb65,
+  .elementor-element-41ba560 {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .elementor-widget-modina_mask_countup > .elementor-widget-container,
+  .elementor-element-858bb65 > .elementor-widget-container,
+  .elementor-element-41ba560 > .elementor-widget-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin: 0 auto 10px auto !important;
+    padding: 0 !important;
+  }
+
+  /* Counter element centering */
+  .mask-outline,
+  .mask-outline.text-center,
+  .elementor-element-858bb65 .mask-outline,
+  .elementor-element-41ba560 .mask-outline {
+    display: inline-block !important;
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    float: none !important;
+    width: auto !important;
+    max-width: 100% !important;
+    background-position: center bottom !important;
+  }
+
+  /* Responsive centered typography for 33 / 31 without horizontal overflow */
+  .mask-outline h1,
+  .mask-outline h2,
+  .mask-outline h3,
+  .elementor-2066 .elementor-element.elementor-element-858bb65 .mask-outline h1,
+  .elementor-2066 .elementor-element.elementor-element-858bb65 .mask-outline h2,
+  .elementor-2066 .elementor-element.elementor-element-858bb65 .mask-outline h3,
+  .elementor-941 .elementor-element.elementor-element-41ba560 .mask-outline h1,
+  .elementor-941 .elementor-element.elementor-element-41ba560 .mask-outline h2,
+  .elementor-941 .elementor-element.elementor-element-41ba560 .mask-outline h3 {
+    display: block !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    font-size: clamp(110px, 30vw, 190px) !important;
+    line-height: 0.95 !important;
+    letter-spacing: -2px !important;
+  }
+
+  /* Subtitle centering below countup */
+  .elementor-element-9556026,
+  .elementor-element-235a598,
+  .elementor-element-9556026 .elementor-widget-container,
+  .elementor-element-235a598 .elementor-widget-container,
+  .elementor-element-9556026 .elementor-heading-title,
+  .elementor-element-235a598 .elementor-heading-title {
+    display: block !important;
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
+  }
+
+  /* Outer column centering */
+  .elementor-column.elementor-element-d4f92ea,
+  .elementor-column.elementor-element-a4c9b9f,
+  .elementor-column.elementor-element-ad71579 {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
+  }
+
+  .elementor-column.elementor-element-d4f92ea > .elementor-widget-wrap,
+  .elementor-column.elementor-element-a4c9b9f > .elementor-widget-wrap,
+  .elementor-column.elementor-element-ad71579 > .elementor-widget-wrap {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
 }
 
 /* 6. Section Titles across the site */
