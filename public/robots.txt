@@ -3,5 +3,5 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://ormalogistics.com/sitemap.xml
 Sitemap: https://orma-one.vercel.app/sitemap.xml
+Sitemap: https://ormalogistics.com/sitemap-domain.xml
