@@ -100,7 +100,7 @@ export default function Navbar({ onOpenQuote }) {
                 </div>
 
                 {/* Language Switcher */}
-                <div className="header-lang-switcher ms-3">
+                <div className="header-lang-switcher ms-4">
                   <button
                     type="button"
                     className="lang-pill-btn"

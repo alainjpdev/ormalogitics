@@ -129,11 +129,11 @@ header.header-1.sticky .logo img {
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  gap: 12px;
+  gap: 24px;
 }
 
 .mobile-header-lang-btn {
-  padding: 5px 12px;
+  padding: 6px 14px;
   font-size: 13px;
   background: rgba(195, 38, 55, 0.08);
   border: 1px solid rgba(195, 38, 55, 0.35);
@@ -142,9 +142,10 @@ header.header-1.sticky .logo img {
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   line-height: 1.2;
   transition: all 0.2s ease;
+  margin-right: 6px;
 }
 
 .mobile-header-lang-btn:hover,
@@ -611,14 +612,14 @@ footer#colophon a:hover {
   background: rgba(195, 38, 55, 0.08);
   border: 1px solid rgba(195, 38, 55, 0.35);
   border-radius: 20px;
-  padding: 5px 12px;
+  padding: 6px 14px;
   cursor: pointer;
   font-family: 'Poppins', sans-serif;
   font-size: 13px;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 7px;
   color: #333333;
   transition: all 0.25s ease;
 }
