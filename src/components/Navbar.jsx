@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
-export default function Navbar() {
+export default function Navbar({ onOpenQuote }) {
   const [isSticky, setIsSticky] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const { language, toggleLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,7 +52,7 @@ export default function Navbar() {
 
             {/* Desktop Navigation Column */}
             <div className="col-lg-10 justify-content-end text-end p-lg-0 d-none d-lg-flex align-items-center">
-              <div className="menu-wrap">
+              <div className="menu-wrap d-flex align-items-center justify-content-end">
                 <div className="main-menu">
                   <ul className="menu" id="menu-cotoweb">
                     <li className="menu-item">
@@ -59,7 +61,7 @@ export default function Navbar() {
                         className={({ isActive }) => (isActive ? 'active' : '')}
                         end
                       >
-                        Inicio
+                        {t.nav.home}
                       </NavLink>
                     </li>
                     <li className="menu-item">
@@ -67,7 +69,7 @@ export default function Navbar() {
                         to="/nosotros"
                         className={({ isActive }) => (isActive ? 'active' : '')}
                       >
-                        Nosotros
+                        {t.nav.about}
                       </NavLink>
                     </li>
                     <li className="menu-item">
@@ -75,7 +77,7 @@ export default function Navbar() {
                         to="/proyectos"
                         className={({ isActive }) => (isActive ? 'active' : '')}
                       >
-                        Proyectos
+                        {t.nav.projects}
                       </NavLink>
                     </li>
                     <li className="menu-item">
@@ -83,7 +85,7 @@ export default function Navbar() {
                         to="/servicios"
                         className={({ isActive }) => (isActive ? 'active' : '')}
                       >
-                        Servicios
+                        {t.nav.services}
                       </NavLink>
                     </li>
                     <li className="menu-item">
@@ -91,10 +93,26 @@ export default function Navbar() {
                         to="/contacto"
                         className={({ isActive }) => (isActive ? 'active' : '')}
                       >
-                        Contacto
+                        {t.nav.contact}
                       </NavLink>
                     </li>
                   </ul>
+                </div>
+
+                {/* Language Switcher */}
+                <div className="header-lang-switcher ms-3">
+                  <button
+                    type="button"
+                    className="lang-pill-btn"
+                    onClick={toggleLanguage}
+                    title={language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
+                    aria-label="Cambiar idioma"
+                  >
+                    <i className="fal fa-globe me-1"></i>
+                    <span className={`lang-badge ${language === 'es' ? 'active' : ''}`}>ES</span>
+                    <span className="lang-sep">|</span>
+                    <span className={`lang-badge ${language === 'en' ? 'active' : ''}`}>EN</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -121,6 +139,21 @@ export default function Navbar() {
                     <i className="fal fa-times-circle"></i>
                   </button>
                   <nav className="sidebar-nav">
+                    {/* Mobile Language Switcher */}
+                    <div className="mobile-lang-wrap mb-3">
+                      <button
+                        type="button"
+                        className="mobile-lang-btn"
+                        onClick={toggleLanguage}
+                        aria-label="Cambiar idioma"
+                      >
+                        <i className="fal fa-globe me-2"></i>
+                        <span className={`lang-text ${language === 'es' ? 'active' : ''}`}>Español</span>
+                        <span className="lang-sep mx-2">|</span>
+                        <span className={`lang-text ${language === 'en' ? 'active' : ''}`}>English</span>
+                      </button>
+                    </div>
+
                     <ul className="metismenu" id="mobile-menu">
                       <li>
                         <NavLink
@@ -129,7 +162,7 @@ export default function Navbar() {
                           className={({ isActive }) => (isActive ? 'active' : '')}
                           end
                         >
-                          Inicio
+                          {t.nav.home}
                         </NavLink>
                       </li>
                       <li>
@@ -138,7 +171,7 @@ export default function Navbar() {
                           onClick={closeMobile}
                           className={({ isActive }) => (isActive ? 'active' : '')}
                         >
-                          Nosotros
+                          {t.nav.about}
                         </NavLink>
                       </li>
                       <li>
@@ -147,7 +180,7 @@ export default function Navbar() {
                           onClick={closeMobile}
                           className={({ isActive }) => (isActive ? 'active' : '')}
                         >
-                          Proyectos
+                          {t.nav.projects}
                         </NavLink>
                       </li>
                       <li>
@@ -156,7 +189,7 @@ export default function Navbar() {
                           onClick={closeMobile}
                           className={({ isActive }) => (isActive ? 'active' : '')}
                         >
-                          Servicios
+                          {t.nav.services}
                         </NavLink>
                       </li>
                       <li>
@@ -165,7 +198,7 @@ export default function Navbar() {
                           onClick={closeMobile}
                           className={({ isActive }) => (isActive ? 'active' : '')}
                         >
-                          Contacto
+                          {t.nav.contact}
                         </NavLink>
                       </li>
                     </ul>

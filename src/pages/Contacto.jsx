@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PageBanner from '../components/PageBanner';
+import { useLanguage } from '../context/LanguageContext';
 import { contactoHtml } from '../data/pagesData';
+import { contactoHtmlEn } from '../data/pagesDataEn';
 
 export default function Contacto() {
   const navigate = useNavigate();
   const [formSent, setFormSent] = useState(false);
+  const { language, t } = useLanguage();
 
   const handleContentClick = (e) => {
     const anchor = e.target.closest('a');
@@ -29,12 +32,20 @@ export default function Contacto() {
 
   return (
     <main>
-      <PageBanner title="Contacto" />
+      <PageBanner title={t.banners.contacto} />
       
       {formSent && (
         <div className="container mt-4">
           <div className="alert alert-success text-center py-3" role="alert">
-            <strong>¡Gracias por contactarnos!</strong> Su mensaje ha sido enviado exitosamente. Nos comunicaremos con usted a la brevedad.
+            {language === 'en' ? (
+              <>
+                <strong>Thank you for contacting us!</strong> Your message has been sent successfully. We will get back to you shortly.
+              </>
+            ) : (
+              <>
+                <strong>¡Gracias por contactarnos!</strong> Su mensaje ha sido enviado exitosamente. Nos comunicaremos con usted a la brevedad.
+              </>
+            )}
           </div>
         </div>
       )}
@@ -42,7 +53,7 @@ export default function Contacto() {
       <div
         onClick={handleContentClick}
         onSubmit={handleFormSubmit}
-        dangerouslySetInnerHTML={{ __html: contactoHtml }}
+        dangerouslySetInnerHTML={{ __html: language === 'en' ? contactoHtmlEn : contactoHtml }}
       />
 
       {/* Interactive Google Map of Merida Matriz */}

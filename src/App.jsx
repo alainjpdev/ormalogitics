@@ -6,6 +6,8 @@ import Footer from './components/Footer';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 import QuoteModal from './components/QuoteModal';
 
+import { LanguageProvider } from './context/LanguageContext';
+
 // Pages
 import Home from './pages/Home';
 import Nosotros from './pages/Nosotros';
@@ -23,10 +25,11 @@ export default function App() {
   };
 
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <div className="app-root">
-        <Navbar onOpenQuote={handleOpenQuote} />
+    <LanguageProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <div className="app-root">
+          <Navbar onOpenQuote={handleOpenQuote} />
 
         <main className="main-content">
           <Routes>
@@ -48,5 +51,6 @@ export default function App() {
         />
       </div>
     </BrowserRouter>
+  </LanguageProvider>
   );
 }

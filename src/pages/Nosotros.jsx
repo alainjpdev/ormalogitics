@@ -1,10 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import PageBanner from '../components/PageBanner';
+import { useLanguage } from '../context/LanguageContext';
 import { nosotrosHtml } from '../data/pagesData';
+import { nosotrosHtmlEn } from '../data/pagesDataEn';
 
 export default function Nosotros() {
   const navigate = useNavigate();
+  const { language, t } = useLanguage();
 
   const handleContentClick = (e) => {
     const anchor = e.target.closest('a');
@@ -19,8 +22,11 @@ export default function Nosotros() {
 
   return (
     <main>
-      <PageBanner title="Nosotros" />
-      <div onClick={handleContentClick} dangerouslySetInnerHTML={{ __html: nosotrosHtml }} />
+      <PageBanner title={t.banners.nosotros} />
+      <div
+        onClick={handleContentClick}
+        dangerouslySetInnerHTML={{ __html: language === 'en' ? nosotrosHtmlEn : nosotrosHtml }}
+      />
     </main>
   );
 }

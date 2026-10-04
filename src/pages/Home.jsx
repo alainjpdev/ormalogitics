@@ -1,33 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 import { homeSectionsHtml } from '../data/pagesData';
+import { homeSectionsHtmlEn } from '../data/pagesDataEn';
 
-export default function Home() {
+export default function Home({ onOpenQuote }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [transitioned, setTransitioned] = useState(false);
+  const { language, t } = useLanguage();
   const navigate = useNavigate();
 
   const slides = [
     {
-      subheading: 'Nuestros Servicios',
-      heading: 'Renta de Maquinaria',
+      subheading: t.hero.slide1.subheading,
+      heading: t.hero.slide1.heading,
       bg: '/assets/images/orig/xWhatsApp-Image-2023-10-12-at-12.19.44-PM-1.jpeg.pagespeed.ic.AWZNIcgHpL.jpg',
-      primaryBtnText: 'Servicios',
+      primaryBtnText: t.hero.slide1.btnServices,
       primaryBtnLink: '/servicios',
-      secondaryBtnText: 'Contáctanos',
+      secondaryBtnText: t.hero.slide1.btnContact,
       secondaryBtnLink: '/contacto',
     },
     {
-      subheading: 'Nuestros proyectos',
+      subheading: t.hero.slide2.subheading,
       heading: (
         <>
-          Tramo 4 y 5 del<br />Tren Maya
+          {t.hero.slide2.headingPart1}<br />{t.hero.slide2.headingPart2}
         </>
       ),
       bg: '/assets/images/orig/xtrenmaya.jpeg.pagespeed.ic.UHuXJ06bg8.jpg',
-      primaryBtnText: 'Proyectos',
+      primaryBtnText: t.hero.slide2.btnProjects,
       primaryBtnLink: '/proyectos',
-      secondaryBtnText: 'Contáctanos',
+      secondaryBtnText: t.hero.slide2.btnContact,
       secondaryBtnLink: '/contacto',
     },
   ];
@@ -121,7 +124,10 @@ export default function Home() {
       </section>
 
       {/* 2. EXACT ELEMENTOR HOMEPAGE SECTIONS */}
-      <div onClick={handleContentClick} dangerouslySetInnerHTML={{ __html: homeSectionsHtml }} />
+      <div
+        onClick={handleContentClick}
+        dangerouslySetInnerHTML={{ __html: language === 'en' ? homeSectionsHtmlEn : homeSectionsHtml }}
+      />
     </main>
   );
 }

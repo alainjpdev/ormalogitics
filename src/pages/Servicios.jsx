@@ -1,10 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import PageBanner from '../components/PageBanner';
+import { useLanguage } from '../context/LanguageContext';
 import { serviciosHtml } from '../data/pagesData';
+import { serviciosHtmlEn } from '../data/pagesDataEn';
 
 export default function Servicios() {
   const navigate = useNavigate();
+  const { language, t } = useLanguage();
 
   const handleContentClick = (e) => {
     const anchor = e.target.closest('a');
@@ -19,8 +22,11 @@ export default function Servicios() {
 
   return (
     <main>
-      <PageBanner title="Servicios" />
-      <div onClick={handleContentClick} dangerouslySetInnerHTML={{ __html: serviciosHtml }} />
+      <PageBanner title={t.banners.servicios} />
+      <div
+        onClick={handleContentClick}
+        dangerouslySetInnerHTML={{ __html: language === 'en' ? serviciosHtmlEn : serviciosHtml }}
+      />
     </main>
   );
 }
