@@ -16,6 +16,65 @@ const createBreadcrumbs = (items) => ({
   })),
 });
 
+
+const createFaqSchema = (faqs) => ({
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.a,
+    },
+  })),
+});
+
+const faqsEs = [
+  {
+    q: '¿Qué servicios de maquinaria y logística ofrece Orma Logistics en México?',
+    a: 'Orma Logistics ofrece renta de maquinaria pesada (excavadoras, retroexcavadoras, motoconformadoras, tractores), pipas de agua de 10,000 y 20,000 litros para terracerías, transporte de personal en autobuses y vans, fletes industriales, cimentaciones y mecánica de suelos.',
+  },
+  {
+    q: '¿En qué ciudades de México cuenta Orma Logistics con cobertura?',
+    a: 'Contamos con bases y sucursales en Querétaro (Bajío), Mérida (Yucatán), Playa del Carmen (Quintana Roo) y Valladolid (Yucatán), con cobertura en todo el Sureste y Centro del país.',
+  },
+  {
+    q: '¿Cómo solicitar una cotización para renta de maquinaria o pipas?',
+    a: 'Puedes solicitar tu cotización inmediata en línea a través de nuestro sitio web, por WhatsApp o llamando al +52 442 799 9440.',
+  },
+  {
+    q: '¿La maquinaria incluye operador y mantenimiento en sitio?',
+    a: 'Sí, ofrecemos opciones de renta con operador capacitado y soporte mecánico y de refacciones en sitio para garantizar máxima disponibilidad operativa.',
+  },
+  {
+    q: '¿Tienen experiencia en grandes proyectos como el Tren Maya?',
+    a: 'Sí, participamos activamente en los Tramos 4 y 5 del Tren Maya suministrando maquinaria pesada, transporte de brigadas y pipas de agua para terracerías.',
+  },
+];
+
+const faqsEn = [
+  {
+    q: 'What heavy equipment and logistics services does Orma Logistics provide in Mexico?',
+    a: 'Orma Logistics provides heavy machinery rental (excavators, backhoes, motor graders, bulldozers), 10,000 & 20,000-liter water tanker trucks, worker transportation buses and vans, freight logistics, deep foundations, and certified soil studies.',
+  },
+  {
+    q: 'Where does Orma Logistics operate in Mexico?',
+    a: 'We operate with branches in Querétaro, Mérida, Playa del Carmen, and Valladolid, serving projects across Southeastern and Central Mexico.',
+  },
+  {
+    q: 'How do I request a quote for machinery or water tankers?',
+    a: 'You can request an instant quote through our online form, via WhatsApp, or by calling our team at +52 442 799 9440.',
+  },
+  {
+    q: 'Does equipment rental include operators and on-site support?',
+    a: 'Yes, we provide rental plans with certified operators and on-site diesel mechanical assistance to ensure uninterrupted uptime.',
+  },
+  {
+    q: 'Does Orma Logistics participate in federal infrastructure like the Maya Train?',
+    a: 'Yes, we contributed extensively to Sections 4 & 5 of the Maya Train with heavy machinery, worker shuttles, and water tankers.',
+  },
+];
+
 export const seoConfig = {
   home: {
     es: {
@@ -27,6 +86,7 @@ export const seoConfig = {
         '@context': 'https://schema.org',
         '@graph': [
           createBreadcrumbs([{ name: 'Inicio', path: '/' }]),
+          createFaqSchema(faqsEs),
           {
             '@type': 'WebSite',
             '@id': `${BASE_URL}/#website`,
@@ -48,6 +108,7 @@ export const seoConfig = {
         '@context': 'https://schema.org',
         '@graph': [
           createBreadcrumbs([{ name: 'Home', path: '/' }]),
+          createFaqSchema(faqsEn),
           {
             '@type': 'WebSite',
             '@id': `${BASE_URL}/#website`,
