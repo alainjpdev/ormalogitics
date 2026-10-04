@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { homeSectionsHtml } from '../data/pagesData';
 import { homeSectionsHtmlEn } from '../data/pagesDataEn';
+import ClientCarousel from '../components/ClientCarousel';
 
 export default function Home({ onOpenQuote }) {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -124,10 +125,22 @@ export default function Home({ onOpenQuote }) {
       </section>
 
       {/* 2. EXACT ELEMENTOR HOMEPAGE SECTIONS */}
-      <div
-        onClick={handleContentClick}
-        dangerouslySetInnerHTML={{ __html: language === 'en' ? homeSectionsHtmlEn : homeSectionsHtml }}
-      />
+      {(() => {
+        const rawHtml = language === 'en' ? homeSectionsHtmlEn : homeSectionsHtml;
+        const marker = '<section class="elementor-section elementor-top-section elementor-element elementor-element-792a8e3';
+        const idx = rawHtml ? rawHtml.indexOf(marker) : -1;
+        const filteredHtml = idx !== -1 ? rawHtml.substring(0, idx) + '</div>' : rawHtml;
+
+        return (
+          <div
+            onClick={handleContentClick}
+            dangerouslySetInnerHTML={{ __html: filteredHtml }}
+          />
+        );
+      })()}
+
+      {/* 3. FUNCTIONAL CLIENT LOGO CAROUSEL */}
+      <ClientCarousel />
     </main>
   );
 }
