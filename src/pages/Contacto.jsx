@@ -3,9 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import PageBanner from '../components/PageBanner';
 import BranchesMap from '../components/BranchesMap';
 import { useLanguage } from '../context/LanguageContext';
-import { contactoHtml } from '../data/pagesData';
-import { contactoHtmlEn } from '../data/pagesDataEn';
-import { CheckCircle2, RotateCcw, MessageCircle } from 'lucide-react';
+import { CheckCircle2, RotateCcw, MessageCircle, Mail, MapPin, Phone } from 'lucide-react';
 
 export default function Contacto() {
   const navigate = useNavigate();
@@ -21,23 +19,6 @@ export default function Contacto() {
   const [selectedBranch, setSelectedBranch] = useState('all');
   const [submitting, setSubmitting] = useState(false);
   const [formSent, setFormSent] = useState(false);
-
-  // Extract Section 1 (Top 3 Info Cards: Email, Address, Phone) from Elementor
-  const currentHtml = language === 'en' ? contactoHtmlEn : contactoHtml;
-  const splitPattern = '<section class="elementor-section elementor-top-section elementor-element elementor-element-effdc15';
-  const splitIdx = currentHtml.indexOf(splitPattern);
-  const section1Html = splitIdx !== -1 ? currentHtml.substring(0, splitIdx) + '</div>' : currentHtml;
-
-  const handleContentClick = (e) => {
-    const anchor = e.target.closest('a');
-    if (!anchor) return;
-    const href = anchor.getAttribute('href');
-    if (href && href.startsWith('/') && !href.startsWith('//')) {
-      e.preventDefault();
-      navigate(href);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -71,11 +52,78 @@ export default function Contacto() {
     <main>
       <PageBanner title={t.banners.contacto} />
 
-      {/* Section 1: Top 3 Contact Info Boxes (Email, Dirección, Teléfono) */}
-      <div
-        onClick={handleContentClick}
-        dangerouslySetInnerHTML={{ __html: section1Html }}
-      />
+      {/* Section 1: Top 3 Contact Info Boxes (Email, Dirección Mérida Matriz, Teléfono) */}
+      <section className="top-contact-cards-section elementor-section elementor-top-section elementor-element elementor-element-fb2ea84 elementor-section-boxed">
+        <div className="elementor-container elementor-column-gap-default">
+          <div className="container p-0">
+            <div className="row g-4">
+              {/* Card 1: Email */}
+              <div className="col-lg-4 col-md-6 col-12">
+                <a
+                  href="mailto:merida@ormalogistics.com"
+                  className="text-decoration-none d-block h-100"
+                >
+                  <div className="contact-info-card">
+                    <div className="contact-info-icon-wrapper">
+                      <Mail size={26} />
+                    </div>
+                    <div className="contact-info-content">
+                      <h3 className="contact-info-title">
+                        {language === 'en' ? 'Email' : 'Email'}
+                      </h3>
+                      <p className="contact-info-desc">merida@ormalogistics.com</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              {/* Card 2: Dirección */}
+              <div className="col-lg-4 col-md-6 col-12">
+                <a
+                  href="https://maps.google.com/?q=Av.+Maquiladoras+%23501+CP.97203+Industrias+No+Contaminantes,+M%C3%A9rida,+Yucat%C3%A1n,+M%C3%A9xico"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-decoration-none d-block h-100"
+                >
+                  <div className="contact-info-card">
+                    <div className="contact-info-icon-wrapper">
+                      <MapPin size={26} />
+                    </div>
+                    <div className="contact-info-content">
+                      <h3 className="contact-info-title">
+                        {language === 'en' ? 'Address' : 'Dirección'}
+                      </h3>
+                      <p className="contact-info-desc">
+                        Av. Maquiladoras #501 CP.97203 Industrias No Contaminantes, Mérida, Yucatán, México.
+                      </p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              {/* Card 3: Teléfono */}
+              <div className="col-lg-4 col-md-12 col-12">
+                <a
+                  href="tel:524427999440"
+                  className="text-decoration-none d-block h-100"
+                >
+                  <div className="contact-info-card">
+                    <div className="contact-info-icon-wrapper">
+                      <Phone size={26} />
+                    </div>
+                    <div className="contact-info-content">
+                      <h3 className="contact-info-title">
+                        {language === 'en' ? 'Phone' : 'Teléfono'}
+                      </h3>
+                      <p className="contact-info-desc">(+52) 442 799 9440</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Section 2: Sucursales (Interactive 4 Branches Map & Cards) */}
       <section
