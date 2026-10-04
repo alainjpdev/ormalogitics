@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PageBanner from '../components/PageBanner';
 import BranchesMap from '../components/BranchesMap';
+import SEO from '../components/SEO';
 import { useLanguage } from '../context/LanguageContext';
 import { CheckCircle2, RotateCcw, MessageCircle, Mail, MapPin, Phone } from 'lucide-react';
 
@@ -50,6 +51,7 @@ export default function Contacto() {
 
   return (
     <main>
+      <SEO pageKey="contacto" />
       <PageBanner title={t.banners.contacto} />
 
       {/* Section 1: Top 3 Contact Info Boxes (Email, Dirección Mérida Matriz, Teléfono) */}

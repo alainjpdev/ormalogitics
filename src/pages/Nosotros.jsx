@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import PageBanner from '../components/PageBanner';
+import SEO from '../components/SEO';
 import { useLanguage } from '../context/LanguageContext';
 import { nosotrosHtml } from '../data/pagesData';
 import { nosotrosHtmlEn } from '../data/pagesDataEn';
@@ -22,6 +23,7 @@ export default function Nosotros() {
 
   return (
     <main>
+      <SEO pageKey="nosotros" />
       <PageBanner title={t.banners.nosotros} />
       <div
         onClick={handleContentClick}

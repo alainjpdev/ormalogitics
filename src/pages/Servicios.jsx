@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import PageBanner from '../components/PageBanner';
+import SEO from '../components/SEO';
 import { useLanguage } from '../context/LanguageContext';
 import { serviciosHtml } from '../data/pagesData';
 import { serviciosHtmlEn } from '../data/pagesDataEn';
@@ -22,6 +23,7 @@ export default function Servicios() {
 
   return (
     <main>
+      <SEO pageKey="servicios" />
       <PageBanner title={t.banners.servicios} />
       <div
         onClick={handleContentClick}

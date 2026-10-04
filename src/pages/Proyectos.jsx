@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import PageBanner from '../components/PageBanner';
+import SEO from '../components/SEO';
 import { useLanguage } from '../context/LanguageContext';
 import { proyectosHtml } from '../data/pagesData';
 import { proyectosHtmlEn } from '../data/pagesDataEn';
@@ -22,6 +23,7 @@ export default function Proyectos() {
 
   return (
     <main>
+      <SEO pageKey="proyectos" />
       <PageBanner title={t.banners.proyectos} />
       <div
         onClick={handleContentClick}

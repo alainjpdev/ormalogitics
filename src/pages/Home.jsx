@@ -4,6 +4,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { homeSectionsHtml } from '../data/pagesData';
 import { homeSectionsHtmlEn } from '../data/pagesDataEn';
 import ClientCarousel from '../components/ClientCarousel';
+import SEO from '../components/SEO';
 
 export default function Home({ onOpenQuote }) {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -76,6 +77,7 @@ export default function Home({ onOpenQuote }) {
 
   return (
     <main>
+      <SEO pageKey="home" />
       {/* 1. HERO SLIDER */}
       <section className="hero-slide-wrapper hero-1">
         <div
