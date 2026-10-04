@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 import QuoteModal from './components/QuoteModal';
+import ModernLoader from './components/ModernLoader';
 
 import { LanguageProvider } from './context/LanguageContext';
 
@@ -27,6 +28,7 @@ export default function App() {
   return (
     <LanguageProvider>
       <BrowserRouter>
+        <ModernLoader />
         <ScrollToTop />
         <div className="app-root">
           <Navbar onOpenQuote={handleOpenQuote} />

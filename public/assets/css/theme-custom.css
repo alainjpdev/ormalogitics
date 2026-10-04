@@ -694,3 +694,154 @@ footer#colophon a:hover {
 .mobile-lang-btn .lang-sep {
   opacity: 0.5;
 }
+
+/* 11. Modern Minimalist Loading System (Top Bar, Preloader & Image Pill) */
+.modern-top-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3.5px;
+  background: linear-gradient(90deg, #c32637 0%, #ff334b 60%, #ff758c 100%);
+  border-radius: 0 3px 3px 0;
+  box-shadow: 0 0 12px rgba(195, 38, 55, 0.8), 0 0 5px rgba(255, 51, 75, 0.6);
+  z-index: 999999;
+  pointer-events: none;
+  transition: width 0.35s cubic-bezier(0.1, 0.9, 0.2, 1), opacity 0.3s ease;
+}
+
+.modern-top-loader .loader-glow-head {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 70px;
+  height: 100%;
+  box-shadow: 0 0 14px #ff334b, 0 0 6px #ffffff;
+  border-radius: 0 3px 3px 0;
+}
+
+/* Minimalist Initial Splash Preloader */
+.modern-preloader-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: #ffffff;
+  z-index: 999998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.45s ease-out, visibility 0.45s ease-out;
+}
+
+.modern-preloader-overlay.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.preloader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.preloader-logo {
+  max-width: 170px;
+  height: auto;
+  animation: preloaderPulse 1.8s ease-in-out infinite;
+}
+
+.minimal-spinner-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.minimal-spinner {
+  width: 34px;
+  height: 34px;
+  border: 2.5px solid rgba(195, 38, 55, 0.12);
+  border-top-color: #c32637;
+  border-radius: 50%;
+  animation: minimalSpin 0.75s cubic-bezier(0.5, 0.1, 0.4, 0.9) infinite;
+}
+
+.minimal-loader-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #777777;
+  letter-spacing: 0.4px;
+  margin-top: 14px;
+}
+
+/* Minimalist Floating Image Download Pill */
+.minimal-image-loading-pill {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 9998;
+  background: rgba(17, 24, 39, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 24px;
+  padding: 7px 15px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+  animation: pillSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s ease;
+}
+
+.minimal-image-loading-pill.done {
+  border-color: rgba(34, 197, 94, 0.45);
+  background: rgba(17, 24, 39, 0.95);
+}
+
+.pill-mini-spinner {
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-top-color: #ff4d61;
+  border-radius: 50%;
+  animation: minimalSpin 0.7s linear infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.pill-check-icon {
+  color: #22c55e;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.pill-text {
+  letter-spacing: 0.2px;
+}
+
+/* Image skeleton / smooth placeholder */
+.portfolio-thumb, .service-bg, .card-thumb, .client-img {
+  background-color: #f3f4f6;
+}
+
+@keyframes minimalSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes preloaderPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.03); opacity: 0.88; }
+}
+
+@keyframes pillSlideUp {
+  from { transform: translateY(16px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
