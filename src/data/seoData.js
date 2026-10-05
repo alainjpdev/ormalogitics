@@ -733,9 +733,9 @@ export const seoConfig = {
 
   rentaPlanas: {
     es: {
-      title: 'Renta de Planas y Fletes en Plataforma de Carga Pesada | Orma Logistics',
-      description: 'Semirremolques de plataforma plana de 40 y 48 pies para fletes de acero, varilla, cemento, prefabricados y estructuras. Cobertura en Querétaro, Mérida y Sureste.',
-      keywords: 'renta de planas, fletes en plana 40 pies, fletes plataforma queretaro, transporte de varilla y acero, renta de planas con tractocamion, fletes de carga pesada sureste',
+      title: 'Renta de Planas y Fletes en Plataforma | Península y México | Orma Logistics',
+      description: 'Semirremolques de plataforma plana de 40 y 48 pies para fletes en toda la Península de Yucatán (Mérida, Cancún, Tulum, Bacalar, Chetumal, Campeche) y Bajío/Centro de México.',
+      keywords: 'renta de planas, fletes en plana chetumal, fletes plana bacalar, fletes plana merida cancun, fletes plataforma peninsula yucatan, transporte de varilla y acero, renta de planas con tractocamion',
       path: '/renta-de-planas',
       schema: {
         '@context': 'https://schema.org',
@@ -750,16 +750,16 @@ export const seoConfig = {
             name: 'Renta de Planas y Fletes en Plataforma',
             serviceType: 'Transporte de carga pesada en plataforma plana',
             provider: { '@id': `${BASE_URL}/#organization` },
-            areaServed: ['Querétaro', 'Yucatán', 'Quintana Roo'],
-            description: 'Fletes y renta de semirremolques de plataforma plana de 40 y 48 pies con tractocamión y operadores con licencia federal.',
+            areaServed: ['Yucatán', 'Quintana Roo', 'Campeche', 'Querétaro', 'México'],
+            description: 'Fletes y renta de semirremolques de plataforma plana de 40 y 48 pies con tractocamión para toda la Península de Yucatán (incluyendo Bacalar y Chetumal) y rutas nacionales.',
           },
         ],
       },
     },
     en: {
-      title: 'Flatbed Trailer Rental (Planas) & Heavy Freight in Mexico | Orma Logistics',
-      description: '40ft & 48ft flatbed trailers for rebar, structural steel, precast concrete, and heavy freight transport in Queretaro, Merida, and Cancun.',
-      keywords: 'flatbed trailer rental mexico, heavy haul trucking cancun, plana trailer rental queretaro, steel freight transport',
+      title: 'Flatbed Trailer Rental (Planas) & Heavy Freight in Yucatan Peninsula & Mexico | Orma Logistics',
+      description: '40ft & 48ft flatbed trailers for rebar, structural steel, precast concrete, and heavy freight across Yucatan Peninsula (Merida, Cancun, Tulum, Bacalar, Chetumal) and nationwide.',
+      keywords: 'flatbed trailer rental mexico, heavy haul trucking chetumal, plana trailer rental bacalar, yucatan peninsula flatbed freight, steel freight transport',
       path: '/renta-de-planas',
       schema: {
         '@context': 'https://schema.org',
@@ -774,7 +774,8 @@ export const seoConfig = {
             name: 'Flatbed Freight Transport',
             serviceType: 'Heavy Flatbed Trucking',
             provider: { '@id': `${BASE_URL}/#organization` },
-            description: '40 & 48-foot flatbed trailer rentals for structural steel and construction cargo.',
+            areaServed: ['Yucatan', 'Quintana Roo', 'Campeche', 'Queretaro', 'Mexico'],
+            description: '40 & 48-foot flatbed trailer rentals for structural steel and construction cargo across the entire Yucatan Peninsula and nationwide.',
           },
         ],
       },

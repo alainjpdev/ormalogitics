@@ -24,22 +24,22 @@ export default function LandingPlanas({ onOpenQuote }) {
   const [formData, setFormData] = useState({
     nombre: '',
     telefono: '',
-    origenDestino: 'Mérida - Cancún / Riviera Maya',
-    otraRuta: '',
-    tipoCarga: 'Acero / Varilla / Perfiles',
+    origen: '',
+    destino: '',
+    tipoCarga: 'Acero / Varilla / Viguetas',
     modalidad: 'Flete por Viaje',
     mensaje: ''
   });
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const rutaElegida = formData.origenDestino === 'Otra ruta'
-      ? (formData.otraRuta ? `Otra ruta: ${formData.otraRuta}` : 'Otra ruta personalizada')
-      : formData.origenDestino;
+    const rutaCompleta = (formData.origen && formData.destino)
+      ? `${formData.origen} ➔ ${formData.destino}`
+      : (formData.origen || formData.destino || 'Toda la Península / Cobertura Nacional');
 
     const msg = language === 'en'
-      ? `Hello Orma Logistics, I am requesting a quote for Flatbed Trailer Rental (Plana):\n• Name: ${formData.nombre}\n• Phone: ${formData.telefono}\n• Route: ${rutaElegida}\n• Cargo: ${formData.tipoCarga}\n• Mode: ${formData.modalidad}\n• Details: ${formData.mensaje}`
-      : `Hola Orma Logistics, solicito cotización urgente para Renta de Plana / Flete en Plataforma:\n• Nombre: ${formData.nombre}\n• Teléfono: ${formData.telefono}\n• Ruta (Origen - Destino): ${rutaElegida}\n• Tipo de carga: ${formData.tipoCarga}\n• Modalidad: ${formData.modalidad}\n• Detalles: ${formData.mensaje}`;
+      ? `Hello Orma Logistics, I am requesting a quote for Flatbed Trailer (Plana):\n• Name: ${formData.nombre}\n• Phone: ${formData.telefono}\n• Route (Origin ➔ Destination): ${rutaCompleta}\n• Cargo: ${formData.tipoCarga}\n• Mode: ${formData.modalidad}\n• Coverage: Entire Yucatan Peninsula (Bacalar, Chetumal, Cancun, Merida, etc.) & Nationwide\n• Details: ${formData.mensaje}`
+      : `Hola Orma Logistics, solicito cotización urgente para Renta de Plana / Plataforma:\n• Nombre: ${formData.nombre}\n• Teléfono: ${formData.telefono}\n• Ruta (Origen ➔ Destino): ${rutaCompleta}\n• Tipo de carga: ${formData.tipoCarga}\n• Modalidad: ${formData.modalidad}\n• Cobertura: Toda la Península (Mérida, Cancún, Playa, Tulum, Bacalar, Chetumal, Campeche) y Nacional\n• Detalles: ${formData.mensaje}`;
 
     const waUrl = `https://api.whatsapp.com/send?phone=524427999440&text=${encodeURIComponent(msg)}`;
     window.open(waUrl, '_blank');
@@ -71,7 +71,7 @@ export default function LandingPlanas({ onOpenQuote }) {
         { label: 'Capacidad', val: 'Hasta 45 - 60 toneladas' },
         { label: 'Acceso', val: 'Cuello de ganso desmontable' },
         { label: 'Seguridad', val: 'Abanderamiento y permisos SCT' },
-        { label: 'Rutas', val: 'Nacionales e interurbanas' }
+        { label: 'Rutas', val: 'Península y Nacionales' }
       ]
     },
     {
@@ -83,12 +83,16 @@ export default function LandingPlanas({ onOpenQuote }) {
         { label: 'Rastreo', val: 'GPS Satelital en tiempo real' },
         { label: 'Operadores', val: 'Licencia Federal vigente' },
         { label: 'Facturación', val: 'Carta Porte digital y SAT' },
-        { label: 'Cobertura', val: 'Bajío, Sureste y Centro' }
+        { label: 'Cobertura', val: 'Península completa, Bajío y Centro' }
       ]
     }
   ];
 
   const faqs = [
+    {
+      q: '¿Qué ciudades y zonas cubren con las plataformas y planas?',
+      a: 'Nuestra flota tiene cobertura TOTAL en toda la Península de Yucatán: llegamos sin problema a Bacalar, Chetumal, Mahahual, Tulum, Playa del Carmen, Cancún, Mérida, Valladolid, Tizimín, Campeche y Ciudad del Carmen. Además, operamos fletes de enlace interestatal hacia Querétaro, el Bajío y el centro de México.'
+    },
     {
       q: '¿Qué tipo de materiales transportan en las planas?',
       a: 'Transportamos varilla, perfiles de acero, alambrón, bultos de cemento paletizado, block, viguetas, estructuras metálicas, tuberías de concreto/acero, maquinaria pesada y prefabricados para obra.'
@@ -119,36 +123,36 @@ export default function LandingPlanas({ onOpenQuote }) {
             <div className="col-lg-7 mb-4 mb-lg-0">
               <div className="landing-hero-badge">
                 <Truck size={15} />
-                <span>Renta de Planas y Fletes en Plataforma • 40 y 48 Pies</span>
+                <span>Renta de Planas y Fletes en Plataforma • 40 y 48 Pies • Toda la Península</span>
               </div>
 
               <h1 className="landing-hero-title">
-                Renta de <span>Planas y Fletes</span> de Carga Pesada en México
+                Renta de <span>Planas y Fletes</span> en Toda la Península y México
               </h1>
 
               <p className="landing-hero-desc">
                 Transporte seguro en semirremolques de plataforma plana para acero, varilla, cemento, prefabricados y estructuras.
-                Servicio puerta a puerta en <strong>Querétaro, Mérida, Cancún, Playa del Carmen y Sureste</strong>.
+                Movilizamos tu carga en <strong>toda la Península de Yucatán</strong> (Mérida, Cancún, Playa del Carmen, Tulum, <strong>Bacalar, Chetumal</strong>, Campeche) y en rutas nacionales hacia <strong>Querétaro, Bajío y Centro de México</strong>.
               </p>
 
               <ul className="landing-hero-bullets">
                 <li>
                   <span className="landing-bullet-icon"><CheckCircle2 size={16} /></span>
-                  <span><strong>Capacidad de 25 a 35 toneladas:</strong> Plataformas de 2 y 3 ejes con bandas y cadenas.</span>
+                  <span><strong>Cobertura Total Peninsular y Nacional:</strong> Fletes continuos conectando Mérida, Riviera Maya, Bacalar, Chetumal y enlaces directos al Bajío/Querétaro.</span>
                 </li>
                 <li>
                   <span className="landing-bullet-icon"><CheckCircle2 size={16} /></span>
-                  <span><strong>Monitoreo GPS Satelital 24/7:</strong> Ubicación exacta de tu carga en todo momento.</span>
+                  <span><strong>Capacidad de 25 a 35 toneladas:</strong> Plataformas de 2 y 3 ejes (sencillos y fulles) con bandas y cadenas grado 70.</span>
                 </li>
                 <li>
                   <span className="landing-bullet-icon"><CheckCircle2 size={16} /></span>
-                  <span><strong>Cumplimiento fiscal total:</strong> Carta Porte digital del SAT y seguro de mercancía.</span>
+                  <span><strong>Monitoreo GPS 24/7 y Carta Porte SAT:</strong> Rastreo satelital en tiempo real, seguro de carga y factura inmediata.</span>
                 </li>
               </ul>
 
               <div className="landing-hero-actions">
                 <a
-                  href="https://api.whatsapp.com/send?phone=524427999440&text=Hola%20Orma%20Logistics%2C%20requiero%20cotizar%20flete%20en%20plana%20%2F%20plataforma."
+                  href="https://api.whatsapp.com/send?phone=524427999440&text=Hola%20Orma%20Logistics%2C%20requiero%20cotizar%20flete%20en%20plana%20%2F%20plataforma%20en%20la%20Pen%C3%ADnsula."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-cta-wa"
@@ -169,6 +173,17 @@ export default function LandingPlanas({ onOpenQuote }) {
                 <div className="landing-card-header">
                   <h3>Cotizar Flete en Plana</h3>
                   <p>Tarifas por viaje o renta dedicada. Respuesta en 15 min.</p>
+                </div>
+
+                {/* Peninsular Coverage Highlight Box */}
+                <div className="landing-coverage-banner">
+                  <div className="landing-coverage-header">
+                    <MapPin size={15} />
+                    <strong>Cobertura Peninsular y Nacional</strong>
+                  </div>
+                  <p>
+                    Llegamos a cualquier punto: <strong>Mérida, Cancún, Playa del Carmen, Tulum, Bacalar, Chetumal, Campeche</strong> y rutas al Bajío / Querétaro / CDMX.
+                  </p>
                 </div>
 
                 <form onSubmit={handleFormSubmit} className="landing-form">
@@ -196,34 +211,83 @@ export default function LandingPlanas({ onOpenQuote }) {
                     />
                   </div>
 
-                  <div className="row g-2 mb-3">
+                  {/* Origen y Destino Abiertos */}
+                  <div className="row g-2 mb-2">
                     <div className="col-sm-6">
-                      <label className="form-label">Ruta (Origen - Destino)</label>
-                      <select
-                        className="form-select"
-                        value={formData.origenDestino}
-                        onChange={(e) => setFormData({ ...formData, origenDestino: e.target.value })}
-                      >
-                        <option value="Mérida - Cancún / Riviera Maya">Mérida - Cancún / Riviera Maya</option>
-                        <option value="Mérida - Playa del Carmen / Tulum">Mérida - Playa del Carmen / Tulum</option>
-                        <option value="Mérida - Valladolid / Tren Maya">Mérida - Valladolid / Tren Maya</option>
-                        <option value="Mérida - Campeche / Chetumal">Mérida - Campeche / Chetumal</option>
-                        <option value="Mérida - Querétaro / Bajío">Mérida - Querétaro / Bajío</option>
-                        <option value="Mérida - Centro / CDMX">Mérida - Centro / CDMX</option>
-                        <option value="Otra ruta">Otra ruta...</option>
-                      </select>
-                      {formData.origenDestino === 'Otra ruta' && (
-                        <input
-                          type="text"
-                          className="form-control mt-2"
-                          placeholder="Escribe tu ruta (Ej. Veracruz a Mérida)"
-                          required
-                          value={formData.otraRuta}
-                          onChange={(e) => setFormData({ ...formData, otraRuta: e.target.value })}
-                        />
-                      )}
+                      <label className="form-label">Origen (¿Dónde cargamos?) *</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Ej. Mérida, Cancún, Querétaro..."
+                        required
+                        value={formData.origen}
+                        onChange={(e) => setFormData({ ...formData, origen: e.target.value })}
+                      />
                     </div>
 
+                    <div className="col-sm-6">
+                      <label className="form-label">Destino (¿A dónde entregamos?) *</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Ej. Chetumal, Bacalar, Tulum..."
+                        required
+                        value={formData.destino}
+                        onChange={(e) => setFormData({ ...formData, destino: e.target.value })}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Chips de sugerencias rápidas */}
+                  <div className="route-chips-wrapper mb-3">
+                    <span className="route-chips-title">Rutas frecuentes (clic para autocompletar):</span>
+                    <div className="route-chips-list">
+                      <button
+                        type="button"
+                        className={`route-chip ${formData.destino === 'Chetumal, Q. Roo' ? 'active' : ''}`}
+                        onClick={() => setFormData({ ...formData, origen: 'Mérida, Yuc.', destino: 'Chetumal, Q. Roo' })}
+                      >
+                        Mérida ➔ Chetumal
+                      </button>
+                      <button
+                        type="button"
+                        className={`route-chip ${formData.destino === 'Bacalar, Q. Roo' ? 'active' : ''}`}
+                        onClick={() => setFormData({ ...formData, origen: 'Mérida, Yuc.', destino: 'Bacalar, Q. Roo' })}
+                      >
+                        Mérida ➔ Bacalar
+                      </button>
+                      <button
+                        type="button"
+                        className={`route-chip ${formData.destino === 'Tulum / Playa del Carmen' ? 'active' : ''}`}
+                        onClick={() => setFormData({ ...formData, origen: 'Mérida, Yuc.', destino: 'Tulum / Playa del Carmen' })}
+                      >
+                        Mérida ➔ Tulum / Playa
+                      </button>
+                      <button
+                        type="button"
+                        className={`route-chip ${formData.origen === 'Cancún, Q. Roo' && formData.destino === 'Chetumal / Bacalar' ? 'active' : ''}`}
+                        onClick={() => setFormData({ ...formData, origen: 'Cancún, Q. Roo', destino: 'Chetumal / Bacalar' })}
+                      >
+                        Cancún ➔ Chetumal / Bacalar
+                      </button>
+                      <button
+                        type="button"
+                        className={`route-chip ${formData.destino === 'Campeche, Camp.' ? 'active' : ''}`}
+                        onClick={() => setFormData({ ...formData, origen: 'Mérida, Yuc.', destino: 'Campeche, Camp.' })}
+                      >
+                        Mérida ➔ Campeche
+                      </button>
+                      <button
+                        type="button"
+                        className={`route-chip ${formData.destino === 'Querétaro / Bajío' ? 'active' : ''}`}
+                        onClick={() => setFormData({ ...formData, origen: 'Península de Yucatán', destino: 'Querétaro / Bajío' })}
+                      >
+                        Península ➔ Bajío / Querétaro
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="row g-2 mb-3">
                     <div className="col-sm-6">
                       <label className="form-label">Tipo de Carga</label>
                       <select
@@ -231,28 +295,28 @@ export default function LandingPlanas({ onOpenQuote }) {
                         value={formData.tipoCarga}
                         onChange={(e) => setFormData({ ...formData, tipoCarga: e.target.value })}
                       >
-                        <option value="Acero / Varilla / Viguetas">Acero / Varilla</option>
+                        <option value="Acero / Varilla / Viguetas">Acero / Varilla / Viguetas</option>
                         <option value="Cemento / Material Paletizado">Cemento / Sacos</option>
                         <option value="Block / Ladrillo / Prefabricados">Block / Prefabricados</option>
                         <option value="Estructuras Metálicas">Estructuras Metálicas</option>
-                        <option value="Tubería de Concreto / PVC">Tubería</option>
+                        <option value="Tubería de Concreto / PVC">Tubería de Concreto / PVC</option>
                         <option value="Maquinaria Pesada (Lowboy)">Maquinaria (Lowboy)</option>
                         <option value="Otra carga">Otra carga</option>
                       </select>
                     </div>
-                  </div>
 
-                  <div className="mb-3">
-                    <label className="form-label">Modalidad de servicio</label>
-                    <select
-                      className="form-select"
-                      value={formData.modalidad}
-                      onChange={(e) => setFormData({ ...formData, modalidad: e.target.value })}
-                    >
-                      <option value="Flete por Viaje">Flete por Viaje</option>
-                      <option value="Renta de Plana Dedicada por Mes">Plana Dedicada por Mes</option>
-                      <option value="Proyecto Completo de Obra">Proyecto Continuo de Obra</option>
-                    </select>
+                    <div className="col-sm-6">
+                      <label className="form-label">Modalidad de servicio</label>
+                      <select
+                        className="form-select"
+                        value={formData.modalidad}
+                        onChange={(e) => setFormData({ ...formData, modalidad: e.target.value })}
+                      >
+                        <option value="Flete por Viaje">Flete por Viaje</option>
+                        <option value="Renta de Plana Dedicada por Mes">Plana Dedicada por Mes</option>
+                        <option value="Proyecto Completo de Obra">Proyecto Continuo de Obra</option>
+                      </select>
+                    </div>
                   </div>
 
                   <button type="submit" className="landing-form-submit">
@@ -301,8 +365,8 @@ export default function LandingPlanas({ onOpenQuote }) {
               <div className="landing-trust-item">
                 <div className="landing-trust-icon"><MapPin size={24} /></div>
                 <div className="landing-trust-text">
-                  <h4>Sureste y Bajío</h4>
-                  <p>Bases propias con patios</p>
+                  <h4>Toda la Península</h4>
+                  <p>Mérida, Bacalar, Chetumal</p>
                 </div>
               </div>
             </div>
@@ -412,8 +476,8 @@ export default function LandingPlanas({ onOpenQuote }) {
             <div className="col-lg-4 col-md-6">
               <div className="feature-box">
                 <div className="feature-box-icon"><MapPin size={26} /></div>
-                <h4>Patios en Puntos Estratégicos</h4>
-                <p>Bases operativas en Querétaro (Bajío), Mérida (Yucatán), Valladolid y Playa del Carmen (Quintana Roo).</p>
+                <h4>Cobertura Total en la Península y México</h4>
+                <p>Movilizamos carga en cualquier punto: Mérida, Cancún, Playa del Carmen, Tulum, <strong>Bacalar, Chetumal</strong> y Campeche, con enlaces al Bajío y Centro.</p>
               </div>
             </div>
           </div>
