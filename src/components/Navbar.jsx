@@ -98,6 +98,9 @@ export default function Navbar({ onOpenQuote }) {
                         <li>
                           <NavLink to="/pipas-de-agua">Pipas de Agua</NavLink>
                         </li>
+                        <li>
+                          <NavLink to="/renta-de-planas">Renta de Planas</NavLink>
+                        </li>
                       </ul>
                     </li>
                     <li className="menu-item">
@@ -264,6 +267,9 @@ export default function Navbar({ onOpenQuote }) {
                           </NavLink>
                           <NavLink to="/pipas-de-agua" onClick={closeMobile} style={{ fontSize: '13px', color: '#ff7600', fontWeight: '600' }}>
                             ↳ Pipas de Agua
+                          </NavLink>
+                          <NavLink to="/renta-de-planas" onClick={closeMobile} style={{ fontSize: '13px', color: '#ff7600', fontWeight: '600' }}>
+                            ↳ Renta de Planas
                           </NavLink>
                         </div>
                       </li>

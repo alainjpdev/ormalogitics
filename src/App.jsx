@@ -18,6 +18,7 @@ import Contacto from './pages/Contacto';
 import LandingTransporte from './pages/LandingTransporte';
 import LandingMaquinaria from './pages/LandingMaquinaria';
 import LandingPipas from './pages/LandingPipas';
+import LandingPlanas from './pages/LandingPlanas';
 
 export default function App() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
@@ -44,6 +45,7 @@ export default function App() {
             <Route path="/transporte-de-personal" element={<LandingTransporte onOpenQuote={handleOpenQuote} />} />
             <Route path="/renta-de-maquinaria-pesada" element={<LandingMaquinaria onOpenQuote={handleOpenQuote} />} />
             <Route path="/pipas-de-agua" element={<LandingPipas onOpenQuote={handleOpenQuote} />} />
+            <Route path="/renta-de-planas" element={<LandingPlanas onOpenQuote={handleOpenQuote} />} />
             <Route path="/proyectos" element={<Proyectos onOpenQuote={handleOpenQuote} />} />
             <Route path="/contacto" element={<Contacto />} />
             <Route path="*" element={<Home onOpenQuote={handleOpenQuote} />} />
