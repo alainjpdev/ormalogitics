@@ -30,4 +30,22 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://orma-one.vercel.app/transporte-de-personal</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://orma-one.vercel.app/renta-de-maquinaria-pesada</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://orma-one.vercel.app/pipas-de-agua</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
 </urlset>

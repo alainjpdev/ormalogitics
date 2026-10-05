@@ -580,4 +580,154 @@ export const seoConfig = {
       },
     },
   },
+
+  transportePersonal: {
+    es: {
+      title: 'Transporte de Personal para Empresas y Obras en México | Orma Logistics',
+      description: 'Servicio puntual de transporte de personal en autobuses y vans con chofer certificado. Cobertura en Querétaro, Mérida, Cancún, Playa del Carmen y Valladolid.',
+      keywords: 'transporte de personal para empresas, vans con chofer queretaro, transporte de personal cancun, transporte de personal playa del carmen, transporte de obreros obra, renta de autobuses con chofer',
+      path: '/transporte-de-personal',
+      schema: {
+        '@context': 'https://schema.org',
+        '@graph': [
+          createBreadcrumbs([
+            { name: 'Inicio', path: '/' },
+            { name: 'Transporte de Personal', path: '/transporte-de-personal' },
+          ]),
+          {
+            '@type': 'Service',
+            '@id': `${BASE_URL}/transporte-de-personal#service`,
+            name: 'Transporte de Personal para Empresas y Obras',
+            serviceType: 'Transporte corporativo y de personal',
+            provider: { '@id': `${BASE_URL}/#organization` },
+            areaServed: ['Querétaro', 'Yucatán', 'Quintana Roo'],
+            description: 'Flota moderna de autobuses y vans climatizadas con choferes certificados para traslado de trabajadores y cuadrillas.',
+          },
+        ],
+      },
+    },
+    en: {
+      title: 'Worker Transportation Services for Companies & Construction in Mexico | Orma',
+      description: 'Reliable worker and corporate bus & van transportation with certified drivers. Operating in Queretaro, Merida, Cancun, and Playa del Carmen.',
+      keywords: 'worker transportation mexico, employee shuttle service, construction crew bus rental, van with driver cancun, corporate transport queretaro',
+      path: '/transporte-de-personal',
+      schema: {
+        '@context': 'https://schema.org',
+        '@graph': [
+          createBreadcrumbs([
+            { name: 'Home', path: '/' },
+            { name: 'Worker Transportation', path: '/transporte-de-personal' },
+          ]),
+          {
+            '@type': 'Service',
+            '@id': `${BASE_URL}/transporte-de-personal#service`,
+            name: 'Worker & Corporate Transportation',
+            serviceType: 'Employee Shuttle Service',
+            provider: { '@id': `${BASE_URL}/#organization` },
+            description: 'Modern vans and buses with certified drivers for industrial, hotel, and construction crews.',
+          },
+        ],
+      },
+    },
+  },
+
+  maquinariaPesada: {
+    es: {
+      title: 'Renta de Maquinaria Pesada para Construcción en México | Orma Logistics',
+      description: 'Excavadoras de oruga, retroexcavadoras, motoconformadoras, bulldozers y rodillos compactadores con soporte técnico en sitio en Sureste y Bajío.',
+      keywords: 'renta de maquinaria pesada, renta de excavadoras queretaro, motoconformadoras merida, retroexcavadoras playa del carmen, flete de maquinaria lowboy, maquinaria para terracerias',
+      path: '/renta-de-maquinaria-pesada',
+      schema: {
+        '@context': 'https://schema.org',
+        '@graph': [
+          createBreadcrumbs([
+            { name: 'Inicio', path: '/' },
+            { name: 'Renta de Maquinaria Pesada', path: '/renta-de-maquinaria-pesada' },
+          ]),
+          {
+            '@type': 'Service',
+            '@id': `${BASE_URL}/renta-de-maquinaria-pesada#service`,
+            name: 'Renta de Maquinaria Pesada',
+            serviceType: 'Alquiler de maquinaria pesada para construcción',
+            provider: { '@id': `${BASE_URL}/#organization` },
+            areaServed: ['Querétaro', 'Yucatán', 'Quintana Roo'],
+            description: 'Arrendamiento de excavadoras, retroexcavadoras, motoconformadoras y tractores con operadores certificados DC-3.',
+          },
+        ],
+      },
+    },
+    en: {
+      title: 'Heavy Equipment & Machinery Rental in Mexico | Orma Logistics',
+      description: 'Excavators, backhoes, motor graders, bulldozers, and compactors available for rent with certified operators and on-site support.',
+      keywords: 'heavy equipment rental mexico, excavator rental cancun, backhoe rental queretaro, bulldozer lease merida',
+      path: '/renta-de-maquinaria-pesada',
+      schema: {
+        '@context': 'https://schema.org',
+        '@graph': [
+          createBreadcrumbs([
+            { name: 'Home', path: '/' },
+            { name: 'Heavy Machinery Rental', path: '/renta-de-maquinaria-pesada' },
+          ]),
+          {
+            '@type': 'Service',
+            '@id': `${BASE_URL}/renta-de-maquinaria-pesada#service`,
+            name: 'Heavy Equipment Rental',
+            serviceType: 'Construction Machinery Rental',
+            provider: { '@id': `${BASE_URL}/#organization` },
+            description: 'Top-tier heavy construction equipment rental with certified operators.',
+          },
+        ],
+      },
+    },
+  },
+
+  pipasAgua: {
+    es: {
+      title: 'Renta de Pipas de Agua 10,000 y 20,000 Litros para Obra | Orma Logistics',
+      description: 'Suministro puntual de agua tratada y potable con barra de aspersión y motobomba para terracerías y obra civil en Playa del Carmen, Cancún, Mérida y Querétaro.',
+      keywords: 'pipas de agua playa del carmen, pipas de agua cancun, pipas de agua 20000 litros terracerias, agua para construccion merida, pipas agua tratada queretaro',
+      path: '/pipas-de-agua',
+      schema: {
+        '@context': 'https://schema.org',
+        '@graph': [
+          createBreadcrumbs([
+            { name: 'Inicio', path: '/' },
+            { name: 'Pipas de Agua', path: '/pipas-de-agua' },
+          ]),
+          {
+            '@type': 'Service',
+            '@id': `${BASE_URL}/pipas-de-agua#service`,
+            name: 'Suministro y Renta de Pipas de Agua',
+            serviceType: 'Suministro de agua para construcción y terracerías',
+            provider: { '@id': `${BASE_URL}/#organization` },
+            areaServed: ['Quintana Roo', 'Yucatán', 'Querétaro'],
+            description: 'Pipas cisterna de 10,000 y 20,000 litros con barra de aspersión para compactación y control de polvo en obra.',
+          },
+        ],
+      },
+    },
+    en: {
+      title: 'Water Tanker Truck Rental (10k & 20k Liters) for Construction | Orma Logistics',
+      description: 'Treated and potable water delivery with spray bars and pumps for earthworks and construction in Playa del Carmen, Cancun, and Merida.',
+      keywords: 'water truck rental mexico, 20000 liter water tanker cancun, compaction water truck playa del carmen',
+      path: '/pipas-de-agua',
+      schema: {
+        '@context': 'https://schema.org',
+        '@graph': [
+          createBreadcrumbs([
+            { name: 'Home', path: '/' },
+            { name: 'Water Tanker Trucks', path: '/pipas-de-agua' },
+          ]),
+          {
+            '@type': 'Service',
+            '@id': `${BASE_URL}/pipas-de-agua#service`,
+            name: 'Water Tanker Truck Rental',
+            serviceType: 'Construction Water Supply',
+            provider: { '@id': `${BASE_URL}/#organization` },
+            description: '10,000 & 20,000-liter water tanker trucks with spray bars for soil compaction and dust control.',
+          },
+        ],
+      },
+    },
+  },
 };

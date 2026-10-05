@@ -15,6 +15,9 @@ import Nosotros from './pages/Nosotros';
 import Servicios from './pages/Servicios';
 import Proyectos from './pages/Proyectos';
 import Contacto from './pages/Contacto';
+import LandingTransporte from './pages/LandingTransporte';
+import LandingMaquinaria from './pages/LandingMaquinaria';
+import LandingPipas from './pages/LandingPipas';
 
 export default function App() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
@@ -38,6 +41,9 @@ export default function App() {
             <Route path="/" element={<Home onOpenQuote={handleOpenQuote} />} />
             <Route path="/nosotros" element={<Nosotros onOpenQuote={handleOpenQuote} />} />
             <Route path="/servicios" element={<Servicios onOpenQuote={handleOpenQuote} />} />
+            <Route path="/transporte-de-personal" element={<LandingTransporte onOpenQuote={handleOpenQuote} />} />
+            <Route path="/renta-de-maquinaria-pesada" element={<LandingMaquinaria onOpenQuote={handleOpenQuote} />} />
+            <Route path="/pipas-de-agua" element={<LandingPipas onOpenQuote={handleOpenQuote} />} />
             <Route path="/proyectos" element={<Proyectos onOpenQuote={handleOpenQuote} />} />
             <Route path="/contacto" element={<Contacto />} />
             <Route path="*" element={<Home onOpenQuote={handleOpenQuote} />} />

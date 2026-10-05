@@ -81,13 +81,24 @@ export default function Navbar({ onOpenQuote }) {
                         {t.nav.projects}
                       </NavLink>
                     </li>
-                    <li className="menu-item">
+                    <li className="menu-item menu-item-has-children">
                       <NavLink
                         to="/servicios"
                         className={({ isActive }) => (isActive ? 'active' : '')}
                       >
                         {t.nav.services}
                       </NavLink>
+                      <ul className="sub-menu">
+                        <li>
+                          <NavLink to="/transporte-de-personal">Transporte de Personal</NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/renta-de-maquinaria-pesada">Renta de Maquinaria</NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/pipas-de-agua">Pipas de Agua</NavLink>
+                        </li>
+                      </ul>
                     </li>
                     <li className="menu-item">
                       <NavLink
@@ -244,6 +255,17 @@ export default function Navbar({ onOpenQuote }) {
                         >
                           {t.nav.services}
                         </NavLink>
+                        <div className="mobile-services-sublinks" style={{ paddingLeft: '16px', display: 'flex', flexDirection: 'column', gap: '8px', margin: '8px 0 12px' }}>
+                          <NavLink to="/transporte-de-personal" onClick={closeMobile} style={{ fontSize: '13px', color: '#ff7600', fontWeight: '600' }}>
+                            ↳ Transporte de Personal
+                          </NavLink>
+                          <NavLink to="/renta-de-maquinaria-pesada" onClick={closeMobile} style={{ fontSize: '13px', color: '#ff7600', fontWeight: '600' }}>
+                            ↳ Renta de Maquinaria
+                          </NavLink>
+                          <NavLink to="/pipas-de-agua" onClick={closeMobile} style={{ fontSize: '13px', color: '#ff7600', fontWeight: '600' }}>
+                            ↳ Pipas de Agua
+                          </NavLink>
+                        </div>
                       </li>
                       <li>
                         <NavLink
