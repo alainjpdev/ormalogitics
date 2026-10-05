@@ -197,7 +197,7 @@ export default function LandingTransporte({ onOpenQuote }) {
                   </div>
 
                   <div className="row g-2 mb-3">
-                    <div className="col-sm-6">
+                    <div className="col-6">
                       <label className="form-label">Ubicación / Ciudad</label>
                       <select
                         className="form-select"
@@ -223,7 +223,7 @@ export default function LandingTransporte({ onOpenQuote }) {
                       )}
                     </div>
 
-                    <div className="col-sm-6">
+                    <div className="col-6">
                       <label className="form-label">Unidades requeridas</label>
                       <select
                         className="form-select"

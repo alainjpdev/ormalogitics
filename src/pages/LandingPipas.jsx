@@ -191,7 +191,7 @@ export default function LandingPipas({ onOpenQuote }) {
                   </div>
 
                   <div className="row g-2 mb-3">
-                    <div className="col-sm-6">
+                    <div className="col-6">
                       <label className="form-label">Ubicación de entrega</label>
                       <select
                         className="form-select"
@@ -218,7 +218,7 @@ export default function LandingPipas({ onOpenQuote }) {
                       )}
                     </div>
 
-                    <div className="col-sm-6">
+                    <div className="col-6">
                       <label className="form-label">Capacidad de Pipa</label>
                       <select
                         className="form-select"

@@ -100,6 +100,54 @@ header.header-1 .main-menu ul > li > a.active {
   color: #c32637 !important;
 }
 
+header.header-1 .main-menu ul > li.menu-item-has-children {
+  position: relative;
+}
+
+header.header-1 .main-menu ul > li .sub-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 250px;
+  background: #ffffff !important;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  border: 1px solid #e2e8f0;
+  padding: 8px 0;
+  margin: 0;
+  list-style: none;
+  display: none;
+  z-index: 1000;
+  text-align: left;
+}
+
+header.header-1 .main-menu ul > li.menu-item-has-children:hover .sub-menu {
+  display: block;
+}
+
+header.header-1 .main-menu ul > li .sub-menu li {
+  display: block;
+  width: 100%;
+  line-height: normal;
+}
+
+header.header-1 .main-menu ul > li .sub-menu li a {
+  display: block;
+  padding: 11px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f172a !important;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  line-height: 1.4;
+}
+
+header.header-1 .main-menu ul > li .sub-menu li a:hover {
+  background: #fff7ed;
+  color: #ff7600 !important;
+  padding-left: 22px;
+}
+
 header.header-1.sticky {
   top: 0 !important;
   width: 100%;

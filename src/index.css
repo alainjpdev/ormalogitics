@@ -333,10 +333,10 @@
 
 .landing-hero {
   position: relative;
-  background: linear-gradient(135deg, rgba(13, 27, 42, 0.94) 0%, rgba(27, 38, 59, 0.92) 100%),
+  background: linear-gradient(135deg, rgba(10, 18, 36, 0.96) 0%, rgba(15, 23, 42, 0.93) 100%),
               url('/assets/images/orig/portada-mejores-erp-constructoras.jpg.pagespeed.ce.AqFVkqaV_h.jpg') center/cover no-repeat;
   color: #ffffff;
-  padding: 110px 0 80px;
+  padding: 100px 0 75px;
   overflow: hidden;
 }
 
@@ -344,36 +344,44 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 118, 0, 0.15);
-  border: 1px solid rgba(255, 118, 0, 0.4);
-  color: #ff9100;
-  padding: 6px 16px;
+  background: rgba(255, 118, 0, 0.2);
+  border: 1px solid rgba(255, 118, 0, 0.55);
+  color: #ffaa40;
+  padding: 7px 18px;
   border-radius: 9999px;
   font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .landing-hero-title {
   font-size: 42px;
   font-weight: 800;
-  line-height: 1.18;
-  color: #ffffff;
+  line-height: 1.2;
+  color: #ffffff !important;
   margin-bottom: 20px;
 }
 
 .landing-hero-title span {
-  color: #ff7600;
+  color: #ff7600 !important;
 }
 
 .landing-hero-desc {
   font-size: 18px;
-  line-height: 1.6;
-  color: #cbd5e1;
+  line-height: 1.65;
+  color: #f1f5f9 !important;
   margin-bottom: 28px;
   max-width: 620px;
+}
+
+.landing-hero-desc strong {
+  color: #ffffff !important;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 118, 0, 0.5);
+  text-underline-offset: 3px;
 }
 
 .landing-hero-bullets {
@@ -382,28 +390,34 @@
   margin: 0 0 32px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 13px;
 }
 
 .landing-hero-bullets li {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
-  font-size: 15px;
-  color: #f1f5f9;
-  font-weight: 500;
+  font-size: 15.5px;
+  color: #f8fafc !important;
+  line-height: 1.5;
+}
+
+.landing-hero-bullets li strong {
+  color: #ffffff !important;
+  font-weight: 700;
 }
 
 .landing-bullet-icon {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: rgba(34, 197, 94, 0.2);
-  color: #22c55e;
+  background: rgba(34, 197, 94, 0.25);
+  color: #4ade80;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .landing-hero-actions {
@@ -458,86 +472,104 @@
 
 /* Quick Quote Box in Hero */
 .landing-hero-card {
-  background: #ffffff;
-  color: #1e293b;
-  border-radius: 12px;
-  padding: 32px 28px;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-radius: 16px;
+  padding: 30px 26px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .landing-card-header {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .landing-card-header h3 {
   font-size: 22px;
   font-weight: 800;
-  color: #0f172a;
-  margin-bottom: 6px;
+  color: #0f172a !important;
+  margin-bottom: 4px;
 }
 
 .landing-card-header p {
-  font-size: 14px;
-  color: #64748b;
+  font-size: 13.5px;
+  color: #475569 !important;
   margin: 0;
 }
 
 .landing-form .form-label {
   font-size: 13px;
-  font-weight: 600;
-  color: #334155;
+  font-weight: 700;
+  color: #1e293b !important;
   margin-bottom: 5px;
+  display: block;
 }
 
 .landing-form .form-control,
 .landing-form .form-select {
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1.5px solid #cbd5e1 !important;
+  border-radius: 8px !important;
   padding: 10px 14px;
-  font-size: 14px;
-  transition: border-color 0.2s;
+  font-size: 14.5px;
+  line-height: 1.4;
+  width: 100%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.landing-form .form-control::placeholder {
+  color: #94a3b8 !important;
+  opacity: 1;
 }
 
 .landing-form .form-control:focus,
 .landing-form .form-select:focus {
-  border-color: #ff7600;
-  box-shadow: 0 0 0 3px rgba(255, 118, 0, 0.15);
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #ff7600 !important;
+  box-shadow: 0 0 0 3px rgba(255, 118, 0, 0.2) !important;
   outline: none;
+}
+
+.landing-form .form-select option {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
 }
 
 .landing-form-submit {
   width: 100%;
-  background: #ff7600;
-  color: #ffffff;
+  background: linear-gradient(135deg, #ff7600 0%, #ea580c 100%);
+  color: #ffffff !important;
   border: none;
-  padding: 14px;
+  padding: 14px 20px;
   border-radius: 8px;
   font-size: 16px;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   cursor: pointer;
   box-shadow: 0 6px 18px rgba(255, 118, 0, 0.35);
   transition: all 0.25s ease;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .landing-form-submit:hover {
-  background: #e06800;
+  background: linear-gradient(135deg, #e06800 0%, #c2410c 100%);
   transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(255, 118, 0, 0.45);
+  box-shadow: 0 10px 24px rgba(255, 118, 0, 0.45);
 }
 
-/* Trust Bar */
+/* Trust Bar - Bright White Clean Background with High Contrast */
 .landing-trust-bar {
-  background: #0f172a;
-  border-top: 1px solid #1e293b;
-  border-bottom: 1px solid #1e293b;
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
   padding: 24px 0;
-  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
 .landing-trust-item {
@@ -547,10 +579,11 @@
 }
 
 .landing-trust-icon {
-  width: 46px;
-  height: 46px;
-  border-radius: 10px;
-  background: rgba(255, 118, 0, 0.12);
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
   color: #ff7600;
   display: flex;
   align-items: center;
@@ -561,13 +594,14 @@
 .landing-trust-text h4 {
   font-size: 16px;
   font-weight: 700;
-  color: #ffffff;
+  color: #0f172a;
   margin: 0 0 2px;
 }
 
 .landing-trust-text p {
   font-size: 13px;
-  color: #94a3b8;
+  color: #475569;
+  font-weight: 500;
   margin: 0;
 }
 
@@ -828,31 +862,34 @@
 
 /* Landing Coverage Banner & Route Chips */
 .landing-coverage-banner {
-  background: rgba(255, 118, 0, 0.08);
-  border: 1px solid rgba(255, 118, 0, 0.25);
+  background: #fff8f0;
+  border: 1.5px solid #ffedd5;
+  border-left: 4px solid #ff7600;
   border-radius: 8px;
-  padding: 10px 14px;
-  margin-bottom: 16px;
+  padding: 12px 14px;
+  margin-bottom: 18px;
 }
 
 .landing-coverage-header {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 13px;
-  color: #ff7600;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #c2410c;
   margin-bottom: 4px;
 }
 
 .landing-coverage-banner p {
-  font-size: 12px;
-  color: #475569;
+  font-size: 13px;
+  color: #334155 !important;
   margin: 0;
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 .landing-coverage-banner p strong {
-  color: #0f172a;
+  color: #0f172a !important;
+  font-weight: 700;
 }
 
 .route-chips-wrapper {

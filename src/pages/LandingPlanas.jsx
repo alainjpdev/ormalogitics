@@ -213,24 +213,24 @@ export default function LandingPlanas({ onOpenQuote }) {
 
                   {/* Origen y Destino Abiertos */}
                   <div className="row g-2 mb-3">
-                    <div className="col-sm-6">
-                      <label className="form-label">Origen (¿Dónde cargamos?) *</label>
+                    <div className="col-6">
+                      <label className="form-label">Origen (Carga) *</label>
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Ej. Mérida, Cancún, etc."
+                        placeholder="Ej. Mérida, Cancún..."
                         required
                         value={formData.origen}
                         onChange={(e) => setFormData({ ...formData, origen: e.target.value })}
                       />
                     </div>
 
-                    <div className="col-sm-6">
-                      <label className="form-label">Destino (¿A dónde entregamos?) *</label>
+                    <div className="col-6">
+                      <label className="form-label">Destino (Entrega) *</label>
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Ej. Bacalar, Chetumal, etc."
+                        placeholder="Ej. Bacalar, Chetumal..."
                         required
                         value={formData.destino}
                         onChange={(e) => setFormData({ ...formData, destino: e.target.value })}
@@ -239,7 +239,7 @@ export default function LandingPlanas({ onOpenQuote }) {
                   </div>
 
                   <div className="row g-2 mb-3">
-                    <div className="col-sm-6">
+                    <div className="col-6">
                       <label className="form-label">Tipo de Carga</label>
                       <select
                         className="form-select"
@@ -247,25 +247,25 @@ export default function LandingPlanas({ onOpenQuote }) {
                         onChange={(e) => setFormData({ ...formData, tipoCarga: e.target.value })}
                       >
                         <option value="Acero / Varilla / Viguetas">Acero / Varilla / Viguetas</option>
-                        <option value="Cemento / Material Paletizado">Cemento / Sacos</option>
+                        <option value="Cemento / Material Paletizado">Cemento / Paletizado</option>
                         <option value="Block / Ladrillo / Prefabricados">Block / Prefabricados</option>
                         <option value="Estructuras Metálicas">Estructuras Metálicas</option>
-                        <option value="Tubería de Concreto / PVC">Tubería de Concreto / PVC</option>
+                        <option value="Tubería de Concreto / PVC">Tubería Concreto / PVC</option>
                         <option value="Maquinaria Pesada (Lowboy)">Maquinaria (Lowboy)</option>
                         <option value="Otra carga">Otra carga</option>
                       </select>
                     </div>
 
-                    <div className="col-sm-6">
-                      <label className="form-label">Modalidad de servicio</label>
+                    <div className="col-6">
+                      <label className="form-label">Modalidad</label>
                       <select
                         className="form-select"
                         value={formData.modalidad}
                         onChange={(e) => setFormData({ ...formData, modalidad: e.target.value })}
                       >
                         <option value="Flete por Viaje">Flete por Viaje</option>
-                        <option value="Renta de Plana Dedicada por Mes">Plana Dedicada por Mes</option>
-                        <option value="Proyecto Completo de Obra">Proyecto Continuo de Obra</option>
+                        <option value="Renta de Plana Dedicada por Mes">Plana Dedicada / Mes</option>
+                        <option value="Proyecto Completo de Obra">Proyecto de Obra</option>
                       </select>
                     </div>
                   </div>

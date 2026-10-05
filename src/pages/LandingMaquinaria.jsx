@@ -228,7 +228,7 @@ export default function LandingMaquinaria({ onOpenQuote }) {
                   </div>
 
                   <div className="row g-2 mb-3">
-                    <div className="col-sm-6">
+                    <div className="col-6">
                       <label className="form-label">Ubicación de la obra</label>
                       <select
                         className="form-select"
@@ -254,7 +254,7 @@ export default function LandingMaquinaria({ onOpenQuote }) {
                       )}
                     </div>
 
-                    <div className="col-sm-6">
+                    <div className="col-6">
                       <label className="form-label">Equipo principal</label>
                       <select
                         className="form-select"
