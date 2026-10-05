@@ -212,13 +212,13 @@ export default function LandingPlanas({ onOpenQuote }) {
                   </div>
 
                   {/* Origen y Destino Abiertos */}
-                  <div className="row g-2 mb-2">
+                  <div className="row g-2 mb-3">
                     <div className="col-sm-6">
                       <label className="form-label">Origen (¿Dónde cargamos?) *</label>
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Ej. Mérida, Cancún, Querétaro..."
+                        placeholder="Ej. Mérida, Cancún, etc."
                         required
                         value={formData.origen}
                         onChange={(e) => setFormData({ ...formData, origen: e.target.value })}
@@ -230,60 +230,11 @@ export default function LandingPlanas({ onOpenQuote }) {
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Ej. Chetumal, Bacalar, Tulum..."
+                        placeholder="Ej. Bacalar, Chetumal, etc."
                         required
                         value={formData.destino}
                         onChange={(e) => setFormData({ ...formData, destino: e.target.value })}
                       />
-                    </div>
-                  </div>
-
-                  {/* Chips de sugerencias rápidas */}
-                  <div className="route-chips-wrapper mb-3">
-                    <span className="route-chips-title">Rutas frecuentes (clic para autocompletar):</span>
-                    <div className="route-chips-list">
-                      <button
-                        type="button"
-                        className={`route-chip ${formData.destino === 'Chetumal, Q. Roo' ? 'active' : ''}`}
-                        onClick={() => setFormData({ ...formData, origen: 'Mérida, Yuc.', destino: 'Chetumal, Q. Roo' })}
-                      >
-                        Mérida ➔ Chetumal
-                      </button>
-                      <button
-                        type="button"
-                        className={`route-chip ${formData.destino === 'Bacalar, Q. Roo' ? 'active' : ''}`}
-                        onClick={() => setFormData({ ...formData, origen: 'Mérida, Yuc.', destino: 'Bacalar, Q. Roo' })}
-                      >
-                        Mérida ➔ Bacalar
-                      </button>
-                      <button
-                        type="button"
-                        className={`route-chip ${formData.destino === 'Tulum / Playa del Carmen' ? 'active' : ''}`}
-                        onClick={() => setFormData({ ...formData, origen: 'Mérida, Yuc.', destino: 'Tulum / Playa del Carmen' })}
-                      >
-                        Mérida ➔ Tulum / Playa
-                      </button>
-                      <button
-                        type="button"
-                        className={`route-chip ${formData.origen === 'Cancún, Q. Roo' && formData.destino === 'Chetumal / Bacalar' ? 'active' : ''}`}
-                        onClick={() => setFormData({ ...formData, origen: 'Cancún, Q. Roo', destino: 'Chetumal / Bacalar' })}
-                      >
-                        Cancún ➔ Chetumal / Bacalar
-                      </button>
-                      <button
-                        type="button"
-                        className={`route-chip ${formData.destino === 'Campeche, Camp.' ? 'active' : ''}`}
-                        onClick={() => setFormData({ ...formData, origen: 'Mérida, Yuc.', destino: 'Campeche, Camp.' })}
-                      >
-                        Mérida ➔ Campeche
-                      </button>
-                      <button
-                        type="button"
-                        className={`route-chip ${formData.destino === 'Querétaro / Bajío' ? 'active' : ''}`}
-                        onClick={() => setFormData({ ...formData, origen: 'Península de Yucatán', destino: 'Querétaro / Bajío' })}
-                      >
-                        Península ➔ Bajío / Querétaro
-                      </button>
                     </div>
                   </div>
 
