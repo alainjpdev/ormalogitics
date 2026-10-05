@@ -235,13 +235,23 @@ export default function LandingMaquinaria({ onOpenQuote }) {
                         value={formData.ciudad}
                         onChange={(e) => setFormData({ ...formData, ciudad: e.target.value })}
                       >
+                        <option value="Mérida / Yucatán">Mérida</option>
                         <option value="Playa del Carmen / Q.Roo">Playa del Carmen</option>
                         <option value="Cancún / Q.Roo">Cancún</option>
-                        <option value="Mérida / Yucatán">Mérida</option>
                         <option value="Valladolid / Yucatán">Valladolid</option>
                         <option value="Querétaro / Bajío">Querétaro</option>
-                        <option value="Otra ubicación">Otra ubicación</option>
+                        <option value="Otra ubicación">Otra ubicación...</option>
                       </select>
+                      {formData.ciudad === 'Otra ubicación' && (
+                        <input
+                          type="text"
+                          className="form-control mt-2"
+                          placeholder="Especifica la ubicación de tu obra"
+                          required
+                          value={formData.otraCiudad || ''}
+                          onChange={(e) => setFormData({ ...formData, otraCiudad: e.target.value })}
+                        />
+                      )}
                     </div>
 
                     <div className="col-sm-6">

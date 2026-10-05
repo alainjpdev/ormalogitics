@@ -198,13 +198,24 @@ export default function LandingPipas({ onOpenQuote }) {
                         value={formData.ciudad}
                         onChange={(e) => setFormData({ ...formData, ciudad: e.target.value })}
                       >
+                        <option value="Mérida / Yucatán">Mérida</option>
                         <option value="Playa del Carmen / Solidaridad">Playa del Carmen</option>
                         <option value="Cancún / Benito Juárez">Cancún</option>
                         <option value="Tulum / Riviera Maya">Tulum</option>
-                        <option value="Mérida / Yucatán">Mérida</option>
                         <option value="Valladolid / Yucatán">Valladolid</option>
                         <option value="Querétaro / Bajío">Querétaro</option>
+                        <option value="Otra ubicación">Otra ubicación...</option>
                       </select>
+                      {formData.ciudad === 'Otra ubicación' && (
+                        <input
+                          type="text"
+                          className="form-control mt-2"
+                          placeholder="Especifica la ubicación de entrega"
+                          required
+                          value={formData.otraCiudad || ''}
+                          onChange={(e) => setFormData({ ...formData, otraCiudad: e.target.value })}
+                        />
+                      )}
                     </div>
 
                     <div className="col-sm-6">

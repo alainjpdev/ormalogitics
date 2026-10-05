@@ -24,7 +24,8 @@ export default function LandingPlanas({ onOpenQuote }) {
   const [formData, setFormData] = useState({
     nombre: '',
     telefono: '',
-    origenDestino: 'Querétaro - Sureste',
+    origenDestino: 'Mérida - Cancún / Riviera Maya',
+    otraRuta: '',
     tipoCarga: 'Acero / Varilla / Perfiles',
     modalidad: 'Flete por Viaje',
     mensaje: ''
@@ -32,9 +33,13 @@ export default function LandingPlanas({ onOpenQuote }) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    const rutaElegida = formData.origenDestino === 'Otra ruta'
+      ? (formData.otraRuta ? `Otra ruta: ${formData.otraRuta}` : 'Otra ruta personalizada')
+      : formData.origenDestino;
+
     const msg = language === 'en'
-      ? `Hello Orma Logistics, I am requesting a quote for Flatbed Trailer Rental (Plana):\n• Name: ${formData.nombre}\n• Phone: ${formData.telefono}\n• Route: ${formData.origenDestino}\n• Cargo: ${formData.tipoCarga}\n• Mode: ${formData.modalidad}\n• Details: ${formData.mensaje}`
-      : `Hola Orma Logistics, solicito cotización urgente para Renta de Plana / Flete en Plataforma:\n• Nombre: ${formData.nombre}\n• Teléfono: ${formData.telefono}\n• Ruta (Origen - Destino): ${formData.origenDestino}\n• Tipo de carga: ${formData.tipoCarga}\n• Modalidad: ${formData.modalidad}\n• Detalles: ${formData.mensaje}`;
+      ? `Hello Orma Logistics, I am requesting a quote for Flatbed Trailer Rental (Plana):\n• Name: ${formData.nombre}\n• Phone: ${formData.telefono}\n• Route: ${rutaElegida}\n• Cargo: ${formData.tipoCarga}\n• Mode: ${formData.modalidad}\n• Details: ${formData.mensaje}`
+      : `Hola Orma Logistics, solicito cotización urgente para Renta de Plana / Flete en Plataforma:\n• Nombre: ${formData.nombre}\n• Teléfono: ${formData.telefono}\n• Ruta (Origen - Destino): ${rutaElegida}\n• Tipo de carga: ${formData.tipoCarga}\n• Modalidad: ${formData.modalidad}\n• Detalles: ${formData.mensaje}`;
 
     const waUrl = `https://api.whatsapp.com/send?phone=524427999440&text=${encodeURIComponent(msg)}`;
     window.open(waUrl, '_blank');
@@ -194,13 +199,29 @@ export default function LandingPlanas({ onOpenQuote }) {
                   <div className="row g-2 mb-3">
                     <div className="col-sm-6">
                       <label className="form-label">Ruta (Origen - Destino)</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Ej. Querétaro a Cancún"
+                      <select
+                        className="form-select"
                         value={formData.origenDestino}
                         onChange={(e) => setFormData({ ...formData, origenDestino: e.target.value })}
-                      />
+                      >
+                        <option value="Mérida - Cancún / Riviera Maya">Mérida - Cancún / Riviera Maya</option>
+                        <option value="Mérida - Playa del Carmen / Tulum">Mérida - Playa del Carmen / Tulum</option>
+                        <option value="Mérida - Valladolid / Tren Maya">Mérida - Valladolid / Tren Maya</option>
+                        <option value="Mérida - Campeche / Chetumal">Mérida - Campeche / Chetumal</option>
+                        <option value="Mérida - Querétaro / Bajío">Mérida - Querétaro / Bajío</option>
+                        <option value="Mérida - Centro / CDMX">Mérida - Centro / CDMX</option>
+                        <option value="Otra ruta">Otra ruta...</option>
+                      </select>
+                      {formData.origenDestino === 'Otra ruta' && (
+                        <input
+                          type="text"
+                          className="form-control mt-2"
+                          placeholder="Escribe tu ruta (Ej. Veracruz a Mérida)"
+                          required
+                          value={formData.otraRuta}
+                          onChange={(e) => setFormData({ ...formData, otraRuta: e.target.value })}
+                        />
+                      )}
                     </div>
 
                     <div className="col-sm-6">
