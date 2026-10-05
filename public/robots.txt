@@ -4,4 +4,3 @@ Allow: /
 
 # Sitemaps
 Sitemap: https://orma-one.vercel.app/sitemap.xml
-Sitemap: https://ormalogistics.com/sitemap-domain.xml
