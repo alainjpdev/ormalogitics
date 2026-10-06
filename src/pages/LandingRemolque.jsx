@@ -118,7 +118,7 @@ export default function LandingRemolque({ onOpenQuote }) {
   const faqs = [
     {
       q: '¿Cómo funciona el servicio de traslado con remolque?',
-      a: 'Nosotros ponemos la camioneta de arrastre, el remolque plataforma de 2 toneladas y el operador calificado. Llegamos a tu punto de carga en Chetumal o poblados cercanos, aseguramos la mercancía con cinchos de matraca y la entregamos directo en tu destino.'
+      a: 'Nosotros ponemos la camioneta de arrastre, el remolque plataforma y el operador calificado. Llegamos a tu punto de carga en Valladolid, Chetumal o cualquier destino de la Península, aseguramos la mercancía con cinchos de matraca y la entregamos directo en tu obra o negocio.'
     },
     {
       q: '¿Por qué conviene más que un camión o tráiler de 40 pies?',
@@ -130,7 +130,7 @@ export default function LandingRemolque({ onOpenQuote }) {
     },
     {
       q: '¿Qué zonas cubren los fletes ligeros?',
-      a: 'Operamos fletes locales en Chetumal, Calderitas, Huay-Pix, Subteniente López y Bacalar, además de viajes foráneos hacia Mahahual, Felipe Carrillo Puerto, Tulum, Playa del Carmen, Cancún y Mérida.'
+      a: 'Operamos desde nuestra base en Valladolid con fletes locales y foráneos hacia Chetumal, Bacalar, Mahahual, Felipe Carrillo Puerto, Tulum, Playa del Carmen, Cancún y Mérida.'
     },
     {
       q: '¿Emiten factura fiscal por el servicio?',
@@ -160,7 +160,7 @@ export default function LandingRemolque({ onOpenQuote }) {
             <div className="col-lg-7 text-white">
               <div className="badge-local d-inline-flex align-items-center gap-2 mb-3 px-3 py-1 rounded-pill" style={{ backgroundColor: 'rgba(37,99,235,0.2)', border: '1px solid #3b82f6', color: '#93c5fd' }}>
                 <MapPin size={16} />
-                <span style={{ fontWeight: 600, fontSize: '13px' }}>Chetumal • Bacalar • Mahahual • Toda la Península</span>
+                <span style={{ fontWeight: 600, fontSize: '13px' }}>Base en Valladolid • Chetumal • Toda la Península</span>
               </div>
 
               <h1 className="hero-title" style={{ fontSize: 'clamp(2rem, 4vw, 3.2rem)', fontWeight: 800, lineHeight: 1.15 }}>
@@ -178,7 +178,7 @@ export default function LandingRemolque({ onOpenQuote }) {
                 </div>
                 <div className="d-flex align-items-center gap-2 mb-2">
                   <CheckCircle2 size={18} color="#22c55e" />
-                  <span><strong>Despacho el Mismo Día:</strong> Disponibilidad inmediata en Chetumal y zona sur.</span>
+                  <span><strong>Despacho Rápido:</strong> Base en Valladolid con conexión estratégica a toda la Península y zona sur.</span>
                 </div>
                 <div className="d-flex align-items-center gap-2">
                   <CheckCircle2 size={18} color="#22c55e" />
@@ -514,10 +514,10 @@ export default function LandingRemolque({ onOpenQuote }) {
               <span style={{ color: '#38bdf8', fontWeight: 700, fontSize: '13px', textTransform: 'uppercase' }}>Rutas y Destinos</span>
               <h2 style={{ fontSize: '2.2rem', fontWeight: 800, marginTop: '8px' }}>Cobertura en Chetumal y toda la Península</h2>
               <p style={{ color: '#94a3b8', fontSize: '15px', lineHeight: 1.7 }}>
-                Base de operaciones en Chetumal para atender despachos express locales y fletes foráneos a cualquier punto de Quintana Roo, Campeche y Yucatán.
+                Base de operaciones en Valladolid para atender despachos express locales y fletes foráneos a cualquier punto de Quintana Roo, Yucatán y Campeche (Chetumal, Cancún, Mérida, Tulum, Playa del Carmen y toda la Península).
               </p>
               <div className="d-flex gap-2 flex-wrap mt-3">
-                {['Chetumal', 'Bacalar', 'Mahahual', 'Calderitas', 'Felipe Carrillo Puerto', 'Tulum', 'Playa del Carmen', 'Cancún', 'Mérida'].map((city, idx) => (
+                {['Valladolid', 'Chetumal', 'Bacalar', 'Mahahual', 'Tulum', 'Playa del Carmen', 'Cancún', 'Mérida', 'Felipe Carrillo Puerto'].map((city, idx) => (
                   <span key={idx} className="badge px-3 py-2" style={{ backgroundColor: '#1e293b', border: '1px solid #334155', color: '#e2e8f0', fontSize: '13px' }}>
                     📍 {city}
                   </span>
