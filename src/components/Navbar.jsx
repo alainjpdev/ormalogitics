@@ -101,6 +101,9 @@ export default function Navbar({ onOpenQuote }) {
                         <li>
                           <NavLink to="/renta-de-planas">Renta de Planas</NavLink>
                         </li>
+                        <li>
+                          <NavLink to="/fletes-carga-ligera">Fletes Carga Ligera (2 Ton)</NavLink>
+                        </li>
                       </ul>
                     </li>
                     <li className="menu-item">
@@ -270,6 +273,9 @@ export default function Navbar({ onOpenQuote }) {
                           </NavLink>
                           <NavLink to="/renta-de-planas" onClick={closeMobile} style={{ fontSize: '13px', color: '#ff7600', fontWeight: '600' }}>
                             ↳ Renta de Planas
+                          </NavLink>
+                          <NavLink to="/fletes-carga-ligera" onClick={closeMobile} style={{ fontSize: '13px', color: '#ff7600', fontWeight: '600' }}>
+                            ↳ Fletes Carga Ligera (2 Ton)
                           </NavLink>
                         </div>
                       </li>
