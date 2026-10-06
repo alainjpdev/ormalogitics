@@ -39,8 +39,8 @@ export default function LandingRemolque({ onOpenQuote }) {
     origen: '',
     destino: '',
     tipoCarga: 'Materiales de Construcción (Cemento/Block/Varilla)',
+    otraCarga: '',
     pesoAprox: 'Carga Mediana (1 a 3.5 Toneladas)',
-    modalidad: 'Flete Local por Viaje',
     mensaje: ''
   });
 
@@ -48,6 +48,10 @@ export default function LandingRemolque({ onOpenQuote }) {
     e.preventDefault();
     setSubmitting(true);
     setSubmitError('');
+
+    const cargaFinal = formData.tipoCarga.includes('Otro')
+      ? (formData.otraCarga ? `Otro: ${formData.otraCarga}` : 'Otro tipo de carga')
+      : formData.tipoCarga;
 
     try {
       const res = await fetch('/api/send-email', {
@@ -58,7 +62,7 @@ export default function LandingRemolque({ onOpenQuote }) {
         body: JSON.stringify({
           ...formData,
           servicio: 'Fletes Ligeros y Medianos • Traslado de Materiales (Hasta 3.5 Tons)',
-          tipoCarga: `${formData.tipoCarga} [${formData.pesoAprox}]`
+          tipoCarga: `${cargaFinal} [${formData.pesoAprox}]`
         })
       });
 
@@ -319,38 +323,40 @@ export default function LandingRemolque({ onOpenQuote }) {
                         <option value="Tarimas y Mercancía Comercial (Pallets)">Tarimas y Mercancía Comercial (Pallets)</option>
                         <option value="Maquinaria Ligera / Generador / Revolvedora">Maquinaria Ligera / Generador / Revolvedora</option>
                         <option value="Mudanza Pequeña / Mobiliario / Enseres">Mudanza Pequeña / Mobiliario / Enseres</option>
-                        <option value="Otro tipo de carga ligera">Otro tipo de carga ligera</option>
+                        <option value="Otro tipo de carga">Otro tipo de carga (Especificar)</option>
                       </select>
                     </div>
 
-                    <div className="row g-2 mb-3">
-                      <div className="col-6">
-                        <label className="form-label" style={{ fontSize: '12px', fontWeight: 600, color: '#334155' }}>Capacidad / Peso</label>
-                        <select
-                          className="form-select"
-                          value={formData.pesoAprox}
-                          onChange={(e) => setFormData({ ...formData, pesoAprox: e.target.value })}
-                          style={{ fontSize: '13px', padding: '8px 12px' }}
-                        >
-                          <option value="Carga Ligera (Hasta 1 Ton)">Carga Ligera (Hasta 1 Ton)</option>
-                          <option value="Carga Mediana (1 a 3.5 Tons)">Carga Mediana (1 a 3.5 Tons)</option>
-                          <option value="Carga Pesada (+3.5 Tons / Plana)">Carga Pesada (+3.5 Tons / Plana)</option>
-                          <option value="No sé el peso exacto (Asesorarme)">No sé el peso (Asesorarme)</option>
-                        </select>
+                    {formData.tipoCarga.includes('Otro') && (
+                      <div className="mb-2">
+                        <label className="form-label" style={{ fontSize: '12px', fontWeight: 600, color: '#2563eb' }}>
+                          Especifica qué material o carga es: *
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Ej. 3 tinacos, cajas de herramientas, paneles, etc."
+                          required
+                          value={formData.otraCarga}
+                          onChange={(e) => setFormData({ ...formData, otraCarga: e.target.value })}
+                          style={{ fontSize: '13px', padding: '8px 12px', borderColor: '#3b82f6', backgroundColor: '#eff6ff' }}
+                        />
                       </div>
-                      <div className="col-6">
-                        <label className="form-label" style={{ fontSize: '12px', fontWeight: 600, color: '#334155' }}>Modalidad</label>
-                        <select
-                          className="form-select"
-                          value={formData.modalidad}
-                          onChange={(e) => setFormData({ ...formData, modalidad: e.target.value })}
-                          style={{ fontSize: '13px', padding: '8px 12px' }}
-                        >
-                          <option value="Flete Local por Viaje">Flete Local por Viaje</option>
-                          <option value="Flete Carretero / Foráneo">Flete Carretero / Foráneo</option>
-                          <option value="Por Día / Jornada Completa">Por Día / Jornada en Obra</option>
-                        </select>
-                      </div>
+                    )}
+
+                    <div className="mb-3">
+                      <label className="form-label" style={{ fontSize: '12px', fontWeight: 600, color: '#334155' }}>Capacidad / Peso estimado</label>
+                      <select
+                        className="form-select"
+                        value={formData.pesoAprox}
+                        onChange={(e) => setFormData({ ...formData, pesoAprox: e.target.value })}
+                        style={{ fontSize: '13px', padding: '8px 12px' }}
+                      >
+                        <option value="Carga Ligera (Hasta 1 Ton)">Carga Ligera (Hasta 1 Ton)</option>
+                        <option value="Carga Mediana (1 a 3.5 Tons)">Carga Mediana (1 a 3.5 Tons)</option>
+                        <option value="Carga Pesada (+3.5 Tons / Plana)">Carga Pesada (+3.5 Tons / Plana)</option>
+                        <option value="No sé el peso exacto (Asesorarme)">No sé el peso exacto (Asesorarme)</option>
+                      </select>
                     </div>
 
                     <button

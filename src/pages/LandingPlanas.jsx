@@ -35,7 +35,7 @@ export default function LandingPlanas({ onOpenQuote }) {
     origen: '',
     destino: '',
     tipoCarga: 'Acero / Varilla / Viguetas',
-    modalidad: 'Flete por Viaje',
+    otraCarga: '',
     mensaje: ''
   });
 
@@ -43,6 +43,10 @@ export default function LandingPlanas({ onOpenQuote }) {
     e.preventDefault();
     setSubmitting(true);
     setSubmitError('');
+
+    const cargaFinal = formData.tipoCarga.includes('Otra')
+      ? (formData.otraCarga ? `Otra: ${formData.otraCarga}` : 'Otra carga')
+      : formData.tipoCarga;
 
     try {
       const res = await fetch('/api/send-email', {
@@ -52,7 +56,8 @@ export default function LandingPlanas({ onOpenQuote }) {
         },
         body: JSON.stringify({
           ...formData,
-          servicio: 'Renta de Planas • Fletes en Plataforma'
+          servicio: 'Renta de Planas • Fletes en Plataforma',
+          tipoCarga: cargaFinal
         })
       });
 
@@ -370,40 +375,40 @@ export default function LandingPlanas({ onOpenQuote }) {
                       </div>
                     </div>
 
-                    <div className="row g-2 mb-3">
-                      <div className="col-6">
-                        <label className="form-label">Tipo de Carga</label>
-                        <select
-                          className="form-select"
-                          value={formData.tipoCarga}
-                          onChange={(e) => setFormData({ ...formData, tipoCarga: e.target.value })}
-                        >
-                          <option value="Acero / Varilla / Viguetas">Acero / Varilla / Viguetas</option>
-                          <option value="Cemento / Material Paletizado">Cemento / Paletizado</option>
-                          <option value="Block / Ladrillo / Prefabricados">Block / Prefabricados</option>
-                          <option value="Estructuras Metálicas">Estructuras Metálicas</option>
-                          <option value="Tubería de Concreto / PVC">Tubería Concreto / PVC</option>
-                          <option value="Maquinaria Pesada (Lowboy)">Maquinaria (Lowboy)</option>
-                          <option value="Carga Ligera o Mediana (1 a 3.5 Tons)">Carga Ligera o Mediana (1 a 3.5 Tons)</option>
-                          <option value="Otra carga">Otra carga</option>
-                        </select>
-                      </div>
-
-                      <div className="col-6">
-                        <label className="form-label">Modalidad o Equipo</label>
-                        <select
-                          className="form-select"
-                          value={formData.modalidad}
-                          onChange={(e) => setFormData({ ...formData, modalidad: e.target.value })}
-                        >
-                          <option value="Flete por Viaje (Plana 40 Pies)">Plana 40 Pies (Por Viaje)</option>
-                          <option value="Plana 48 Pies / Full">Plana 48 Pies / Full</option>
-                          <option value="Plana Dedicada por Mes">Plana Dedicada / Mes</option>
-                          <option value="Unidad Ligera o Mediana (< 3.5 Tons)">Unidad Ligera / Mediana (&lt; 3.5 Tons)</option>
-                          <option value="Asesorarme con la mejor opción">Asesorarme con la mejor opción</option>
-                        </select>
-                      </div>
+                    <div className="mb-3">
+                      <label className="form-label">Tipo de Carga</label>
+                      <select
+                        className="form-select"
+                        value={formData.tipoCarga}
+                        onChange={(e) => setFormData({ ...formData, tipoCarga: e.target.value })}
+                      >
+                        <option value="Acero / Varilla / Viguetas">Acero / Varilla / Viguetas</option>
+                        <option value="Cemento / Material Paletizado">Cemento / Material Paletizado</option>
+                        <option value="Block / Ladrillo / Prefabricados">Block / Ladrillo / Prefabricados</option>
+                        <option value="Estructuras Metálicas">Estructuras Metálicas</option>
+                        <option value="Tubería de Concreto / PVC">Tubería de Concreto / PVC</option>
+                        <option value="Maquinaria Pesada (Lowboy)">Maquinaria Pesada (Lowboy)</option>
+                        <option value="Carga Ligera o Mediana (1 a 3.5 Tons)">Carga Ligera o Mediana (1 a 3.5 Tons)</option>
+                        <option value="Otra carga">Otra carga (Especificar)</option>
+                      </select>
                     </div>
+
+                    {formData.tipoCarga.includes('Otra') && (
+                      <div className="mb-3">
+                        <label className="form-label" style={{ color: '#2563eb', fontWeight: 600 }}>
+                          Especifica qué material o carga es: *
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Ej. Postes de concreto, paneles solares, etc."
+                          required
+                          value={formData.otraCarga}
+                          onChange={(e) => setFormData({ ...formData, otraCarga: e.target.value })}
+                          style={{ backgroundColor: '#eff6ff', borderColor: '#3b82f6' }}
+                        />
+                      </div>
+                    )}
 
                     <button
                       type="submit"
