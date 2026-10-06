@@ -14,29 +14,55 @@ import {
   MessageCircle,
   Phone,
   Send,
-  Zap
+  Zap,
+  Mail,
+  Loader2,
+  AlertCircle
 } from 'lucide-react';
 
 export default function LandingTransporte({ onOpenQuote }) {
   const { language } = useLanguage();
   const [openFaq, setOpenFaq] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const [formData, setFormData] = useState({
     nombre: '',
     telefono: '',
+    email: '',
     ciudad: 'Playa del Carmen / Cancún',
     unidades: '1 a 3 unidades',
     mensaje: ''
   });
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const msg = language === 'en'
-      ? `Hello Orma Logistics, I am requesting a quote for Worker Transportation:\n• Name: ${formData.nombre}\n• Phone: ${formData.telefono}\n• City: ${formData.ciudad}\n• Units: ${formData.unidades}\n• Details: ${formData.mensaje}`
-      : `Hola Orma Logistics, solicito cotización urgente para Transporte de Personal:\n• Nombre: ${formData.nombre}\n• Teléfono: ${formData.telefono}\n• Ciudad/Zona: ${formData.ciudad}\n• Unidades requeridas: ${formData.unidades}\n• Detalles: ${formData.mensaje}`;
+    setSubmitting(true);
+    setSubmitError('');
 
-    const waUrl = `https://api.whatsapp.com/send?phone=524427999440&text=${encodeURIComponent(msg)}`;
-    window.open(waUrl, '_blank');
+    try {
+      const res = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          servicio: 'Transporte de Personal'
+        })
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(data.error || 'Ocurrió un error al procesar la cotización.');
+      }
+    } catch (err) {
+      console.error('Error enviando formulario:', err);
+      setSubmitError('No se pudo conectar con el servidor. Puedes contactarnos vía WhatsApp o por teléfono.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const toggleFaq = (idx) => {
@@ -171,89 +197,210 @@ export default function LandingTransporte({ onOpenQuote }) {
                   <p>Respuesta y disponibilidad de unidades en menos de 15 minutos.</p>
                 </div>
 
-                <form onSubmit={handleFormSubmit} className="landing-form">
-                  <div className="mb-3">
-                    <label className="form-label">Nombre o Empresa *</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Ej. Ing. Carlos Méndez"
-                      required
-                      value={formData.nombre}
-                      onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
-                    />
-                  </div>
-
-                  <div className="mb-3">
-                    <label className="form-label">Teléfono / WhatsApp *</label>
-                    <input
-                      type="tel"
-                      className="form-control"
-                      placeholder="Ej. 998 123 4567"
-                      required
-                      value={formData.telefono}
-                      onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
-                    />
-                  </div>
-
-                  <div className="row g-2 mb-3">
-                    <div className="col-6">
-                      <label className="form-label">Ubicación / Ciudad</label>
-                      <select
-                        className="form-select"
-                        value={formData.ciudad}
-                        onChange={(e) => setFormData({ ...formData, ciudad: e.target.value })}
+                {submitted ? (
+                  <div className="landing-form-success" style={{ padding: '28px 16px', textAlign: 'center' }}>
+                    <div style={{
+                      width: '60px',
+                      height: '60px',
+                      borderRadius: '50%',
+                      backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginBottom: '16px',
+                      color: '#10b981'
+                    }}>
+                      <CheckCircle2 size={36} />
+                    </div>
+                    <h3 style={{ color: '#0f172a', fontWeight: '700', fontSize: '20px', marginBottom: '10px' }}>
+                      ¡Cotización Solicitada con Éxito!
+                    </h3>
+                    <p style={{ color: '#475569', fontSize: '14px', lineHeight: '1.5', marginBottom: '16px' }}>
+                      Hemos recibido tu solicitud de transporte ({formData.unidades}) en <strong>{formData.otraCiudad || formData.ciudad}</strong>. Te enviaremos la propuesta a <strong>{formData.email}</strong> o te contactaremos al <strong>{formData.telefono}</strong> en menos de 15 minutos.
+                    </p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '16px' }}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSubmitted(false);
+                          setFormData({
+                            nombre: '',
+                            telefono: '',
+                            email: '',
+                            ciudad: 'Playa del Carmen / Cancún',
+                            unidades: '1 a 3 unidades',
+                            mensaje: ''
+                          });
+                        }}
+                        style={{
+                          padding: '10px 16px',
+                          fontSize: '13px',
+                          fontWeight: '600',
+                          borderRadius: '8px',
+                          border: '1px solid #cbd5e1',
+                          background: '#ffffff',
+                          color: '#334155',
+                          cursor: 'pointer'
+                        }}
                       >
-                        <option value="Mérida / Yucatán">Mérida</option>
-                        <option value="Playa del Carmen / Riviera Maya">Playa del Carmen</option>
-                        <option value="Cancún / Quintana Roo">Cancún</option>
-                        <option value="Valladolid / Yucatán">Valladolid</option>
-                        <option value="Querétaro / Bajío">Querétaro</option>
-                        <option value="Otra ciudad">Otra ciudad...</option>
-                      </select>
-                      {formData.ciudad === 'Otra ciudad' && (
+                        Cotizar Otra Ruta o Unidades
+                      </button>
+                      <a
+                        href={`https://api.whatsapp.com/send?phone=524427999440&text=${encodeURIComponent(`Hola Orma Logistics, solicité cotización en la web para transporte de personal (${formData.unidades}) en ${formData.otraCiudad || formData.ciudad} a nombre de ${formData.nombre}.`)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          padding: '10px 16px',
+                          fontSize: '13px',
+                          fontWeight: '600',
+                          borderRadius: '8px',
+                          background: '#25D366',
+                          color: '#ffffff',
+                          textDecoration: 'none',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '8px'
+                        }}
+                      >
+                        <MessageCircle size={16} />
+                        <span>¿Urgente? Confirmar por WhatsApp</span>
+                      </a>
+                    </div>
+                  </div>
+                ) : (
+                  <form onSubmit={handleFormSubmit} className="landing-form">
+                    {submitError && (
+                      <div style={{
+                        backgroundColor: '#fef2f2',
+                        border: '1px solid #fecaca',
+                        borderRadius: '8px',
+                        padding: '10px 14px',
+                        marginBottom: '14px',
+                        fontSize: '13px',
+                        color: '#b91c1c',
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        gap: '8px'
+                      }}>
+                        <AlertCircle size={18} style={{ flexShrink: 0, marginTop: '2px' }} />
+                        <span>{submitError}</span>
+                      </div>
+                    )}
+
+                    <div className="mb-3">
+                      <label className="form-label">Nombre o Empresa *</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Ej. Ing. Carlos Méndez"
+                        required
+                        value={formData.nombre}
+                        onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
+                      />
+                    </div>
+
+                    <div className="row g-2 mb-3">
+                      <div className="col-6">
+                        <label className="form-label">Teléfono / WhatsApp *</label>
                         <input
-                          type="text"
-                          className="form-control mt-2"
-                          placeholder="Especifica tu ciudad"
+                          type="tel"
+                          className="form-control"
+                          placeholder="Ej. 998 123 4567"
                           required
-                          value={formData.otraCiudad || ''}
-                          onChange={(e) => setFormData({ ...formData, otraCiudad: e.target.value })}
+                          value={formData.telefono}
+                          onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
                         />
+                      </div>
+                      <div className="col-6">
+                        <label className="form-label">Correo Electrónico *</label>
+                        <input
+                          type="email"
+                          className="form-control"
+                          placeholder="tu@empresa.com"
+                          required
+                          value={formData.email}
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="row g-2 mb-3">
+                      <div className="col-6">
+                        <label className="form-label">Ubicación / Ciudad</label>
+                        <select
+                          className="form-select"
+                          value={formData.ciudad}
+                          onChange={(e) => setFormData({ ...formData, ciudad: e.target.value })}
+                        >
+                          <option value="Mérida / Yucatán">Mérida</option>
+                          <option value="Playa del Carmen / Riviera Maya">Playa del Carmen</option>
+                          <option value="Cancún / Quintana Roo">Cancún</option>
+                          <option value="Valladolid / Yucatán">Valladolid</option>
+                          <option value="Querétaro / Bajío">Querétaro</option>
+                          <option value="Otra ciudad">Otra ciudad...</option>
+                        </select>
+                        {formData.ciudad === 'Otra ciudad' && (
+                          <input
+                            type="text"
+                            className="form-control mt-2"
+                            placeholder="Especifica tu ciudad"
+                            required
+                            value={formData.otraCiudad || ''}
+                            onChange={(e) => setFormData({ ...formData, otraCiudad: e.target.value })}
+                          />
+                        )}
+                      </div>
+
+                      <div className="col-6">
+                        <label className="form-label">Unidades requeridas</label>
+                        <select
+                          className="form-select"
+                          value={formData.unidades}
+                          onChange={(e) => setFormData({ ...formData, unidades: e.target.value })}
+                        >
+                          <option value="1 a 2 Vans">1 a 2 Vans</option>
+                          <option value="Autobús completo">Autobús completo</option>
+                          <option value="Flota mixta (Varias unidades)">Flota mixta</option>
+                          <option value="Asesoría personalizada">Por definir</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="mb-3">
+                      <label className="form-label">Detalles de la ruta o turnos (opcional)</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Ej. Turnos mañana y noche de Lunes a Sábado"
+                        value={formData.mensaje}
+                        onChange={(e) => setFormData({ ...formData, mensaje: e.target.value })}
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="landing-form-submit"
+                      disabled={submitting}
+                      style={{
+                        opacity: submitting ? 0.75 : 1,
+                        cursor: submitting ? 'wait' : 'pointer'
+                      }}
+                    >
+                      {submitting ? (
+                        <>
+                          <Loader2 size={18} style={{ animation: 'minimalSpin 0.75s linear infinite' }} />
+                          <span>Enviando Cotización...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send size={18} />
+                          <span>Cotizar Transporte</span>
+                        </>
                       )}
-                    </div>
-
-                    <div className="col-6">
-                      <label className="form-label">Unidades requeridas</label>
-                      <select
-                        className="form-select"
-                        value={formData.unidades}
-                        onChange={(e) => setFormData({ ...formData, unidades: e.target.value })}
-                      >
-                        <option value="1 a 2 Vans">1 a 2 Vans</option>
-                        <option value="Autobús completo">Autobús completo</option>
-                        <option value="Flota mixta (Varias unidades)">Flota mixta</option>
-                        <option value="Asesoría personalizada">Por definir</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="mb-3">
-                    <label className="form-label">Detalles de la ruta o turnos (opcional)</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Ej. Turnos mañana y noche de Lunes a Sábado"
-                      value={formData.mensaje}
-                      onChange={(e) => setFormData({ ...formData, mensaje: e.target.value })}
-                    />
-                  </div>
-
-                  <button type="submit" className="landing-form-submit">
-                    <Send size={18} />
-                    <span>Cotizar Inmediato por WhatsApp</span>
-                  </button>
-                </form>
+                    </button>
+                  </form>
+                )}
               </div>
             </div>
           </div>

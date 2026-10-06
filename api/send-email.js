@@ -59,10 +59,18 @@ export default async function handler(req, res) {
       email,
       origen,
       destino,
+      ciudad,
+      otraCiudad,
+      equipo,
+      duracion,
+      capacidad,
+      frecuencia,
+      unidades,
       tipoCarga,
       modalidad,
+      asunto,
       mensaje,
-      servicio = 'Renta de Planas y Fletes'
+      servicio = 'Cotización Web Orma Logistics'
     } = body;
 
     if (!nombre || (!telefono && !email)) {
@@ -98,7 +106,40 @@ export default async function handler(req, res) {
       }
     });
 
-    const ruta = origen && destino ? `${origen} ➔ ${destino}` : (origen || destino || 'Península / Zona Sur');
+    const fields = [];
+    if (nombre) fields.push({ label: 'Nombre o Empresa', val: nombre });
+    if (telefono) fields.push({ label: 'Teléfono / WhatsApp', val: telefono, isTel: true });
+    if (email) fields.push({ label: 'Correo Electrónico', val: email, isMail: true });
+    if (servicio) fields.push({ label: 'Servicio / Área', val: servicio });
+    if (origen || destino) fields.push({ label: 'Ruta Solicitada', val: `${origen || 'Origen por definir'} ➔ ${destino || 'Destino por definir'}` });
+    if (otraCiudad || ciudad) fields.push({ label: 'Ubicación / Ciudad', val: otraCiudad || ciudad });
+    if (equipo) fields.push({ label: 'Equipo / Maquinaria', val: equipo });
+    if (duracion) fields.push({ label: 'Tiempo / Duración', val: duracion });
+    if (capacidad) fields.push({ label: 'Capacidad de Pipa', val: capacidad });
+    if (frecuencia) fields.push({ label: 'Modalidad de Pipa', val: frecuencia });
+    if (unidades) fields.push({ label: 'Unidades Requeridas', val: unidades });
+    if (tipoCarga) fields.push({ label: 'Tipo de Carga', val: tipoCarga });
+    if (modalidad) fields.push({ label: 'Modalidad de Flete', val: modalidad });
+    if (asunto) fields.push({ label: 'Asunto', val: asunto });
+    if (mensaje) fields.push({ label: 'Mensaje / Notas', val: mensaje, isMultiline: true });
+
+    const rowsHtml = fields.map(f => {
+      let valHtml = f.val;
+      if (f.isTel) valHtml = `<a href="tel:${f.val}" style="color: #2563eb; text-decoration: none; font-weight: bold;">${f.val}</a>`;
+      else if (f.isMail) valHtml = `<a href="mailto:${f.val}" style="color: #2563eb; text-decoration: none;">${f.val}</a>`;
+      else if (f.isMultiline) valHtml = `<span style="white-space: pre-line;">${f.val}</span>`;
+
+      return `
+        <tr style="border-bottom: 1px solid #f1f5f9;">
+          <td style="padding: 10px 0; font-weight: bold; color: #475569; width: 35%;">${f.label}:</td>
+          <td style="padding: 10px 0; color: #0f172a;">${valHtml}</td>
+        </tr>
+      `;
+    }).join('');
+
+    const plainTextBody = `Nueva Solicitud de Cotización Web - ${servicio}\n\n` +
+      fields.map(f => `${f.label}: ${f.val}`).join('\n') +
+      `\n\nFecha: ${new Date().toLocaleString('es-MX', { timeZone: 'America/Merida' })}`;
 
     const htmlContent = `
       <div style="font-family: Arial, sans-serif; max-width: 620px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
@@ -109,39 +150,11 @@ export default async function handler(req, res) {
         
         <div style="padding: 24px; background-color: #ffffff;">
           <p style="font-size: 15px; color: #1e293b; margin-top: 0;">
-            Has recibido una nueva solicitud de cotización desde la página de <strong>${servicio}</strong>:
+            Has recibido una nueva solicitud desde la página de <strong>${servicio}</strong>:
           </p>
 
           <table style="width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px;">
-            <tr style="border-bottom: 1px solid #f1f5f9;">
-              <td style="padding: 10px 0; font-weight: bold; color: #475569; width: 35%;">Nombre / Empresa:</td>
-              <td style="padding: 10px 0; color: #0f172a;">${nombre || 'N/A'}</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #f1f5f9;">
-              <td style="padding: 10px 0; font-weight: bold; color: #475569;">Teléfono / WhatsApp:</td>
-              <td style="padding: 10px 0; color: #0f172a;"><a href="tel:${telefono}" style="color: #2563eb; text-decoration: none;">${telefono || 'N/A'}</a></td>
-            </tr>
-            <tr style="border-bottom: 1px solid #f1f5f9;">
-              <td style="padding: 10px 0; font-weight: bold; color: #475569;">Correo Electrónico:</td>
-              <td style="padding: 10px 0; color: #0f172a;">${email ? `<a href="mailto:${email}" style="color: #2563eb; text-decoration: none;">${email}</a>` : 'No proporcionado'}</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #f1f5f9;">
-              <td style="padding: 10px 0; font-weight: bold; color: #475569;">Ruta (Origen ➔ Destino):</td>
-              <td style="padding: 10px 0; font-weight: bold; color: #0f172a;">${ruta}</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #f1f5f9;">
-              <td style="padding: 10px 0; font-weight: bold; color: #475569;">Tipo de Carga:</td>
-              <td style="padding: 10px 0; color: #0f172a;">${tipoCarga || 'N/A'}</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #f1f5f9;">
-              <td style="padding: 10px 0; font-weight: bold; color: #475569;">Modalidad:</td>
-              <td style="padding: 10px 0; color: #0f172a;">${modalidad || 'N/A'}</td>
-            </tr>
-            ${mensaje ? `
-            <tr style="border-bottom: 1px solid #f1f5f9;">
-              <td style="padding: 10px 0; font-weight: bold; color: #475569; vertical-align: top;">Detalles adicionales:</td>
-              <td style="padding: 10px 0; color: #0f172a; white-space: pre-line;">${mensaje}</td>
-            </tr>` : ''}
+            ${rowsHtml}
           </table>
 
           <div style="margin-top: 24px; padding: 14px; background-color: #f8fafc; border-radius: 6px; font-size: 12px; color: #64748b; text-align: center;">
@@ -151,19 +164,14 @@ export default async function handler(req, res) {
       </div>
     `;
 
+    const subjectTitle = `Nueva Cotización: ${nombre || 'Cliente'} • ${servicio}`;
+
     const mailOptions = {
       from: `"Orma Logistics Web" <${smtpUser}>`,
       to: destEmails,
       replyTo: email || smtpUser,
-      subject: `Nueva Cotización: ${nombre} • ${ruta}`,
-      text: `Nueva Cotización Web - ${servicio}\n\n` +
-            `Nombre: ${nombre}\n` +
-            `Teléfono: ${telefono}\n` +
-            `Correo: ${email || 'N/A'}\n` +
-            `Ruta: ${ruta}\n` +
-            `Tipo de Carga: ${tipoCarga}\n` +
-            `Modalidad: ${modalidad}\n` +
-            `Mensaje: ${mensaje || 'Sin mensaje adicional'}\n`,
+      subject: subjectTitle,
+      text: plainTextBody,
       html: htmlContent
     };
 

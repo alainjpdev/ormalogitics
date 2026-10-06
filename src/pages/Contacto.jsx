@@ -21,21 +21,25 @@ export default function Contacto() {
   const [submitting, setSubmitting] = useState(false);
   const [formSent, setFormSent] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
 
-    const waText = language === 'en'
-      ? `Hello Orma Logistics, I would like to request information.\n\n*Name:* ${formData.nombre}\n*Email:* ${formData.email}\n*Phone:* ${formData.telefono}\n*Subject:* ${formData.asunto || 'General Inquiry'}\n*Message:* ${formData.mensaje}`
-      : `Hola Orma Logistics, solicito información de contacto.\n\n*Nombre:* ${formData.nombre}\n*Correo:* ${formData.email}\n*Teléfono:* ${formData.telefono}\n*Asunto:* ${formData.asunto || 'Consulta General'}\n*Mensaje:* ${formData.mensaje}`;
-
-    const waUrl = `https://api.whatsapp.com/send?phone=524427999440&text=${encodeURIComponent(waText)}`;
-
-    setTimeout(() => {
+    try {
+      await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          servicio: 'Contacto Web General'
+        })
+      });
+    } catch (err) {
+      console.error('Error enviando contacto por correo:', err);
+    } finally {
       setSubmitting(false);
       setFormSent(true);
-      window.open(waUrl, '_blank');
-    }, 600);
+    }
   };
 
   const handleReset = () => {

@@ -14,30 +14,56 @@ import {
   MessageCircle,
   Phone,
   Send,
-  Zap
+  Zap,
+  Mail,
+  Loader2,
+  AlertCircle
 } from 'lucide-react';
 
 export default function LandingMaquinaria({ onOpenQuote }) {
   const { language } = useLanguage();
   const [openFaq, setOpenFaq] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const [formData, setFormData] = useState({
     nombre: '',
     telefono: '',
+    email: '',
     ciudad: 'Playa del Carmen / Cancún',
     equipo: 'Excavadora de Oruga',
     duracion: 'Por Mes',
     mensaje: ''
   });
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const msg = language === 'en'
-      ? `Hello Orma Logistics, I am requesting a quote for Heavy Machinery:\n• Name: ${formData.nombre}\n• Phone: ${formData.telefono}\n• Location: ${formData.ciudad}\n• Machine: ${formData.equipo}\n• Duration: ${formData.duracion}\n• Details: ${formData.mensaje}`
-      : `Hola Orma Logistics, solicito cotización urgente para Renta de Maquinaria:\n• Nombre: ${formData.nombre}\n• Teléfono: ${formData.telefono}\n• Ciudad/Obra: ${formData.ciudad}\n• Equipo requerido: ${formData.equipo}\n• Duración estimada: ${formData.duracion}\n• Detalles: ${formData.mensaje}`;
+    setSubmitting(true);
+    setSubmitError('');
 
-    const waUrl = `https://api.whatsapp.com/send?phone=524427999440&text=${encodeURIComponent(msg)}`;
-    window.open(waUrl, '_blank');
+    try {
+      const res = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          servicio: 'Renta de Maquinaria Pesada'
+        })
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(data.error || 'Ocurrió un error al procesar la cotización.');
+      }
+    } catch (err) {
+      console.error('Error enviando formulario:', err);
+      setSubmitError('No se pudo conectar con el servidor. Puedes contactarnos vía WhatsApp o por teléfono.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const toggleFaq = (idx) => {
@@ -202,95 +228,217 @@ export default function LandingMaquinaria({ onOpenQuote }) {
                   <p>Disponibilidad y propuesta formal en menos de 15 minutos.</p>
                 </div>
 
-                <form onSubmit={handleFormSubmit} className="landing-form">
-                  <div className="mb-3">
-                    <label className="form-label">Nombre o Constructora *</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Ej. Ing. Roberto Sánchez"
-                      required
-                      value={formData.nombre}
-                      onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
-                    />
-                  </div>
-
-                  <div className="mb-3">
-                    <label className="form-label">Teléfono / WhatsApp *</label>
-                    <input
-                      type="tel"
-                      className="form-control"
-                      placeholder="Ej. 442 123 4567"
-                      required
-                      value={formData.telefono}
-                      onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
-                    />
-                  </div>
-
-                  <div className="row g-2 mb-3">
-                    <div className="col-6">
-                      <label className="form-label">Ubicación de la obra</label>
-                      <select
-                        className="form-select"
-                        value={formData.ciudad}
-                        onChange={(e) => setFormData({ ...formData, ciudad: e.target.value })}
+                {submitted ? (
+                  <div className="landing-form-success" style={{ padding: '28px 16px', textAlign: 'center' }}>
+                    <div style={{
+                      width: '60px',
+                      height: '60px',
+                      borderRadius: '50%',
+                      backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginBottom: '16px',
+                      color: '#10b981'
+                    }}>
+                      <CheckCircle2 size={36} />
+                    </div>
+                    <h3 style={{ color: '#0f172a', fontWeight: '700', fontSize: '20px', marginBottom: '10px' }}>
+                      ¡Cotización Solicitada con Éxito!
+                    </h3>
+                    <p style={{ color: '#475569', fontSize: '14px', lineHeight: '1.5', marginBottom: '16px' }}>
+                      Hemos recibido tu solicitud para <strong>{formData.equipo}</strong> en <strong>{formData.otraCiudad || formData.ciudad}</strong>. Te enviaremos la tarifa formal a <strong>{formData.email}</strong> o te contactaremos al <strong>{formData.telefono}</strong> en menos de 15 minutos.
+                    </p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '16px' }}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSubmitted(false);
+                          setFormData({
+                            nombre: '',
+                            telefono: '',
+                            email: '',
+                            ciudad: 'Playa del Carmen / Cancún',
+                            equipo: 'Excavadora de Oruga',
+                            duracion: 'Por Mes',
+                            mensaje: ''
+                          });
+                        }}
+                        style={{
+                          padding: '10px 16px',
+                          fontSize: '13px',
+                          fontWeight: '600',
+                          borderRadius: '8px',
+                          border: '1px solid #cbd5e1',
+                          background: '#ffffff',
+                          color: '#334155',
+                          cursor: 'pointer'
+                        }}
                       >
-                        <option value="Mérida / Yucatán">Mérida</option>
-                        <option value="Playa del Carmen / Q.Roo">Playa del Carmen</option>
-                        <option value="Cancún / Q.Roo">Cancún</option>
-                        <option value="Valladolid / Yucatán">Valladolid</option>
-                        <option value="Querétaro / Bajío">Querétaro</option>
-                        <option value="Otra ubicación">Otra ubicación...</option>
-                      </select>
-                      {formData.ciudad === 'Otra ubicación' && (
+                        Cotizar Otro Equipo
+                      </button>
+                      <a
+                        href={`https://api.whatsapp.com/send?phone=524427999440&text=${encodeURIComponent(`Hola Orma Logistics, solicité cotización en la web para ${formData.equipo} en ${formData.otraCiudad || formData.ciudad} a nombre de ${formData.nombre}.`)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          padding: '10px 16px',
+                          fontSize: '13px',
+                          fontWeight: '600',
+                          borderRadius: '8px',
+                          background: '#25D366',
+                          color: '#ffffff',
+                          textDecoration: 'none',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '8px'
+                        }}
+                      >
+                        <MessageCircle size={16} />
+                        <span>¿Urgente? Confirmar por WhatsApp</span>
+                      </a>
+                    </div>
+                  </div>
+                ) : (
+                  <form onSubmit={handleFormSubmit} className="landing-form">
+                    {submitError && (
+                      <div style={{
+                        backgroundColor: '#fef2f2',
+                        border: '1px solid #fecaca',
+                        borderRadius: '8px',
+                        padding: '10px 14px',
+                        marginBottom: '14px',
+                        fontSize: '13px',
+                        color: '#b91c1c',
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        gap: '8px'
+                      }}>
+                        <AlertCircle size={18} style={{ flexShrink: 0, marginTop: '2px' }} />
+                        <span>{submitError}</span>
+                      </div>
+                    )}
+
+                    <div className="mb-3">
+                      <label className="form-label">Nombre o Constructora *</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Ej. Ing. Roberto Sánchez"
+                        required
+                        value={formData.nombre}
+                        onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
+                      />
+                    </div>
+
+                    <div className="row g-2 mb-3">
+                      <div className="col-6">
+                        <label className="form-label">Teléfono / WhatsApp *</label>
                         <input
-                          type="text"
-                          className="form-control mt-2"
-                          placeholder="Especifica la ubicación de tu obra"
+                          type="tel"
+                          className="form-control"
+                          placeholder="Ej. 442 123 4567"
                           required
-                          value={formData.otraCiudad || ''}
-                          onChange={(e) => setFormData({ ...formData, otraCiudad: e.target.value })}
+                          value={formData.telefono}
+                          onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
                         />
-                      )}
+                      </div>
+                      <div className="col-6">
+                        <label className="form-label">Correo Electrónico *</label>
+                        <input
+                          type="email"
+                          className="form-control"
+                          placeholder="tu@constructora.com"
+                          required
+                          value={formData.email}
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        />
+                      </div>
                     </div>
 
-                    <div className="col-6">
-                      <label className="form-label">Equipo principal</label>
+                    <div className="row g-2 mb-3">
+                      <div className="col-6">
+                        <label className="form-label">Ubicación de la obra</label>
+                        <select
+                          className="form-select"
+                          value={formData.ciudad}
+                          onChange={(e) => setFormData({ ...formData, ciudad: e.target.value })}
+                        >
+                          <option value="Mérida / Yucatán">Mérida</option>
+                          <option value="Playa del Carmen / Q.Roo">Playa del Carmen</option>
+                          <option value="Cancún / Q.Roo">Cancún</option>
+                          <option value="Valladolid / Yucatán">Valladolid</option>
+                          <option value="Querétaro / Bajío">Querétaro</option>
+                          <option value="Otra ubicación">Otra ubicación...</option>
+                        </select>
+                        {formData.ciudad === 'Otra ubicación' && (
+                          <input
+                            type="text"
+                            className="form-control mt-2"
+                            placeholder="Especifica la ubicación de tu obra"
+                            required
+                            value={formData.otraCiudad || ''}
+                            onChange={(e) => setFormData({ ...formData, otraCiudad: e.target.value })}
+                          />
+                        )}
+                      </div>
+
+                      <div className="col-6">
+                        <label className="form-label">Equipo principal</label>
+                        <select
+                          className="form-select"
+                          value={formData.equipo}
+                          onChange={(e) => setFormData({ ...formData, equipo: e.target.value })}
+                        >
+                          <option value="Excavadora de Oruga">Excavadora de Oruga</option>
+                          <option value="Retroexcavadora 4x4">Retroexcavadora 4x4</option>
+                          <option value="Motoconformadora">Motoconformadora</option>
+                          <option value="Bulldozer / Tractor D6">Bulldozer / Tractor D6</option>
+                          <option value="Rodillo Compactador">Rodillo Compactador</option>
+                          <option value="Cargador Frontal">Cargador Frontal</option>
+                          <option value="Varios Equipos">Varios Equipos</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="mb-3">
+                      <label className="form-label">Tiempo estimado de renta</label>
                       <select
                         className="form-select"
-                        value={formData.equipo}
-                        onChange={(e) => setFormData({ ...formData, equipo: e.target.value })}
+                        value={formData.duracion}
+                        onChange={(e) => setFormData({ ...formData, duracion: e.target.value })}
                       >
-                        <option value="Excavadora de Oruga">Excavadora de Oruga</option>
-                        <option value="Retroexcavadora 4x4">Retroexcavadora 4x4</option>
-                        <option value="Motoconformadora">Motoconformadora</option>
-                        <option value="Bulldozer / Tractor D6">Bulldozer / Tractor D6</option>
-                        <option value="Rodillo Compactador">Rodillo Compactador</option>
-                        <option value="Cargador Frontal">Cargador Frontal</option>
-                        <option value="Varios Equipos">Varios Equipos</option>
+                        <option value="Por Semana">Por Semana</option>
+                        <option value="1 Mes">1 Mes</option>
+                        <option value="3 Meses o más (Tarifa Preferencial)">3 Meses o más</option>
+                        <option value="Proyecto Largo Plazo">Proyecto Anual</option>
                       </select>
                     </div>
-                  </div>
 
-                  <div className="mb-3">
-                    <label className="form-label">Tiempo estimado de renta</label>
-                    <select
-                      className="form-select"
-                      value={formData.duracion}
-                      onChange={(e) => setFormData({ ...formData, duracion: e.target.value })}
+                    <button
+                      type="submit"
+                      className="landing-form-submit"
+                      disabled={submitting}
+                      style={{
+                        opacity: submitting ? 0.75 : 1,
+                        cursor: submitting ? 'wait' : 'pointer'
+                      }}
                     >
-                      <option value="Por Semana">Por Semana</option>
-                      <option value="1 Mes">1 Mes</option>
-                      <option value="3 Meses o más (Tarifa Preferencial)">3 Meses o más</option>
-                      <option value="Proyecto Largo Plazo">Proyecto Anual</option>
-                    </select>
-                  </div>
-
-                  <button type="submit" className="landing-form-submit">
-                    <Send size={18} />
-                    <span>Cotizar Maquinaria por WhatsApp</span>
-                  </button>
-                </form>
+                      {submitting ? (
+                        <>
+                          <Loader2 size={18} style={{ animation: 'minimalSpin 0.75s linear infinite' }} />
+                          <span>Enviando Cotización...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send size={18} />
+                          <span>Cotizar Maquinaria</span>
+                        </>
+                      )}
+                    </button>
+                  </form>
+                )}
               </div>
             </div>
           </div>
