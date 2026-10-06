@@ -233,8 +233,8 @@ export default function Contacto() {
                         </h3>
                         <p>
                           {language === 'en'
-                            ? 'Thank you for reaching out to Orma Logistics. We have opened WhatsApp with your details and an advisor will get back to you promptly.'
-                            : 'Gracias por ponerte en contacto con Orma Logistics. Hemos preparado tu consulta en WhatsApp y un asesor se comunicará contigo a la brevedad.'}
+                            ? 'Thank you for contacting Orma Logistics. We have received your inquiry via email and an advisor will get back to you promptly.'
+                            : 'Gracias por ponerte en contacto con Orma Logistics. Hemos recibido tu mensaje vía correo electrónico y un asesor se comunicará contigo a la brevedad.'}
                         </p>
                         <div className="d-flex justify-content-center gap-3 flex-wrap">
                           <button
@@ -277,10 +277,9 @@ export default function Contacto() {
 
                         <div className="col-md-6 col-12">
                           <div className="single-personal-info">
-                            <label>{language === 'en' ? 'Email Address' : 'Correo Electrónico'}</label>
+                            <label>{language === 'en' ? 'Email Address (Optional)' : 'Correo Electrónico (Opcional)'}</label>
                             <input
                               type="email"
-                              required
                               name="email-address"
                               placeholder={language === 'en' ? 'Enter your email' : 'Ingresa tu correo'}
                               value={formData.email}

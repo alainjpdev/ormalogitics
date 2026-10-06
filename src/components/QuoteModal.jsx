@@ -144,10 +144,9 @@ export default function QuoteModal({ isOpen, onClose, initialService = '' }) {
               </div>
 
               <div className="form-group">
-                <label className="form-label">{language === 'en' ? 'Email Address *' : 'Correo Electrónico *'}</label>
+                <label className="form-label">{language === 'en' ? 'Email Address (Optional)' : 'Correo Electrónico (Opcional)'}</label>
                 <input
                   type="email"
-                  required
                   placeholder={language === 'en' ? 'your@email.com' : 'tu@correo.com'}
                   className="form-input"
                   value={formData.email}

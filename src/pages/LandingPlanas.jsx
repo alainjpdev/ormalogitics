@@ -330,12 +330,11 @@ export default function LandingPlanas({ onOpenQuote }) {
                       </div>
 
                       <div className="col-6">
-                        <label className="form-label">Correo Electrónico *</label>
+                        <label className="form-label">Correo Electrónico (Opcional)</label>
                         <input
                           type="email"
                           className="form-control"
                           placeholder="tu@empresa.com"
-                          required
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         />
