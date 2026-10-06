@@ -39,7 +39,7 @@ export default function LandingRemolque({ onOpenQuote }) {
     origen: '',
     destino: '',
     tipoCarga: 'Materiales de Construcción (Cemento/Block/Varilla)',
-    pesoAprox: '1 a 2 Toneladas',
+    pesoAprox: 'Carga Mediana (1 a 3.5 Toneladas)',
     modalidad: 'Flete Local por Viaje',
     mensaje: ''
   });
@@ -57,8 +57,8 @@ export default function LandingRemolque({ onOpenQuote }) {
         },
         body: JSON.stringify({
           ...formData,
-          servicio: 'Fletes Ligeros • Traslado de Materiales (Remolque 2 Ton)',
-          tipoCarga: `${formData.tipoCarga} (${formData.pesoAprox})`
+          servicio: 'Fletes Ligeros y Medianos • Traslado de Materiales (Hasta 3.5 Tons)',
+          tipoCarga: `${formData.tipoCarga} [${formData.pesoAprox}]`
         })
       });
 
@@ -137,14 +137,14 @@ export default function LandingRemolque({ onOpenQuote }) {
   return (
     <div className="landing-planas-page">
       <SEO
-        title="Fletes Ligeros y Traslado de Materiales hasta 2 Toneladas | Chetumal y Península • Orma Logistics"
-        description="Fletes rápidos y traslado de materiales de construcción, tarimas y carga de hasta 2 toneladas con camioneta y remolque en Chetumal, Bacalar y toda la Península. Cotiza en 5 minutos."
+        title="Fletes de Carga Ligera y Mediana (hasta 3.5 Tons) | Chetumal y Península • Orma Logistics"
+        description="Fletes rápidos y traslado de materiales de 500 kg hasta 3.5 toneladas y fletes pesados en Chetumal, Bacalar y Península. Remolque plataforma, camioneta y planas. Cotiza al instante."
       />
 
       <LandingStickyBar
-        title="Fletes Ligeros • Remolque 2 Toneladas Chetumal"
+        title="Fletes Ligeros y Medianos • Chetumal y Península"
         phone="4427999440"
-        whatsappMessage="Hola, me interesa cotizar un flete ligero / traslado de materiales con remolque de 2 toneladas en Chetumal:"
+        whatsappMessage="Hola, me interesa cotizar un flete de materiales / carga en Chetumal:"
       />
 
       {/* HERO SECTION */}
@@ -160,11 +160,11 @@ export default function LandingRemolque({ onOpenQuote }) {
               </div>
 
               <h1 className="hero-title" style={{ fontSize: 'clamp(2rem, 4vw, 3.2rem)', fontWeight: 800, lineHeight: 1.15 }}>
-                Fletes Ligeros y Traslado de Materiales hasta <span style={{ color: '#38bdf8' }}>2 Toneladas</span>
+                Fletes de Carga Ligera y Mediana <span style={{ color: '#38bdf8'}}>(hasta 3.5 Tons)</span>
               </h1>
 
               <p className="hero-subtitle mt-3" style={{ fontSize: '1.1rem', color: '#cbd5e1', maxWidth: '600px' }}>
-                La solución ágil y económica para mover cemento, varilla, tarimas, herrería y maquinaria ligera. <strong>Entramos a calles estrechas y obras donde un tráiler no cabe.</strong>
+                La solución ágil para mover cemento, varilla, tarimas, herrería y maquinaria. <strong>Tenemos remolques plataforma, unidades de 3.5 tons y planas de 40 pies:</strong> te asignamos la unidad exacta para que ahorres.
               </p>
 
               <div className="hero-bullets mt-4">
@@ -325,16 +325,17 @@ export default function LandingRemolque({ onOpenQuote }) {
 
                     <div className="row g-2 mb-3">
                       <div className="col-6">
-                        <label className="form-label" style={{ fontSize: '12px', fontWeight: 600, color: '#334155' }}>Peso estimado</label>
+                        <label className="form-label" style={{ fontSize: '12px', fontWeight: 600, color: '#334155' }}>Capacidad / Peso</label>
                         <select
                           className="form-select"
                           value={formData.pesoAprox}
                           onChange={(e) => setFormData({ ...formData, pesoAprox: e.target.value })}
                           style={{ fontSize: '13px', padding: '8px 12px' }}
                         >
-                          <option value="Hasta 500 kg">Hasta 500 kg</option>
-                          <option value="500 kg a 1 Ton">500 kg a 1 Tonelada</option>
-                          <option value="1 a 2 Toneladas">1 a 2 Toneladas (Máx)</option>
+                          <option value="Carga Ligera (Hasta 1 Ton)">Carga Ligera (Hasta 1 Ton)</option>
+                          <option value="Carga Mediana (1 a 3.5 Tons)">Carga Mediana (1 a 3.5 Tons)</option>
+                          <option value="Carga Pesada (+3.5 Tons / Plana)">Carga Pesada (+3.5 Tons / Plana)</option>
+                          <option value="No sé el peso exacto (Asesorarme)">No sé el peso (Asesorarme)</option>
                         </select>
                       </div>
                       <div className="col-6">
@@ -391,19 +392,19 @@ export default function LandingRemolque({ onOpenQuote }) {
         </div>
       </section>
 
-      {/* BANNER REDIRECCIÓN CARGA PESADA */}
+      {/* BANNER FLOTA COMPLETA */}
       <div style={{ backgroundColor: '#0b192c', borderTop: '1px solid #1e293b', borderBottom: '1px solid #1e293b', padding: '12px 0' }}>
         <div className="container d-flex flex-wrap align-items-center justify-content-between gap-2 text-white" style={{ fontSize: '13px' }}>
           <div className="d-flex align-items-center gap-2">
             <Truck size={18} color="#38bdf8" />
-            <span><strong>¿Requieres transportar más de 2 toneladas o carga pesada industrial?</strong> Contamos con tractocamiones y plataformas de 40 y 48 pies.</span>
+            <span><strong>Flota Completa desde 500 kg hasta 35 Toneladas:</strong> Tenemos remolques, unidades de 3.5 tons y tractocamiones de 40 y 48 pies.</span>
           </div>
           <Link
             to="/renta-de-planas"
             className="btn btn-sm text-decoration-none fw-bold"
             style={{ backgroundColor: 'rgba(56, 189, 248, 0.15)', color: '#38bdf8', border: '1px solid #38bdf8', borderRadius: '20px', padding: '4px 14px', fontSize: '12px' }}
           >
-            Ver Fletes en Planas de 40 Pies ➔
+            Ver Planas de 40 Pies (+3.5 Tons) ➔
           </Link>
         </div>
       </div>

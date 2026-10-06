@@ -157,7 +157,8 @@ export default function LandingPlanas({ onOpenQuote }) {
 
               <p className="landing-hero-desc">
                 Transporte seguro en semirremolques de plataforma plana para acero, varilla, cemento, prefabricados y estructuras.
-                Movilizamos tu carga en <strong>toda la Península de Yucatán con enfoque prioritario en la Zona Sur: Chetumal, Bacalar, Mahahual</strong>, conectando con <strong>Tulum, Playa del Carmen, Cancún y Mérida</strong>.
+                Movilizamos tu carga en <strong>toda la Península con enfoque en la Zona Sur: Chetumal, Bacalar, Mahahual</strong>.
+                <em> ¿Tu carga es menor a 3.5 toneladas? También disponemos de unidades medianas y ligeras para que no pagues de más.</em>
               </p>
 
               <ul className="landing-hero-bullets">
@@ -383,20 +384,23 @@ export default function LandingPlanas({ onOpenQuote }) {
                           <option value="Estructuras Metálicas">Estructuras Metálicas</option>
                           <option value="Tubería de Concreto / PVC">Tubería Concreto / PVC</option>
                           <option value="Maquinaria Pesada (Lowboy)">Maquinaria (Lowboy)</option>
+                          <option value="Carga Ligera o Mediana (1 a 3.5 Tons)">Carga Ligera o Mediana (1 a 3.5 Tons)</option>
                           <option value="Otra carga">Otra carga</option>
                         </select>
                       </div>
 
                       <div className="col-6">
-                        <label className="form-label">Modalidad</label>
+                        <label className="form-label">Modalidad o Equipo</label>
                         <select
                           className="form-select"
                           value={formData.modalidad}
                           onChange={(e) => setFormData({ ...formData, modalidad: e.target.value })}
                         >
-                          <option value="Flete por Viaje">Flete por Viaje</option>
-                          <option value="Renta de Plana Dedicada por Mes">Plana Dedicada / Mes</option>
-                          <option value="Proyecto Completo de Obra">Proyecto de Obra</option>
+                          <option value="Flete por Viaje (Plana 40 Pies)">Plana 40 Pies (Por Viaje)</option>
+                          <option value="Plana 48 Pies / Full">Plana 48 Pies / Full</option>
+                          <option value="Plana Dedicada por Mes">Plana Dedicada / Mes</option>
+                          <option value="Unidad Ligera o Mediana (< 3.5 Tons)">Unidad Ligera / Mediana (&lt; 3.5 Tons)</option>
+                          <option value="Asesorarme con la mejor opción">Asesorarme con la mejor opción</option>
                         </select>
                       </div>
                     </div>
@@ -424,11 +428,11 @@ export default function LandingPlanas({ onOpenQuote }) {
                     </button>
 
                     <div className="text-center mt-3 pt-2" style={{ borderTop: '1px solid #f1f5f9' }}>
-                      <span style={{ fontSize: '12px', color: '#64748b' }}>¿Tu carga es pequeña (hasta 2 toneladas) o no amerita un tráiler? </span>
+                      <span style={{ fontSize: '12px', color: '#64748b' }}>¿Tu carga es menor a 3.5 toneladas o no amerita un tráiler? </span>
                       <br />
                       <Link to="/fletes-carga-ligera" style={{ fontSize: '13px', color: '#2563eb', fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px', marginTop: '4px' }}>
                         <Truck size={15} />
-                        <span>Ir a Fletes Ligeros y Traslado de Materiales ➔</span>
+                        <span>Cotizar Flete Ligero o Mediano (hasta 3.5 Tons) ➔</span>
                       </Link>
                     </div>
                   </form>
@@ -439,19 +443,19 @@ export default function LandingPlanas({ onOpenQuote }) {
         </div>
       </section>
 
-      {/* BANNER REDIRECCIÓN CARGA LIGERA */}
+      {/* BANNER FLOTA COMPLETA */}
       <div style={{ backgroundColor: '#0b192c', borderTop: '1px solid #1e293b', borderBottom: '1px solid #1e293b', padding: '12px 0' }}>
         <div className="container d-flex flex-wrap align-items-center justify-content-between gap-2 text-white" style={{ fontSize: '13px' }}>
           <div className="d-flex align-items-center gap-2">
             <Truck size={18} color="#38bdf8" />
-            <span><strong>¿Tu carga es menor a 2 toneladas o no amerita un tráiler completo?</strong> Ahorra con nuestro servicio de fletes ligeros en remolque plataforma.</span>
+            <span><strong>Flota Completa desde 500 kg hasta 35 Toneladas:</strong> Planas de 40 y 48 pies, así como unidades ligeras y medianas para cualquier tamaño de carga.</span>
           </div>
           <Link
             to="/fletes-carga-ligera"
             className="btn btn-sm text-decoration-none fw-bold"
             style={{ backgroundColor: 'rgba(56, 189, 248, 0.15)', color: '#38bdf8', border: '1px solid #38bdf8', borderRadius: '20px', padding: '4px 14px', fontSize: '12px' }}
           >
-            Ver Fletes Ligeros (hasta 2 Tons) ➔
+            Ver Fletes Ligeros y Medianos (hasta 3.5 Tons) ➔
           </Link>
         </div>
       </div>
