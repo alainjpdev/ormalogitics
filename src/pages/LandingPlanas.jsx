@@ -449,18 +449,62 @@ export default function LandingPlanas({ onOpenQuote }) {
       </section>
 
       {/* BANNER FLOTA COMPLETA */}
-      <div style={{ backgroundColor: '#0b192c', borderTop: '1px solid #1e293b', borderBottom: '1px solid #1e293b', padding: '12px 0' }}>
-        <div className="container d-flex flex-wrap align-items-center justify-content-between gap-2 text-white" style={{ fontSize: '13px' }}>
-          <div className="d-flex align-items-center gap-2">
-            <Truck size={18} color="#38bdf8" />
-            <span><strong>Flota Completa desde 500 kg hasta 35 Toneladas:</strong> Planas de 40 y 48 pies, así como unidades ligeras y medianas para cualquier tamaño de carga.</span>
+      <div
+        style={{
+          backgroundColor: '#09192f',
+          borderTop: '2px solid #38bdf8',
+          borderBottom: '1px solid #1e293b',
+          padding: '16px 0',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.25)',
+        }}
+      >
+        <div className="container d-flex flex-wrap align-items-center justify-content-between gap-3">
+          <div className="d-flex align-items-center gap-3">
+            <div
+              style={{
+                backgroundColor: 'rgba(56, 189, 248, 0.15)',
+                border: '1px solid #38bdf8',
+                borderRadius: '50%',
+                width: '38px',
+                height: '38px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+              }}
+            >
+              <Truck size={20} color="#38bdf8" />
+            </div>
+            <div style={{ fontSize: '14.5px', lineHeight: 1.45 }}>
+              <strong style={{ color: '#38bdf8', fontWeight: 800, display: 'inline', marginRight: '6px' }}>
+                Flota Completa desde 500 kg hasta 35 Toneladas:
+              </strong>
+              <span style={{ color: '#ffffff', fontWeight: 500, display: 'inline' }}>
+                Planas de 40 y 48 pies, así como unidades ligeras y medianas para cualquier tamaño de carga.
+              </span>
+            </div>
           </div>
           <Link
             to="/fletes-carga-ligera"
-            className="btn btn-sm text-decoration-none fw-bold"
-            style={{ backgroundColor: 'rgba(56, 189, 248, 0.15)', color: '#38bdf8', border: '1px solid #38bdf8', borderRadius: '20px', padding: '4px 14px', fontSize: '12px' }}
+            className="btn text-decoration-none fw-bold"
+            style={{
+              backgroundColor: '#38bdf8',
+              color: '#09192f',
+              border: 'none',
+              borderRadius: '25px',
+              padding: '8px 20px',
+              fontSize: '13px',
+              fontWeight: 800,
+              whiteSpace: 'nowrap',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              boxShadow: '0 4px 14px rgba(56, 189, 248, 0.4)',
+              transition: 'all 0.2s ease',
+            }}
           >
-            Ver Fletes Ligeros y Medianos (hasta 3.5 Tons) ➔
+            <span>Ver Fletes Ligeros y Medianos (hasta 3.5 Tons)</span>
+            <span style={{ fontWeight: 900 }}>➔</span>
           </Link>
         </div>
       </div>

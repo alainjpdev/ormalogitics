@@ -538,6 +538,17 @@
   color: #0f172a !important;
 }
 
+/* Utilería de Alto Contraste */
+.text-white {
+  color: #ffffff !important;
+}
+.text-white p,
+.text-white span,
+.text-white li,
+.text-white strong {
+  color: inherit;
+}
+
 .landing-form-submit {
   width: 100%;
   background: linear-gradient(135deg, #ff7600 0%, #ea580c 100%);
