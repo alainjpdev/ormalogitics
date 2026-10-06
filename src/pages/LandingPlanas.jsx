@@ -14,16 +14,23 @@ import {
   MessageCircle,
   Phone,
   Send,
-  Zap
+  Zap,
+  Mail,
+  Loader2,
+  AlertCircle
 } from 'lucide-react';
 
 export default function LandingPlanas({ onOpenQuote }) {
   const { language } = useLanguage();
   const [openFaq, setOpenFaq] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const [formData, setFormData] = useState({
     nombre: '',
     telefono: '',
+    email: '',
     origen: '',
     destino: '',
     tipoCarga: 'Acero / Varilla / Viguetas',
@@ -31,18 +38,35 @@ export default function LandingPlanas({ onOpenQuote }) {
     mensaje: ''
   });
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const rutaCompleta = (formData.origen && formData.destino)
-      ? `${formData.origen} ➔ ${formData.destino}`
-      : (formData.origen || formData.destino || 'Toda la Península / Cobertura Nacional');
+    setSubmitting(true);
+    setSubmitError('');
 
-    const msg = language === 'en'
-      ? `Hello Orma Logistics, I am requesting a quote for Flatbed Trailer (Plana):\n• Name: ${formData.nombre}\n• Phone: ${formData.telefono}\n• Route (Origin ➔ Destination): ${rutaCompleta}\n• Cargo: ${formData.tipoCarga}\n• Mode: ${formData.modalidad}\n• Coverage: Entire Yucatan Peninsula (Bacalar, Chetumal, Cancun, Merida, etc.) & Nationwide\n• Details: ${formData.mensaje}`
-      : `Hola Orma Logistics, solicito cotización urgente para Renta de Plana / Plataforma:\n• Nombre: ${formData.nombre}\n• Teléfono: ${formData.telefono}\n• Ruta (Origen ➔ Destino): ${rutaCompleta}\n• Tipo de carga: ${formData.tipoCarga}\n• Modalidad: ${formData.modalidad}\n• Cobertura: Toda la Península (Mérida, Cancún, Playa, Tulum, Bacalar, Chetumal, Campeche) y Nacional\n• Detalles: ${formData.mensaje}`;
+    try {
+      const res = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          ...formData,
+          servicio: 'Renta de Planas • Fletes en Plataforma'
+        })
+      });
 
-    const waUrl = `https://api.whatsapp.com/send?phone=524427999440&text=${encodeURIComponent(msg)}`;
-    window.open(waUrl, '_blank');
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(data.error || 'Ocurrió un detalle al procesar la cotización.');
+      }
+    } catch (err) {
+      console.error('Error enviando formulario:', err);
+      setSubmitError('No se pudo conectar con el servidor para enviar el correo. Puedes contactarnos por WhatsApp o teléfono.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const toggleFaq = (idx) => {
@@ -71,7 +95,7 @@ export default function LandingPlanas({ onOpenQuote }) {
         { label: 'Capacidad', val: 'Hasta 45 - 60 toneladas' },
         { label: 'Acceso', val: 'Cuello de ganso desmontable' },
         { label: 'Seguridad', val: 'Abanderamiento y permisos SCT' },
-        { label: 'Rutas', val: 'Península y Nacionales' }
+        { label: 'Rutas', val: 'Toda la Península y Zona Sur' }
       ]
     },
     {
@@ -83,15 +107,15 @@ export default function LandingPlanas({ onOpenQuote }) {
         { label: 'Rastreo', val: 'GPS Satelital en tiempo real' },
         { label: 'Operadores', val: 'Licencia Federal vigente' },
         { label: 'Facturación', val: 'Carta Porte digital y SAT' },
-        { label: 'Cobertura', val: 'Península completa, Bajío y Centro' }
+        { label: 'Cobertura', val: 'Especialistas en Chetumal, Bacalar y Península' }
       ]
     }
   ];
 
   const faqs = [
     {
-      q: '¿Qué ciudades y zonas cubren con las plataformas y planas?',
-      a: 'Nuestra flota tiene cobertura TOTAL en toda la Península de Yucatán: llegamos sin problema a Bacalar, Chetumal, Mahahual, Tulum, Playa del Carmen, Cancún, Mérida, Valladolid, Tizimín, Campeche y Ciudad del Carmen. Además, operamos fletes de enlace interestatal hacia Querétaro, el Bajío y el centro de México.'
+      q: '¿Tienen cobertura de fletes en plana hacia Chetumal, Bacalar y la zona sur?',
+      a: 'Sí, somos especialistas en la ruta hacia la zona sur de la Península de Yucatán: realizamos fletes continuos en plana de 40 y 48 pies hacia Chetumal, Bacalar, Mahahual, Felipe Carrillo Puerto y tramos del Tren Maya, conectando de forma directa desde Mérida, Cancún, Playa del Carmen, Tulum y Campeche.'
     },
     {
       q: '¿Qué tipo de materiales transportan en las planas?',
@@ -123,36 +147,36 @@ export default function LandingPlanas({ onOpenQuote }) {
             <div className="col-lg-7 mb-4 mb-lg-0">
               <div className="landing-hero-badge">
                 <Truck size={15} />
-                <span>Renta de Planas y Fletes en Plataforma • 40 y 48 Pies • Toda la Península</span>
+                <span>Renta de Planas • Fletes en Plataforma • Especialistas en Chetumal y Zona Sur</span>
               </div>
 
               <h1 className="landing-hero-title">
-                Renta de <span>Planas y Fletes</span> en Toda la Península y México
+                Renta de <span>Planas y Fletes</span> en Toda la Península y Zona Sur
               </h1>
 
               <p className="landing-hero-desc">
                 Transporte seguro en semirremolques de plataforma plana para acero, varilla, cemento, prefabricados y estructuras.
-                Movilizamos tu carga en <strong>toda la Península de Yucatán</strong> (Mérida, Cancún, Playa del Carmen, Tulum, <strong>Bacalar, Chetumal</strong>, Campeche) y en rutas nacionales hacia <strong>Querétaro, Bajío y Centro de México</strong>.
+                Movilizamos tu carga en <strong>toda la Península de Yucatán con enfoque prioritario en la Zona Sur: Chetumal, Bacalar, Mahahual</strong>, conectando con <strong>Tulum, Playa del Carmen, Cancún y Mérida</strong>.
               </p>
 
               <ul className="landing-hero-bullets">
                 <li>
                   <span className="landing-bullet-icon"><CheckCircle2 size={16} /></span>
-                  <span><strong>Cobertura Total Peninsular y Nacional:</strong> Fletes continuos conectando Mérida, Riviera Maya, Bacalar, Chetumal y enlaces directos al Bajío/Querétaro.</span>
+                  <span><strong>Especialistas en la Zona Sur de la Península:</strong> Viajes continuos y servicio dedicado hacia Chetumal, Bacalar, Mahahual, Tulum y Felipe Carrillo Puerto.</span>
                 </li>
                 <li>
                   <span className="landing-bullet-icon"><CheckCircle2 size={16} /></span>
-                  <span><strong>Capacidad de 25 a 35 toneladas:</strong> Plataformas de 2 y 3 ejes (sencillos y fulles) con bandas y cadenas grado 70.</span>
+                  <span><strong>Capacidad de 25 a 35 toneladas:</strong> Plataformas de 2 y 3 ejes (sencillos y fulles) equipadas con bandas de 4", cadenas y matracas de uso rudo.</span>
                 </li>
                 <li>
                   <span className="landing-bullet-icon"><CheckCircle2 size={16} /></span>
-                  <span><strong>Monitoreo GPS 24/7 y Carta Porte SAT:</strong> Rastreo satelital en tiempo real, seguro de carga y factura inmediata.</span>
+                  <span><strong>Monitoreo GPS 24/7 y Carta Porte SAT:</strong> Rastreo satelital en tiempo real durante todo el trayecto carretero, seguro de mercancía y facturación fiscal inmediata.</span>
                 </li>
               </ul>
 
               <div className="landing-hero-actions">
                 <a
-                  href="https://api.whatsapp.com/send?phone=524427999440&text=Hola%20Orma%20Logistics%2C%20requiero%20cotizar%20flete%20en%20plana%20%2F%20plataforma%20en%20la%20Pen%C3%ADnsula."
+                  href="https://api.whatsapp.com/send?phone=524427999440&text=Hola%20Orma%20Logistics%2C%20requiero%20cotizar%20flete%20en%20plana%20hacia%20Chetumal%20%2F%20Bacalar%20%2F%20Pen%C3%ADnsula."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-cta-wa"
@@ -179,102 +203,227 @@ export default function LandingPlanas({ onOpenQuote }) {
                 <div className="landing-coverage-banner">
                   <div className="landing-coverage-header">
                     <MapPin size={15} />
-                    <strong>Cobertura Peninsular y Nacional</strong>
+                    <strong>Especialistas en Zona Sur y Toda la Península</strong>
                   </div>
                   <p>
-                    Llegamos a cualquier punto: <strong>Mérida, Cancún, Playa del Carmen, Tulum, Bacalar, Chetumal, Campeche</strong> y rutas al Bajío / Querétaro / CDMX.
+                    Llegamos a cualquier punto: <strong>Chetumal, Bacalar, Mahahual, Felipe Carrillo Puerto, Tulum, Playa del Carmen, Cancún y Mérida</strong>.
                   </p>
                 </div>
 
-                <form onSubmit={handleFormSubmit} className="landing-form">
-                  <div className="mb-3">
-                    <label className="form-label">Nombre o Empresa *</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Ej. Ing. Alejandro Torres"
-                      required
-                      value={formData.nombre}
-                      onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
-                    />
+                {submitted ? (
+                  <div className="landing-form-success" style={{ padding: '28px 16px', textAlign: 'center' }}>
+                    <div style={{
+                      width: '60px',
+                      height: '60px',
+                      borderRadius: '50%',
+                      backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginBottom: '16px',
+                      color: '#10b981'
+                    }}>
+                      <CheckCircle2 size={36} />
+                    </div>
+                    <h3 style={{ color: '#0f172a', fontWeight: '700', fontSize: '20px', marginBottom: '10px' }}>
+                      ¡Cotización Solicitada con Éxito!
+                    </h3>
+                    <p style={{ color: '#475569', fontSize: '14px', lineHeight: '1.5', marginBottom: '16px' }}>
+                      Hemos recibido los detalles de tu ruta <strong>{formData.origen} ➔ {formData.destino}</strong>. Nuestro equipo de logística revisará disponibilidad y te responderá a <strong>{formData.email}</strong> o te contactará al <strong>{formData.telefono}</strong> en menos de 15 minutos.
+                    </p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '16px' }}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSubmitted(false);
+                          setFormData({
+                            nombre: '',
+                            telefono: '',
+                            email: '',
+                            origen: '',
+                            destino: '',
+                            tipoCarga: 'Acero / Varilla / Viguetas',
+                            modalidad: 'Flete por Viaje',
+                            mensaje: ''
+                          });
+                        }}
+                        style={{
+                          padding: '10px 16px',
+                          fontSize: '13px',
+                          fontWeight: '600',
+                          borderRadius: '8px',
+                          border: '1px solid #cbd5e1',
+                          background: '#ffffff',
+                          color: '#334155',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        Cotizar Otra Ruta o Equipo
+                      </button>
+                      <a
+                        href={`https://api.whatsapp.com/send?phone=524427999440&text=${encodeURIComponent(`Hola Orma Logistics, solicité una cotización en la web para la ruta ${formData.origen} ➔ ${formData.destino} a nombre de ${formData.nombre}.`)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          padding: '10px 16px',
+                          fontSize: '13px',
+                          fontWeight: '600',
+                          borderRadius: '8px',
+                          background: '#25D366',
+                          color: '#ffffff',
+                          textDecoration: 'none',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '8px'
+                        }}
+                      >
+                        <MessageCircle size={16} />
+                        <span>¿Urgente? Confirmar por WhatsApp</span>
+                      </a>
+                    </div>
                   </div>
+                ) : (
+                  <form onSubmit={handleFormSubmit} className="landing-form">
+                    {submitError && (
+                      <div style={{
+                        backgroundColor: '#fef2f2',
+                        border: '1px solid #fecaca',
+                        borderRadius: '8px',
+                        padding: '10px 14px',
+                        marginBottom: '14px',
+                        fontSize: '13px',
+                        color: '#b91c1c',
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        gap: '8px'
+                      }}>
+                        <AlertCircle size={18} style={{ flexShrink: 0, marginTop: '2px' }} />
+                        <span>{submitError}</span>
+                      </div>
+                    )}
 
-                  <div className="mb-3">
-                    <label className="form-label">Teléfono / WhatsApp *</label>
-                    <input
-                      type="tel"
-                      className="form-control"
-                      placeholder="Ej. 442 987 6543"
-                      required
-                      value={formData.telefono}
-                      onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
-                    />
-                  </div>
-
-                  {/* Origen y Destino Abiertos */}
-                  <div className="row g-2 mb-3">
-                    <div className="col-6">
-                      <label className="form-label">Origen (Carga) *</label>
+                    <div className="mb-3">
+                      <label className="form-label">Nombre o Empresa *</label>
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Ej. Mérida, Cancún..."
+                        placeholder="Ej. Ing. Alejandro Torres"
                         required
-                        value={formData.origen}
-                        onChange={(e) => setFormData({ ...formData, origen: e.target.value })}
+                        value={formData.nombre}
+                        onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
                       />
                     </div>
 
-                    <div className="col-6">
-                      <label className="form-label">Destino (Entrega) *</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Ej. Bacalar, Chetumal..."
-                        required
-                        value={formData.destino}
-                        onChange={(e) => setFormData({ ...formData, destino: e.target.value })}
-                      />
-                    </div>
-                  </div>
+                    {/* Teléfono y Correo Electrónico en 2 columnas */}
+                    <div className="row g-2 mb-3">
+                      <div className="col-6">
+                        <label className="form-label">Teléfono / WhatsApp *</label>
+                        <input
+                          type="tel"
+                          className="form-control"
+                          placeholder="Ej. 442 987 6543"
+                          required
+                          value={formData.telefono}
+                          onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
+                        />
+                      </div>
 
-                  <div className="row g-2 mb-3">
-                    <div className="col-6">
-                      <label className="form-label">Tipo de Carga</label>
-                      <select
-                        className="form-select"
-                        value={formData.tipoCarga}
-                        onChange={(e) => setFormData({ ...formData, tipoCarga: e.target.value })}
-                      >
-                        <option value="Acero / Varilla / Viguetas">Acero / Varilla / Viguetas</option>
-                        <option value="Cemento / Material Paletizado">Cemento / Paletizado</option>
-                        <option value="Block / Ladrillo / Prefabricados">Block / Prefabricados</option>
-                        <option value="Estructuras Metálicas">Estructuras Metálicas</option>
-                        <option value="Tubería de Concreto / PVC">Tubería Concreto / PVC</option>
-                        <option value="Maquinaria Pesada (Lowboy)">Maquinaria (Lowboy)</option>
-                        <option value="Otra carga">Otra carga</option>
-                      </select>
+                      <div className="col-6">
+                        <label className="form-label">Correo Electrónico *</label>
+                        <input
+                          type="email"
+                          className="form-control"
+                          placeholder="tu@empresa.com"
+                          required
+                          value={formData.email}
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        />
+                      </div>
                     </div>
 
-                    <div className="col-6">
-                      <label className="form-label">Modalidad</label>
-                      <select
-                        className="form-select"
-                        value={formData.modalidad}
-                        onChange={(e) => setFormData({ ...formData, modalidad: e.target.value })}
-                      >
-                        <option value="Flete por Viaje">Flete por Viaje</option>
-                        <option value="Renta de Plana Dedicada por Mes">Plana Dedicada / Mes</option>
-                        <option value="Proyecto Completo de Obra">Proyecto de Obra</option>
-                      </select>
-                    </div>
-                  </div>
+                    {/* Origen y Destino Abiertos */}
+                    <div className="row g-2 mb-3">
+                      <div className="col-6">
+                        <label className="form-label">Origen (Carga) *</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Ej. Mérida, Cancún..."
+                          required
+                          value={formData.origen}
+                          onChange={(e) => setFormData({ ...formData, origen: e.target.value })}
+                        />
+                      </div>
 
-                  <button type="submit" className="landing-form-submit">
-                    <Send size={18} />
-                    <span>Cotizar Plana por WhatsApp</span>
-                  </button>
-                </form>
+                      <div className="col-6">
+                        <label className="form-label">Destino (Entrega) *</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Ej. Bacalar, Chetumal..."
+                          required
+                          value={formData.destino}
+                          onChange={(e) => setFormData({ ...formData, destino: e.target.value })}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="row g-2 mb-3">
+                      <div className="col-6">
+                        <label className="form-label">Tipo de Carga</label>
+                        <select
+                          className="form-select"
+                          value={formData.tipoCarga}
+                          onChange={(e) => setFormData({ ...formData, tipoCarga: e.target.value })}
+                        >
+                          <option value="Acero / Varilla / Viguetas">Acero / Varilla / Viguetas</option>
+                          <option value="Cemento / Material Paletizado">Cemento / Paletizado</option>
+                          <option value="Block / Ladrillo / Prefabricados">Block / Prefabricados</option>
+                          <option value="Estructuras Metálicas">Estructuras Metálicas</option>
+                          <option value="Tubería de Concreto / PVC">Tubería Concreto / PVC</option>
+                          <option value="Maquinaria Pesada (Lowboy)">Maquinaria (Lowboy)</option>
+                          <option value="Otra carga">Otra carga</option>
+                        </select>
+                      </div>
+
+                      <div className="col-6">
+                        <label className="form-label">Modalidad</label>
+                        <select
+                          className="form-select"
+                          value={formData.modalidad}
+                          onChange={(e) => setFormData({ ...formData, modalidad: e.target.value })}
+                        >
+                          <option value="Flete por Viaje">Flete por Viaje</option>
+                          <option value="Renta de Plana Dedicada por Mes">Plana Dedicada / Mes</option>
+                          <option value="Proyecto Completo de Obra">Proyecto de Obra</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="landing-form-submit"
+                      disabled={submitting}
+                      style={{
+                        opacity: submitting ? 0.75 : 1,
+                        cursor: submitting ? 'wait' : 'pointer'
+                      }}
+                    >
+                      {submitting ? (
+                        <>
+                          <Loader2 size={18} style={{ animation: 'minimalSpin 0.75s linear infinite' }} />
+                          <span>Enviando Cotización...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send size={18} />
+                          <span>Cotizar Plana</span>
+                        </>
+                      )}
+                    </button>
+                  </form>
+                )}
               </div>
             </div>
           </div>
@@ -316,8 +465,8 @@ export default function LandingPlanas({ onOpenQuote }) {
               <div className="landing-trust-item">
                 <div className="landing-trust-icon"><MapPin size={24} /></div>
                 <div className="landing-trust-text">
-                  <h4>Toda la Península</h4>
-                  <p>Mérida, Bacalar, Chetumal</p>
+                  <h4>Zona Sur y Península</h4>
+                  <p>Chetumal, Bacalar y Mérida</p>
                 </div>
               </div>
             </div>
@@ -396,7 +545,7 @@ export default function LandingPlanas({ onOpenQuote }) {
               <div className="feature-box">
                 <div className="feature-box-icon"><ShieldCheck size={26} /></div>
                 <h4>Conductores con Licencia Federal</h4>
-                <p>Operadores con experiencia probada en carreteras federales, manejo de carga pesada y conocimiento de rutas en Bajío y Sureste.</p>
+                <p>Operadores con experiencia probada en carreteras federales, manejo de carga pesada y amplio dominio de rutas hacia Chetumal, Bacalar y la Península.</p>
               </div>
             </div>
 
@@ -427,8 +576,8 @@ export default function LandingPlanas({ onOpenQuote }) {
             <div className="col-lg-4 col-md-6">
               <div className="feature-box">
                 <div className="feature-box-icon"><MapPin size={26} /></div>
-                <h4>Cobertura Total en la Península y México</h4>
-                <p>Movilizamos carga en cualquier punto: Mérida, Cancún, Playa del Carmen, Tulum, <strong>Bacalar, Chetumal</strong> y Campeche, con enlaces al Bajío y Centro.</p>
+                <h4>Especialistas en Zona Sur y Toda la Península</h4>
+                <p>Movilizamos carga de manera continua hacia <strong>Chetumal, Bacalar, Mahahual, Felipe Carrillo Puerto y Tulum</strong>, enlazando directamente con Mérida, Cancún y Campeche.</p>
               </div>
             </div>
           </div>

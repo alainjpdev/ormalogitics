@@ -733,9 +733,9 @@ export const seoConfig = {
 
   rentaPlanas: {
     es: {
-      title: 'Renta de Planas y Fletes en Plataforma | Península y México | Orma Logistics',
-      description: 'Semirremolques de plataforma plana de 40 y 48 pies para fletes en toda la Península de Yucatán (Mérida, Cancún, Tulum, Bacalar, Chetumal, Campeche) y Bajío/Centro de México.',
-      keywords: 'renta de planas, fletes en plana chetumal, fletes plana bacalar, fletes plana merida cancun, fletes plataforma peninsula yucatan, transporte de varilla y acero, renta de planas con tractocamion',
+      title: 'Renta de Planas y Fletes en Chetumal, Bacalar y Península | Orma Logistics',
+      description: 'Semirremolques de plataforma plana de 40 y 48 pies para fletes de acero, varilla y carga pesada hacia Chetumal, Bacalar, Mahahual, Tulum y toda la Península.',
+      keywords: 'fletes en plana chetumal, renta de planas chetumal, fletes plana bacalar, fletes plataforma quintana roo, fletes plataforma chetumal merida, transporte de varilla y acero',
       path: '/renta-de-planas',
       schema: {
         '@context': 'https://schema.org',
@@ -747,19 +747,19 @@ export const seoConfig = {
           {
             '@type': 'Service',
             '@id': `${BASE_URL}/renta-de-planas#service`,
-            name: 'Renta de Planas y Fletes en Plataforma',
+            name: 'Renta de Planas y Fletes en Chetumal y Península',
             serviceType: 'Transporte de carga pesada en plataforma plana',
             provider: { '@id': `${BASE_URL}/#organization` },
-            areaServed: ['Yucatán', 'Quintana Roo', 'Campeche', 'Querétaro', 'México'],
-            description: 'Fletes y renta de semirremolques de plataforma plana de 40 y 48 pies con tractocamión para toda la Península de Yucatán (incluyendo Bacalar y Chetumal) y rutas nacionales.',
+            areaServed: ['Chetumal', 'Bacalar', 'Quintana Roo', 'Yucatán', 'Campeche'],
+            description: 'Fletes y renta de semirremolques de plataforma plana de 40 y 48 pies con tractocamión especializados en Chetumal, Bacalar y toda la Península de Yucatán.',
           },
         ],
       },
     },
     en: {
-      title: 'Flatbed Trailer Rental (Planas) & Heavy Freight in Yucatan Peninsula & Mexico | Orma Logistics',
-      description: '40ft & 48ft flatbed trailers for rebar, structural steel, precast concrete, and heavy freight across Yucatan Peninsula (Merida, Cancun, Tulum, Bacalar, Chetumal) and nationwide.',
-      keywords: 'flatbed trailer rental mexico, heavy haul trucking chetumal, plana trailer rental bacalar, yucatan peninsula flatbed freight, steel freight transport',
+      title: 'Flatbed Trailer Rental (Planas) in Chetumal, Bacalar & Yucatan Peninsula | Orma',
+      description: '40ft & 48ft flatbed trailers for structural steel, rebar, and heavy freight in Chetumal, Bacalar, Tulum, and across the Yucatan Peninsula.',
+      keywords: 'flatbed trailer rental chetumal, heavy haul trucking bacalar, plana trailer rental quintana roo, yucatan peninsula flatbed freight',
       path: '/renta-de-planas',
       schema: {
         '@context': 'https://schema.org',
@@ -771,11 +771,11 @@ export const seoConfig = {
           {
             '@type': 'Service',
             '@id': `${BASE_URL}/renta-de-planas#service`,
-            name: 'Flatbed Freight Transport',
+            name: 'Flatbed Freight Transport in Chetumal & Southern Peninsula',
             serviceType: 'Heavy Flatbed Trucking',
             provider: { '@id': `${BASE_URL}/#organization` },
-            areaServed: ['Yucatan', 'Quintana Roo', 'Campeche', 'Queretaro', 'Mexico'],
-            description: '40 & 48-foot flatbed trailer rentals for structural steel and construction cargo across the entire Yucatan Peninsula and nationwide.',
+            areaServed: ['Chetumal', 'Bacalar', 'Quintana Roo', 'Yucatan', 'Campeche'],
+            description: '40 & 48-foot flatbed trailer rentals for structural steel and heavy cargo specialized in Chetumal, Bacalar, and the Yucatan Peninsula.',
           },
         ],
       },
