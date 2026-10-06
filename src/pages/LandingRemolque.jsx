@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import LandingStickyBar from '../components/LandingStickyBar';
 import { useLanguage } from '../context/LanguageContext';
@@ -372,6 +373,15 @@ export default function LandingRemolque({ onOpenQuote }) {
                     <span style={{ fontSize: '11px', color: '#94a3b8', display: 'block', textAlign: 'center', marginTop: '8px' }}>
                       🔒 Tus datos son confidenciales. Te contactamos en menos de 15 minutos.
                     </span>
+
+                    <div className="text-center mt-3 pt-2" style={{ borderTop: '1px solid #f1f5f9' }}>
+                      <span style={{ fontSize: '12px', color: '#64748b' }}>¿Tu carga supera las 2 toneladas o requieres un tráiler completo? </span>
+                      <br />
+                      <Link to="/renta-de-planas" style={{ fontSize: '13px', color: '#2563eb', fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px', marginTop: '4px' }}>
+                        <Truck size={15} />
+                        <span>Ir a Cotizar Plana de 40 y 48 Pies ➔</span>
+                      </Link>
+                    </div>
                   </form>
                 )}
               </div>
@@ -380,6 +390,23 @@ export default function LandingRemolque({ onOpenQuote }) {
           </div>
         </div>
       </section>
+
+      {/* BANNER REDIRECCIÓN CARGA PESADA */}
+      <div style={{ backgroundColor: '#0b192c', borderTop: '1px solid #1e293b', borderBottom: '1px solid #1e293b', padding: '12px 0' }}>
+        <div className="container d-flex flex-wrap align-items-center justify-content-between gap-2 text-white" style={{ fontSize: '13px' }}>
+          <div className="d-flex align-items-center gap-2">
+            <Truck size={18} color="#38bdf8" />
+            <span><strong>¿Requieres transportar más de 2 toneladas o carga pesada industrial?</strong> Contamos con tractocamiones y plataformas de 40 y 48 pies.</span>
+          </div>
+          <Link
+            to="/renta-de-planas"
+            className="btn btn-sm text-decoration-none fw-bold"
+            style={{ backgroundColor: 'rgba(56, 189, 248, 0.15)', color: '#38bdf8', border: '1px solid #38bdf8', borderRadius: '20px', padding: '4px 14px', fontSize: '12px' }}
+          >
+            Ver Fletes en Planas de 40 Pies ➔
+          </Link>
+        </div>
+      </div>
 
       {/* COMPARATIVA: ¿POR QUÉ UN REMOLQUE DE 2 TONELADAS? */}
       <section className="py-5" style={{ backgroundColor: '#f8fafc' }}>
