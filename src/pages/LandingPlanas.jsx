@@ -83,7 +83,7 @@ export default function LandingPlanas({ onOpenQuote }) {
     {
       title: 'Planas de 40 y 48 Pies (2 y 3 Ejes)',
       desc: 'Semirremolques de plataforma ideales para transporte de acero, varilla, perfiles estructurales, cemento paletizado, block y prefabricados de concreto.',
-      image: '/assets/images/orig/xWhatsApp-Image-2023-10-18-at-10.30.06-AM-5-820x461.jpeg.pagespeed.ic.xFjhpYxN5V.jpg',
+      image: '/assets/images/orig/xWhatsApp-Image-2023-10-18-at-10.30.26-AM-2-820x461.jpeg.pagespeed.ic.vrYWwWxZaf.jpg',
       badge: 'Carga Pesada',
       specs: [
         { label: 'Longitud', val: '40 y 48 pies' },
@@ -93,13 +93,13 @@ export default function LandingPlanas({ onOpenQuote }) {
       ]
     },
     {
-      title: 'Plataformas Lowboy para Maquinaria',
-      desc: 'Cama baja reforzada para movilizar excavadoras, motoconformadoras, bulldozers y componentes industriales sobredimensionados.',
-      image: '/assets/images/orig/xWhatsApp-Image-2023-10-18-at-10.30.20-AM-820x461.jpeg.pagespeed.ic.RbYMDD48jT.jpg',
-      badge: 'Cama Baja',
+      title: 'Plataformas Lowboy y Especializadas',
+      desc: 'Plataformas reforzadas para movilizar maquinaria pesada, componentes estructurales y carga sobredimensionada.',
+      image: '/assets/images/orig/xWhatsApp-Image-2023-10-18-at-10.30.20-AM-1-820x461.jpeg.pagespeed.ic.4m2Yvyj6qx.jpg',
+      badge: 'Carga Especial',
       specs: [
         { label: 'Capacidad', val: 'Hasta 45 - 60 toneladas' },
-        { label: 'Acceso', val: 'Cuello de ganso desmontable' },
+        { label: 'Estructura', val: 'Chasis de uso pesado' },
         { label: 'Seguridad', val: 'Abanderamiento y permisos SCT' },
         { label: 'Rutas', val: 'Toda la Península y Zona Sur' }
       ]
@@ -107,7 +107,7 @@ export default function LandingPlanas({ onOpenQuote }) {
     {
       title: 'Fletes Terrestres en Carretera y Obra',
       desc: 'Tractocamiones de modelo reciente con monitoreo satelital GPS 24/7 y operadores certificados para traslados seguros y en tiempo récord.',
-      image: '/assets/images/orig/xWhatsApp-Image-2023-10-18-at-10.30.20-AM-1-820x461.jpeg.pagespeed.ic.4m2Yvyj6qx.jpg',
+      image: '/assets/images/orig/xWhatsApp-Image-2023-10-18-at-10.30.31-AM-820x461.jpeg.pagespeed.ic.nY8XFtkR-h.jpg',
       badge: 'Logística',
       specs: [
         { label: 'Rastreo', val: 'GPS Satelital en tiempo real' },
