@@ -143,8 +143,8 @@ header.header-1 .main-menu ul > li .sub-menu li a {
 }
 
 header.header-1 .main-menu ul > li .sub-menu li a:hover {
-  background: #fff7ed;
-  color: #ff7600 !important;
+  background: #eff6ff;
+  color: #1d4ed8 !important;
   padding-left: 22px;
 }
 

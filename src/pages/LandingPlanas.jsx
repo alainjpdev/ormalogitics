@@ -23,6 +23,7 @@ import {
 
 export default function LandingPlanas({ onOpenQuote }) {
   const { language } = useLanguage();
+  const isEn = language === 'en';
   const [openFaq, setOpenFaq] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -71,11 +72,11 @@ export default function LandingPlanas({ onOpenQuote }) {
           tipoCarga: cargaFinal
         });
       } else {
-        setSubmitError(data.error || 'Ocurrió un detalle al procesar la cotización.');
+        setSubmitError(data.error || (isEn ? 'An error occurred while processing your quote.' : 'Ocurrió un detalle al procesar la cotización.'));
       }
     } catch (err) {
       console.error('Error enviando formulario:', err);
-      setSubmitError('No se pudo enviar la cotización. Puedes contactarnos directo por WhatsApp o teléfono.');
+      setSubmitError(isEn ? 'Could not connect. You can contact us directly via WhatsApp or phone.' : 'No se pudo enviar la cotización. Puedes contactarnos directo por WhatsApp o teléfono.');
     } finally {
       setSubmitting(false);
     }
@@ -86,65 +87,77 @@ export default function LandingPlanas({ onOpenQuote }) {
   };
 
   const routes = [
-    { num: '1', city: 'Mérida', role: 'Hub Comercial e Industrial' },
-    { num: '2', city: 'Cancún', role: 'Hotelería y Desarrollos' },
-    { num: '3', city: 'Valladolid', role: 'Base Operativa y Patio Central' },
-    { num: '4', city: 'Playa del Carmen', role: 'Riviera Maya y Construcción' },
-    { num: '5', city: 'Tulum', role: 'Riviera Maya y Obra' },
-    { num: '6', city: 'Chetumal', role: 'Zona Sur y Corredor Fronterizo' }
+    { num: '1', city: 'Mérida', role: isEn ? 'Commercial & Logistics Hub' : 'Hub Comercial e Industrial' },
+    { num: '2', city: 'Cancún', role: isEn ? 'Hotels & Resort Developments' : 'Hotelería y Desarrollos' },
+    { num: '3', city: 'Valladolid', role: isEn ? 'Operations Base & Central Yard' : 'Base Operativa y Patio Central' },
+    { num: '4', city: 'Playa del Carmen', role: isEn ? 'Riviera Maya & Construction' : 'Riviera Maya y Construcción' },
+    { num: '5', city: 'Tulum', role: isEn ? 'Riviera Maya & Jobsites' : 'Riviera Maya y Obra' },
+    { num: '6', city: 'Chetumal', role: isEn ? 'Southern & Border Corridor' : 'Zona Sur y Corredor Fronterizo' }
   ];
 
   const fleet = [
     {
-      title: 'Planas de 40 y 48 Pies',
-      desc: 'Semirremolques de plataforma para acero, varilla, perfiles, cemento paletizado y prefabricados.',
+      title: isEn ? '40 & 48 Ft Flatbed Trailers' : 'Planas de 40 y 48 Pies',
+      desc: isEn
+        ? 'Flatbed semitrailers for structural steel, rebar, beams, palletized cement, and precast concrete.'
+        : 'Semirremolques de plataforma para acero, varilla, perfiles, cemento paletizado y prefabricados.',
       image: '/assets/images/orig/xWhatsApp-Image-2023-10-18-at-10.30.26-AM-2-820x461.jpeg.pagespeed.ic.vrYWwWxZaf.jpg',
-      badge: 'Carga Pesada',
+      badge: isEn ? 'Heavy Freight' : 'Carga Pesada',
       specs: [
-        { label: 'Longitud', val: '40 y 48 pies (2 y 3 ejes)' },
-        { label: 'Capacidad', val: 'Hasta 30 - 35 toneladas' },
-        { label: 'Sujeción', val: 'Bandas, cadenas y lonas' },
-        { label: 'Ruta clave', val: 'Mérida ⇄ Cancún y Península' }
+        { label: isEn ? 'Length' : 'Longitud', val: isEn ? '40 & 48 ft (2 & 3 axles)' : '40 y 48 pies (2 y 3 ejes)' },
+        { label: isEn ? 'Capacity' : 'Capacidad', val: isEn ? 'Up to 30 - 35 tons' : 'Hasta 30 - 35 toneladas' },
+        { label: isEn ? 'Tie-down' : 'Sujeción', val: isEn ? 'Straps, chains & tarps' : 'Bandas, cadenas y lonas' },
+        { label: isEn ? 'Key Route' : 'Ruta clave', val: isEn ? 'Mérida ⇄ Cancún & Peninsula' : 'Mérida ⇄ Cancún y Península' }
       ]
     },
     {
-      title: 'Plataformas para Maquinaria',
-      desc: 'Plataformas reforzadas para trasladar maquinaria pesada, componentes estructurales y piezas de gran volumen.',
+      title: isEn ? 'Machinery Transport Platforms' : 'Plataformas para Maquinaria',
+      desc: isEn
+        ? 'Reinforced platforms to haul heavy equipment, structural components, and high-volume project cargo.'
+        : 'Plataformas reforzadas para trasladar maquinaria pesada, componentes estructurales y piezas de gran volumen.',
       image: '/assets/images/orig/xWhatsApp-Image-2023-10-18-at-10.30.20-AM-1-820x461.jpeg.pagespeed.ic.4m2Yvyj6qx.jpg',
-      badge: 'Carga Especial',
+      badge: isEn ? 'Special Freight' : 'Carga Especial',
       specs: [
-        { label: 'Capacidad', val: 'Hasta 45 toneladas' },
-        { label: 'Estructura', val: 'Chasis de servicio pesado' },
-        { label: 'Seguridad', val: 'Operador certificado y abanderamiento' },
-        { label: 'Cobertura', val: 'Toda la Península' }
+        { label: isEn ? 'Capacity' : 'Capacidad', val: isEn ? 'Up to 45 tons' : 'Hasta 45 toneladas' },
+        { label: isEn ? 'Structure' : 'Estructura', val: isEn ? 'Heavy-duty chassis' : 'Chasis de servicio pesado' },
+        { label: isEn ? 'Safety' : 'Seguridad', val: isEn ? 'Certified operator & pilot flags' : 'Operador certificado y abanderamiento' },
+        { label: isEn ? 'Coverage' : 'Cobertura', val: isEn ? 'All Yucatan Peninsula' : 'Toda la Península' }
       ]
     },
     {
-      title: 'Tractocamiones y Fletes Carretera',
-      desc: 'Unidades de modelo reciente con monitoreo satelital GPS 24/7 y despacho ágil desde base Valladolid.',
+      title: isEn ? 'Highway Tractors & Freight Hauling' : 'Tractocamiones y Fletes Carretera',
+      desc: isEn
+        ? 'Late-model tractor units with 24/7 real-time satellite GPS tracking and fast dispatch from our central base in Valladolid.'
+        : 'Unidades de modelo reciente con monitoreo satelital GPS 24/7 y despacho ágil desde base Valladolid.',
       image: '/assets/images/orig/xWhatsApp-Image-2023-10-18-at-10.30.31-AM-820x461.jpeg.pagespeed.ic.nY8XFtkR-h.jpg',
-      badge: 'Logística',
+      badge: isEn ? 'Logistics' : 'Logística',
       specs: [
-        { label: 'Monitoreo', val: 'GPS Satelital en tiempo real' },
-        { label: 'Operadores', val: 'Licencia Federal SCT' },
-        { label: 'Facturación', val: 'Carta Porte SAT inmediata' },
-        { label: 'Tiempos', val: 'Despacho en menos de 24 hrs' }
+        { label: isEn ? 'Tracking' : 'Monitoreo', val: isEn ? 'Real-time Satellite GPS' : 'GPS Satelital en tiempo real' },
+        { label: isEn ? 'Operators' : 'Operadores', val: isEn ? 'SCT Federal License' : 'Licencia Federal SCT' },
+        { label: isEn ? 'Compliance' : 'Facturación', val: isEn ? 'Official SAT Carta Porte' : 'Carta Porte SAT inmediata' },
+        { label: isEn ? 'Timeframe' : 'Tiempos', val: isEn ? 'Dispatch in under 24 hrs' : 'Despacho en menos de 24 hrs' }
       ]
     }
   ];
 
   const faqs = [
     {
-      q: '¿Qué ciudades cubren con servicio de planas?',
-      a: 'Nuestra red cubre de forma prioritaria: 1) Mérida, 2) Cancún, 3) Valladolid (Base Operativa Central), 4) Playa del Carmen, 5) Tulum y 6) Chetumal, además de Bacalar y municipios intermedios.'
+      q: isEn ? 'What cities do you cover with flatbed trailer service?' : '¿Qué ciudades cubren con servicio de planas?',
+      a: isEn
+        ? 'Our network priority covers: 1) Mérida, 2) Cancún, 3) Valladolid (Central Operations Base), 4) Playa del Carmen, 5) Tulum, and 6) Chetumal, as well as Bacalar and intermediate hubs.'
+        : 'Nuestra red cubre de forma prioritaria: 1) Mérida, 2) Cancún, 3) Valladolid (Base Operativa Central), 4) Playa del Carmen, 5) Tulum y 6) Chetumal, además de Bacalar y municipios intermedios.'
     },
     {
-      q: '¿Qué materiales transportan en las plataformas?',
-      a: 'Varilla, perfiles y vigas de acero, bultos de cemento en tarimas, block, tubos de concreto o PVC, maquinaria de obra y estructuras metálicas.'
+      q: isEn ? 'What materials do you haul on flatbeds?' : '¿Qué materiales transportan en las plataformas?',
+      a: isEn
+        ? 'Steel rebar, beams and profiles, palletized cement bags, concrete blocks, concrete or PVC pipes, construction machinery, and structural steel.'
+        : 'Varilla, perfiles y vigas de acero, bultos de cemento en tarimas, block, tubos de concreto o PVC, maquinaria de obra y estructuras metálicas.'
     },
     {
-      q: '¿Emiten Carta Porte digital y factura fiscal?',
-      a: 'Sí, el 100% de nuestros fletes cumplen con los complementos fiscales Carta Porte del SAT, seguro de mercancía y factura inmediata.'
+      q: isEn ? 'Do you issue digital Carta Porte and fiscal invoices?' : '¿Emiten Carta Porte digital y factura fiscal?',
+      a: isEn
+        ? 'Yes, 100% of our freight trips strictly comply with SAT digital Carta Porte tax supplements, cargo insurance, and immediate formal invoicing.'
+        : 'Sí, el 100% de nuestros fletes cumplen con los complementos fiscales Carta Porte del SAT, seguro de mercancía y factura inmediata.'
     }
   ];
 
@@ -163,26 +176,55 @@ export default function LandingPlanas({ onOpenQuote }) {
                 <span>Mérida • Cancún • Valladolid • Playa del Carmen • Tulum • Chetumal</span>
               </div>
 
-              <h1 className="landing-hero-title" style={{ fontSize: 'clamp(28px, 4vw, 42px)', lineHeight: '1.2', marginBottom: '16px' }}>
-                Renta de <span>Planas y Fletes</span> en Plataforma
+              <h1
+                className="landing-hero-title"
+                style={{
+                  fontSize: 'clamp(26px, 3.4vw, 40px)',
+                  fontWeight: 700,
+                  lineHeight: '1.35',
+                  letterSpacing: '0.3px',
+                  marginBottom: '22px'
+                }}
+              >
+                {isEn ? 'Flatbed Trailer' : 'Renta de'}{' '}
+                <span>{isEn ? 'Rentals & Freight' : 'Planas y Fletes'}</span>
+                <br className="d-none d-md-inline" />{' '}
+                {isEn ? 'in Yucatan Peninsula' : 'en Plataforma'}
               </h1>
 
               <p className="landing-hero-desc" style={{ fontSize: '16px', lineHeight: '1.55', color: '#cbd5e1', marginBottom: '22px' }}>
-                Transporte de carga pesada en semirremolques de 40 y 48 pies (hasta 35 toneladas) para acero, prefabricados y materiales de construcción en toda la Península de Yucatán.
+                {isEn
+                  ? 'Heavy freight hauling in 40 and 48 ft flatbed semitrailers (up to 35 tons) for steel, precast concrete, and construction materials throughout the Yucatan Peninsula.'
+                  : 'Transporte de carga pesada en semirremolques de 40 y 48 pies (hasta 35 toneladas) para acero, prefabricados y materiales de construcción en toda la Península de Yucatán.'}
               </p>
 
               <ul className="landing-hero-bullets" style={{ marginBottom: '20px' }}>
                 <li style={{ marginBottom: '10px' }}>
                   <span className="landing-bullet-icon"><CheckCircle2 size={16} /></span>
-                  <span><strong>Rutas Clave en la Península:</strong> Servicio ágil en <strong>Mérida, Cancún, base en Valladolid, Playa del Carmen, Tulum y Chetumal</strong>.</span>
+                  <span>
+                    <strong>{isEn ? 'Key Peninsula Routes:' : 'Rutas Clave en la Península:'}</strong>{' '}
+                    {isEn
+                      ? 'Fast dispatch in Mérida, Cancún, base in Valladolid, Playa del Carmen, Tulum, and Chetumal.'
+                      : 'Servicio ágil en Mérida, Cancún, base en Valladolid, Playa del Carmen, Tulum y Chetumal.'}
+                  </span>
                 </li>
                 <li style={{ marginBottom: '10px' }}>
                   <span className="landing-bullet-icon"><CheckCircle2 size={16} /></span>
-                  <span><strong>Planas de 40 y 48 Pies:</strong> Configuraciones sencillas y fulles con bandas, cadenas y lonas impermeables.</span>
+                  <span>
+                    <strong>{isEn ? '40 & 48 Ft Flatbeds:' : 'Planas de 40 y 48 Pies:'}</strong>{' '}
+                    {isEn
+                      ? 'Single and double trailer setups with heavy-duty straps, chains, and waterproof tarps.'
+                      : 'Configuraciones sencillas y fulles con bandas, cadenas y lonas impermeables.'}
+                  </span>
                 </li>
                 <li>
                   <span className="landing-bullet-icon"><CheckCircle2 size={16} /></span>
-                  <span><strong>Seguridad y Formalidad:</strong> Monitoreo GPS 24/7 en tiempo real y Carta Porte digital SAT.</span>
+                  <span>
+                    <strong>{isEn ? 'Safety & Compliance:' : 'Seguridad y Formalidad:'}</strong>{' '}
+                    {isEn
+                      ? '24/7 real-time satellite GPS tracking and official digital SAT Carta Porte.'
+                      : 'Monitoreo GPS 24/7 en tiempo real y Carta Porte digital SAT.'}
+                  </span>
                 </li>
               </ul>
 
@@ -202,7 +244,10 @@ export default function LandingPlanas({ onOpenQuote }) {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <Package size={18} color="#38bdf8" />
                   <span style={{ fontSize: '13px', color: '#e2e8f0' }}>
-                    <strong style={{ color: '#38bdf8' }}>¿Carga menor a 2 o 3.5 Tons?</strong> También realizamos fletes en remolque y carga ligera.
+                    <strong style={{ color: '#38bdf8' }}>
+                      {isEn ? 'Cargo under 2 or 3.5 Tons?' : '¿Carga menor a 2 o 3.5 Tons?'}
+                    </strong>{' '}
+                    {isEn ? 'We also offer trailer freight and light cargo logistics.' : 'También realizamos fletes en remolque y carga ligera.'}
                   </span>
                 </div>
                 <Link
@@ -221,21 +266,25 @@ export default function LandingPlanas({ onOpenQuote }) {
                     whiteSpace: 'nowrap'
                   }}
                 >
-                  <span>Ver Cargas Menores</span>
+                  <span>{isEn ? 'View Light Freight' : 'Ver Cargas Menores'}</span>
                   <span>➔</span>
                 </Link>
               </div>
 
               <div className="landing-hero-actions">
                 <a
-                  href="https://api.whatsapp.com/send?phone=524427999440&text=Hola%20Orma%20Logistics%2C%20requiero%20cotizar%20flete%20en%20plana%20(Ruta%3A%20M%C3%A9rida%20%2F%20Canc%C3%BAn%20%2F%20Pen%C3%ADnsula)."
+                  href={`https://api.whatsapp.com/send?phone=524427999440&text=${encodeURIComponent(
+                    isEn
+                      ? 'Hello Orma Logistics, I would like to quote flatbed trailer freight (Route: Mérida / Cancún / Peninsula).'
+                      : 'Hola Orma Logistics, requiero cotizar flete en plana (Ruta: Mérida / Cancún / Península).'
+                  )}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-cta-wa"
                   onClick={() => trackWhatsAppClick('Hero Planas')}
                 >
                   <MessageCircle size={20} />
-                  <span>Cotizar por WhatsApp</span>
+                  <span>{isEn ? 'Quote on WhatsApp' : 'Cotizar por WhatsApp'}</span>
                 </a>
                 <a
                   href="tel:524427999440"
@@ -243,7 +292,7 @@ export default function LandingPlanas({ onOpenQuote }) {
                   onClick={() => trackPhoneClick('Hero Planas')}
                 >
                   <Phone size={18} />
-                  <span>Llamar (442) 799 9440</span>
+                  <span>{isEn ? 'Call (442) 799 9440' : 'Llamar (442) 799 9440'}</span>
                 </a>
               </div>
             </div>
@@ -252,10 +301,13 @@ export default function LandingPlanas({ onOpenQuote }) {
             <div className="col-lg-5">
               <div className="landing-hero-card" style={{ padding: '24px 22px', borderRadius: '14px', boxShadow: '0 12px 35px rgba(0,0,0,0.18)' }}>
                 <div className="landing-card-header" style={{ marginBottom: '14px', textAlign: 'left' }}>
-                  <h3 style={{ fontSize: '20px', fontWeight: 800, color: '#0f172a', marginBottom: '4px' }}>Cotización Rápida</h3>
-                  <p style={{ fontSize: '13px', color: '#64748b', margin: 0 }}>Tarifas inmediatas por viaje o renta dedicada</p>
+                  <h3 style={{ fontSize: '20px', fontWeight: 800, color: '#0f172a', marginBottom: '4px' }}>
+                    {isEn ? 'Fast Quote' : 'Cotización Rápida'}
+                  </h3>
+                  <p style={{ fontSize: '13px', color: '#64748b', margin: 0 }}>
+                    {isEn ? 'Instant rates per trip or dedicated rental' : 'Tarifas inmediatas por viaje o renta dedicada'}
+                  </p>
                 </div>
-
 
                 {submitted ? (
                   <div className="landing-form-success" style={{ padding: '24px 12px', textAlign: 'center' }}>
@@ -273,13 +325,19 @@ export default function LandingPlanas({ onOpenQuote }) {
                       <CheckCircle2 size={32} />
                     </div>
                     <h3 style={{ color: '#0f172a', fontWeight: '700', fontSize: '18px', marginBottom: '8px' }}>
-                      ¡Solicitud Recibida!
+                      {isEn ? 'Request Received!' : '¡Solicitud Recibida!'}
                     </h3>
                     <p style={{ color: '#475569', fontSize: '13px', lineHeight: '1.45', marginBottom: '14px' }}>
-                      Nos pondremos en contacto contigo a la brevedad con la tarifa exacta para tu flete.
+                      {isEn
+                        ? 'We will contact you shortly with the exact rate for your freight project.'
+                        : 'Nos pondremos en contacto contigo a la brevedad con la tarifa exacta para tu flete.'}
                     </p>
                     <a
-                      href={`https://api.whatsapp.com/send?phone=524427999440&text=${encodeURIComponent(`Hola Orma Logistics, solicité cotización en la web para flete de: ${formData.origen} a ${formData.destino}.`)}`}
+                      href={`https://api.whatsapp.com/send?phone=524427999440&text=${encodeURIComponent(
+                        isEn
+                          ? `Hello Orma Logistics, I requested a quote on your website for freight from ${formData.origen} to ${formData.destino}.`
+                          : `Hola Orma Logistics, solicité cotización en la web para flete de: ${formData.origen} a ${formData.destino}.`
+                      )}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-card-quote"
@@ -287,7 +345,7 @@ export default function LandingPlanas({ onOpenQuote }) {
                       onClick={() => trackWhatsAppClick('Form Success Redirect')}
                     >
                       <MessageCircle size={16} />
-                      <span>Contactar por WhatsApp Ahora</span>
+                      <span>{isEn ? 'Contact on WhatsApp Now' : 'Contactar por WhatsApp Ahora'}</span>
                     </a>
                   </div>
                 ) : (
@@ -302,7 +360,7 @@ export default function LandingPlanas({ onOpenQuote }) {
                       <input
                         type="text"
                         className="form-control form-control-sm"
-                        placeholder="Nombre completo *"
+                        placeholder={isEn ? 'Full name *' : 'Nombre completo *'}
                         required
                         value={formData.nombre}
                         onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
@@ -314,7 +372,7 @@ export default function LandingPlanas({ onOpenQuote }) {
                       <input
                         type="tel"
                         className="form-control form-control-sm"
-                        placeholder="Teléfono / WhatsApp *"
+                        placeholder={isEn ? 'Phone / WhatsApp *' : 'Teléfono / WhatsApp *'}
                         required
                         value={formData.telefono}
                         onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
@@ -327,7 +385,7 @@ export default function LandingPlanas({ onOpenQuote }) {
                         <input
                           type="text"
                           className="form-control form-control-sm"
-                          placeholder="Origen (ej. Mérida) *"
+                          placeholder={isEn ? 'Origin (e.g. Mérida) *' : 'Origen (ej. Mérida) *'}
                           required
                           value={formData.origen}
                           onChange={(e) => setFormData({ ...formData, origen: e.target.value })}
@@ -338,7 +396,7 @@ export default function LandingPlanas({ onOpenQuote }) {
                         <input
                           type="text"
                           className="form-control form-control-sm"
-                          placeholder="Destino (ej. Cancún) *"
+                          placeholder={isEn ? 'Destination (e.g. Cancún) *' : 'Destino (ej. Cancún) *'}
                           required
                           value={formData.destino}
                           onChange={(e) => setFormData({ ...formData, destino: e.target.value })}
@@ -354,13 +412,13 @@ export default function LandingPlanas({ onOpenQuote }) {
                         onChange={(e) => setFormData({ ...formData, tipoCarga: e.target.value })}
                         style={{ fontSize: '13px', padding: '9px 12px' }}
                       >
-                        <option value="Acero / Varilla / Viguetas">Acero / Varilla / Viguetas</option>
-                        <option value="Cemento / Material Paletizado">Cemento / Material Paletizado</option>
-                        <option value="Block / Ladrillo / Prefabricados">Block / Ladrillo / Prefabricados</option>
-                        <option value="Estructuras Metálicas">Estructuras Metálicas</option>
-                        <option value="Maquinaria Pesada (Lowboy)">Maquinaria Pesada (Lowboy)</option>
-                        <option value="Carga Ligera o Mediana (hasta 3.5 Tons)">Carga Ligera o Mediana (hasta 3.5 Tons)</option>
-                        <option value="Otra carga">Otra carga (especificar)</option>
+                        <option value="Acero / Varilla / Viguetas">{isEn ? 'Steel / Rebar / Beams' : 'Acero / Varilla / Viguetas'}</option>
+                        <option value="Cemento / Material Paletizado">{isEn ? 'Palletized Cement / Building Materials' : 'Cemento / Material Paletizado'}</option>
+                        <option value="Block / Ladrillo / Prefabricados">{isEn ? 'Blocks / Brick / Precast Concrete' : 'Block / Ladrillo / Prefabricados'}</option>
+                        <option value="Estructuras Metálicas">{isEn ? 'Structural Steel & Metal Frames' : 'Estructuras Metálicas'}</option>
+                        <option value="Maquinaria Pesada (Lowboy)">{isEn ? 'Heavy Machinery (Lowboy)' : 'Maquinaria Pesada (Lowboy)'}</option>
+                        <option value="Carga Ligera o Mediana (hasta 3.5 Tons)">{isEn ? 'Light / Medium Freight (up to 3.5 Tons)' : 'Carga Ligera o Mediana (hasta 3.5 Tons)'}</option>
+                        <option value="Otra carga">{isEn ? 'Other cargo (specify)' : 'Otra carga (especificar)'}</option>
                       </select>
                     </div>
 
@@ -369,7 +427,7 @@ export default function LandingPlanas({ onOpenQuote }) {
                         <input
                           type="text"
                           className="form-control form-control-sm"
-                          placeholder="Especifica el tipo de material *"
+                          placeholder={isEn ? 'Specify type of material *' : 'Especifica el tipo de material *'}
                           required
                           value={formData.otraCarga}
                           onChange={(e) => setFormData({ ...formData, otraCarga: e.target.value })}
@@ -392,12 +450,12 @@ export default function LandingPlanas({ onOpenQuote }) {
                       {submitting ? (
                         <>
                           <Loader2 size={16} className="spinner-border spinner-border-sm" />
-                          <span>Enviando...</span>
+                          <span>{isEn ? 'Sending...' : 'Enviando...'}</span>
                         </>
                       ) : (
                         <>
                           <Send size={16} />
-                          <span>Solicitar Cotización</span>
+                          <span>{isEn ? 'Request Fast Quote' : 'Solicitar Cotización'}</span>
                         </>
                       )}
                     </button>
@@ -405,7 +463,7 @@ export default function LandingPlanas({ onOpenQuote }) {
                     <div className="text-center mt-3 pt-2" style={{ borderTop: '1px solid #f1f5f9' }}>
                       <Link to="/fletes-carga-ligera" style={{ fontSize: '12.5px', color: '#0284c7', fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
                         <Package size={14} />
-                        <span>¿Carga menor a 3.5 Tons? Ver unidades ligeras ➔</span>
+                        <span>{isEn ? 'Cargo under 3.5 Tons? View light units ➔' : '¿Carga menor a 3.5 Tons? Ver unidades ligeras ➔'}</span>
                       </Link>
                     </div>
                   </form>
@@ -422,10 +480,10 @@ export default function LandingPlanas({ onOpenQuote }) {
           <div className="row g-2 align-items-center justify-content-between text-center text-md-start">
             <div className="col-lg-3 col-12 mb-2 mb-lg-0">
               <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#94a3b8', fontWeight: 700 }}>
-                Corredor de Carga
+                {isEn ? 'Freight Corridor' : 'Corredor de Carga'}
               </span>
               <h4 style={{ fontSize: '16px', color: '#ffffff', margin: 0, fontWeight: 700 }}>
-                Rutas Principales
+                {isEn ? 'Primary Routes' : 'Rutas Principales'}
               </h4>
             </div>
             <div className="col-lg-9 col-12">
@@ -473,9 +531,13 @@ export default function LandingPlanas({ onOpenQuote }) {
       <section className="landing-section" style={{ padding: '60px 0' }}>
         <div className="container">
           <div className="landing-section-title" style={{ marginBottom: '36px' }}>
-            <span className="section-tag">Flota Disponible</span>
-            <h2>Semirremolques de Plataforma y Carga</h2>
-            <p>Unidades verificadas con mantenimiento continuo y choferes con licencia federal.</p>
+            <span className="section-tag">{isEn ? 'Available Fleet' : 'Flota Disponible'}</span>
+            <h2>{isEn ? 'Flatbed Semitrailers & Cargo Platforms' : 'Semirremolques de Plataforma y Carga'}</h2>
+            <p>
+              {isEn
+                ? 'Verified units with continuous maintenance and federally licensed commercial drivers.'
+                : 'Unidades verificadas con mantenimiento continuo y choferes con licencia federal.'}
+            </p>
           </div>
 
           <div className="row g-4 justify-content-center">
@@ -502,14 +564,18 @@ export default function LandingPlanas({ onOpenQuote }) {
                     </div>
 
                     <a
-                      href={`https://api.whatsapp.com/send?phone=524427999440&text=${encodeURIComponent(`Hola Orma Logistics, me interesa cotizar: ${item.title}`)}`}
+                      href={`https://api.whatsapp.com/send?phone=524427999440&text=${encodeURIComponent(
+                        isEn
+                          ? `Hello Orma Logistics, I am interested in quoting: ${item.title}`
+                          : `Hola Orma Logistics, me interesa cotizar: ${item.title}`
+                      )}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-card-quote"
                       onClick={() => trackWhatsAppClick(`Fleet - ${item.title}`)}
                     >
                       <MessageCircle size={16} />
-                      <span>Cotizar por WhatsApp</span>
+                      <span>{isEn ? 'Quote on WhatsApp' : 'Cotizar por WhatsApp'}</span>
                     </a>
                   </div>
                 </div>
@@ -531,13 +597,17 @@ export default function LandingPlanas({ onOpenQuote }) {
             <div className="col-lg-8">
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#38bdf8', fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' }}>
                 <Package size={14} />
-                <span>Logística Ligera y Mediana</span>
+                <span>{isEn ? 'Light & Medium Logistics' : 'Logística Ligera y Mediana'}</span>
               </div>
               <h3 style={{ color: '#ffffff', fontSize: '21px', fontWeight: 800, margin: '0 0 6px' }}>
-                ¿No requieres un tráiler de 40 pies? También hacemos logística en cargas menores
+                {isEn
+                  ? "Don't need a 40 ft trailer? We also handle light and medium freight"
+                  : '¿No requieres un tráiler de 40 pies? También hacemos logística en cargas menores'}
               </h3>
               <p style={{ color: '#94a3b8', fontSize: '14px', margin: 0 }}>
-                Traslado rápido y seguro de material, tarimas, herrería y equipo desde 500 kg hasta 3.5 toneladas con camionetas y remolques de plataforma en Mérida, Cancún y toda la Península.
+                {isEn
+                  ? 'Fast and secure transport of materials, pallets, equipment, and structural items from 500 kg to 3.5 tons with flatbed pickups and trailers in Mérida, Cancún, and the Peninsula.'
+                  : 'Traslado rápido y seguro de material, tarimas, herrería y equipo desde 500 kg hasta 3.5 toneladas con camionetas y remolques de plataforma en Mérida, Cancún y toda la Península.'}
               </p>
             </div>
             <div className="col-lg-4 text-lg-end text-start">
@@ -558,7 +628,7 @@ export default function LandingPlanas({ onOpenQuote }) {
                   whiteSpace: 'nowrap'
                 }}
               >
-                <span>Ver Fletes de Carga Menor</span>
+                <span>{isEn ? 'View Light Freight' : 'Ver Fletes de Carga Menor'}</span>
                 <span style={{ fontSize: '16px' }}>➔</span>
               </Link>
             </div>
@@ -573,29 +643,43 @@ export default function LandingPlanas({ onOpenQuote }) {
             <div className="col-md-3 col-6">
               <div style={{ padding: '12px' }}>
                 <Award size={26} color="#2563eb" style={{ marginBottom: '8px' }} />
-                <h4 style={{ fontSize: '17px', fontWeight: 800, color: '#0f172a', margin: '0 0 2px' }}>+30 Años</h4>
-                <p style={{ fontSize: '12.5px', color: '#64748b', margin: 0 }}>Experiencia logística</p>
+                <h4 style={{ fontSize: '17px', fontWeight: 800, color: '#0f172a', margin: '0 0 2px' }}>
+                  {isEn ? '+30 Years' : '+30 Años'}
+                </h4>
+                <p style={{ fontSize: '12.5px', color: '#64748b', margin: 0 }}>
+                  {isEn ? 'Logistics experience' : 'Experiencia logística'}
+                </p>
               </div>
             </div>
             <div className="col-md-3 col-6">
               <div style={{ padding: '12px' }}>
                 <ShieldCheck size={26} color="#2563eb" style={{ marginBottom: '8px' }} />
                 <h4 style={{ fontSize: '17px', fontWeight: 800, color: '#0f172a', margin: '0 0 2px' }}>Carta Porte</h4>
-                <p style={{ fontSize: '12.5px', color: '#64748b', margin: 0 }}>100% formal ante el SAT</p>
+                <p style={{ fontSize: '12.5px', color: '#64748b', margin: 0 }}>
+                  {isEn ? '100% formal SAT tax compliance' : '100% formal ante el SAT'}
+                </p>
               </div>
             </div>
             <div className="col-md-3 col-6">
               <div style={{ padding: '12px' }}>
                 <Clock size={26} color="#2563eb" style={{ marginBottom: '8px' }} />
-                <h4 style={{ fontSize: '17px', fontWeight: 800, color: '#0f172a', margin: '0 0 2px' }}>GPS Satelital</h4>
-                <p style={{ fontSize: '12.5px', color: '#64748b', margin: 0 }}>Rastreo continuo 24/7</p>
+                <h4 style={{ fontSize: '17px', fontWeight: 800, color: '#0f172a', margin: '0 0 2px' }}>
+                  {isEn ? 'Satellite GPS' : 'GPS Satelital'}
+                </h4>
+                <p style={{ fontSize: '12.5px', color: '#64748b', margin: 0 }}>
+                  {isEn ? '24/7 continuous tracking' : 'Rastreo continuo 24/7'}
+                </p>
               </div>
             </div>
             <div className="col-md-3 col-6">
               <div style={{ padding: '12px' }}>
                 <MapPin size={26} color="#2563eb" style={{ marginBottom: '8px' }} />
-                <h4 style={{ fontSize: '17px', fontWeight: 800, color: '#0f172a', margin: '0 0 2px' }}>Toda la Península</h4>
-                <p style={{ fontSize: '12.5px', color: '#64748b', margin: 0 }}>Mérida ➔ Cancún ➔ Sur</p>
+                <h4 style={{ fontSize: '17px', fontWeight: 800, color: '#0f172a', margin: '0 0 2px' }}>
+                  {isEn ? 'All the Peninsula' : 'Toda la Península'}
+                </h4>
+                <p style={{ fontSize: '12.5px', color: '#64748b', margin: 0 }}>
+                  {isEn ? 'Mérida ➔ Cancún ➔ South' : 'Mérida ➔ Cancún ➔ Sur'}
+                </p>
               </div>
             </div>
           </div>
@@ -606,8 +690,8 @@ export default function LandingPlanas({ onOpenQuote }) {
       <section className="landing-section" style={{ padding: '50px 0' }}>
         <div className="container">
           <div className="landing-section-title" style={{ marginBottom: '28px' }}>
-            <span className="section-tag">Preguntas Frecuentes</span>
-            <h2>Dudas Habituales sobre Fletes</h2>
+            <span className="section-tag">{isEn ? 'Frequently Asked Questions' : 'Preguntas Frecuentes'}</span>
+            <h2>{isEn ? 'Common Questions About Freight' : 'Dudas Habituales sobre Fletes'}</h2>
           </div>
 
           <div className="row justify-content-center">
@@ -638,20 +722,28 @@ export default function LandingPlanas({ onOpenQuote }) {
       {/* FINAL CALL TO ACTION BANNER */}
       <section className="landing-cta-banner" style={{ padding: '50px 0' }}>
         <div className="container text-center">
-          <h2 style={{ fontSize: '26px', marginBottom: '10px' }}>¿Requieres una Plana de 40 Pies Hoy Mismo?</h2>
+          <h2 style={{ fontSize: '26px', marginBottom: '10px' }}>
+            {isEn ? 'Need a 40 Ft Flatbed Today?' : '¿Requieres una Plana de 40 Pies Hoy Mismo?'}
+          </h2>
           <p style={{ fontSize: '15px', color: '#cbd5e1', marginBottom: '22px' }}>
-            Atención directa para fletes en Mérida, Cancún, Valladolid, Playa del Carmen, Tulum y Chetumal.
+            {isEn
+              ? 'Direct attention for freight in Mérida, Cancún, Valladolid, Playa del Carmen, Tulum, and Chetumal.'
+              : 'Atención directa para fletes en Mérida, Cancún, Valladolid, Playa del Carmen, Tulum y Chetumal.'}
           </p>
           <div className="d-flex justify-content-center flex-wrap gap-3">
             <a
-              href="https://api.whatsapp.com/send?phone=524427999440&text=Hola%20Orma%20Logistics%2C%20requiero%20cotizar%20flete%20en%20plana%20(Ruta%3A%20M%C3%A9rida%20%2F%20Canc%C3%BAn%20%2F%20Pen%C3%ADnsula)."
+              href={`https://api.whatsapp.com/send?phone=524427999440&text=${encodeURIComponent(
+                isEn
+                  ? 'Hello Orma Logistics, I would like to quote flatbed trailer freight (Route: Mérida / Cancún / Peninsula).'
+                  : 'Hola Orma Logistics, requiero cotizar flete en plana (Ruta: Mérida / Cancún / Península).'
+              )}`}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-cta-wa"
               onClick={() => trackWhatsAppClick('Bottom Banner Planas')}
             >
               <MessageCircle size={20} />
-              <span>Cotizar por WhatsApp</span>
+              <span>{isEn ? 'Quote on WhatsApp' : 'Cotizar por WhatsApp'}</span>
             </a>
             <a
               href="tel:524427999440"
@@ -659,17 +751,21 @@ export default function LandingPlanas({ onOpenQuote }) {
               onClick={() => trackPhoneClick('Bottom Banner Planas')}
             >
               <Phone size={18} />
-              <span>Llamar (442) 799 9440</span>
+              <span>{isEn ? 'Call (442) 799 9440' : 'Llamar (442) 799 9440'}</span>
             </a>
           </div>
         </div>
       </section>
 
-      {/* STICKY BAR FOR SMARTPHONES (SIN ROJO Y CON ORDEN DE RUTAS) */}
+      {/* STICKY BAR FOR SMARTPHONES */}
       <LandingStickyBar
-        serviceName="Renta de Planas (Mérida • Cancún • Tulum • Chetumal)"
+        serviceName={isEn ? 'Flatbed Trailer Rentals (Mérida • Cancún • Tulum • Chetumal)' : 'Renta de Planas (Mérida • Cancún • Tulum • Chetumal)'}
         phoneNumber="524427999440"
-        customWaText="Hola Orma Logistics, vi su página y requiero cotizar flete en plana hacia Mérida / Cancún / Tulum / Península."
+        customWaText={
+          isEn
+            ? 'Hello Orma Logistics, I visited your website and would like to quote flatbed trailer freight to Mérida / Cancún / Tulum / Peninsula.'
+            : 'Hola Orma Logistics, vi su página y requiero cotizar flete en plana hacia Mérida / Cancún / Tulum / Península.'
+        }
       />
     </div>
   );
