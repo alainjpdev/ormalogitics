@@ -1,6 +1,7 @@
 import React from 'react';
 import { Phone, MessageCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { trackWhatsAppClick, trackPhoneClick } from '../utils/analytics';
 
 export default function LandingStickyBar({
   serviceName = 'Transporte de Personal',
@@ -17,7 +18,11 @@ export default function LandingStickyBar({
 
   return (
     <aside className="mobile-sticky-bar" aria-label="Acciones rápidas de contacto">
-      <a href={`tel:${phoneNumber}`} className="mobile-sticky-btn-call">
+      <a
+        href={`tel:${phoneNumber}`}
+        className="mobile-sticky-btn-call"
+        onClick={() => trackPhoneClick(`StickyBar - ${serviceName}`)}
+      >
         <Phone size={18} />
         <span>{language === 'en' ? 'Call' : 'Llamar'}</span>
       </a>
@@ -26,6 +31,7 @@ export default function LandingStickyBar({
         target="_blank"
         rel="noopener noreferrer"
         className="mobile-sticky-btn-wa"
+        onClick={() => trackWhatsAppClick(`StickyBar - ${serviceName}`)}
       >
         <MessageCircle size={18} />
         <span>{language === 'en' ? 'Quote on WhatsApp' : 'Cotizar WhatsApp'}</span>

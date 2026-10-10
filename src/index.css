@@ -453,21 +453,22 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background-color: #c32637;
+  background-color: #1e293b;
   color: #ffffff !important;
   font-size: 16px;
   font-weight: 700;
   padding: 15px 28px;
   border-radius: 8px;
   text-decoration: none;
-  box-shadow: 0 8px 24px rgba(195, 38, 55, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.25);
   transition: all 0.25s ease;
 }
 
 .btn-cta-call:hover {
-  background-color: #a81c2b;
+  background-color: #0f172a;
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(195, 38, 55, 0.45);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.35);
 }
 
 /* Quick Quote Box in Hero */
@@ -851,9 +852,10 @@
 
 /* Bottom CTA Banner */
 .landing-cta-banner {
-  background: linear-gradient(135deg, #c32637 0%, #ff7600 100%);
+  background: linear-gradient(135deg, #0b1329 0%, #0f172a 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   color: #ffffff;
-  padding: 70px 0;
+  padding: 60px 0;
   text-align: center;
 }
 
@@ -959,7 +961,7 @@
   background: rgba(15, 23, 42, 0.98);
   backdrop-filter: blur(10px);
   border-top: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 10px 14px;
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
   display: flex;
   gap: 10px;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.35);
@@ -971,13 +973,19 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: #c32637;
+  background: #1e293b;
   color: #ffffff !important;
   font-size: 14px;
   font-weight: 700;
   padding: 12px;
   border-radius: 8px;
   text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: background 0.2s ease;
+}
+
+.mobile-sticky-btn-call:hover {
+  background: #0f172a;
 }
 
 .mobile-sticky-btn-wa {
@@ -1012,6 +1020,12 @@
     margin-top: 40px;
   }
   body {
-    padding-bottom: 65px; /* Give room for mobile sticky bar */
+    padding-bottom: calc(75px + env(safe-area-inset-bottom, 0px)); /* Give room for mobile sticky bar + safe area */
+  }
+
+  /* Evita doble botón de WhatsApp en celular ocultando el flotante cuando la barra fija está activa */
+  .whatsapp-float,
+  .floating-whatsapp {
+    display: none !important;
   }
 }

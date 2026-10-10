@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { trackWhatsAppClick } from '../utils/analytics';
 
 export default function FloatingWhatsApp() {
   const { language } = useLanguage();
@@ -15,6 +16,7 @@ export default function FloatingWhatsApp() {
       className="whatsapp-float floating-whatsapp"
       aria-label={language === 'en' ? 'Contact via WhatsApp' : 'Contactar por WhatsApp'}
       title={language === 'en' ? 'Chat on WhatsApp' : 'Contactar por WhatsApp'}
+      onClick={() => trackWhatsAppClick('FloatingButton')}
     >
       <i className="fab fa-whatsapp"></i>
     </a>

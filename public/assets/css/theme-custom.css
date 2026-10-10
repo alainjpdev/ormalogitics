@@ -215,7 +215,7 @@ header.header-1.sticky .logo img {
   width: 320px;
   max-width: 85vw;
   height: 100vh;
-  background-color: #c32637 !important;
+  background-color: #0f172a !important;
   z-index: 10000;
   padding: 25px 20px;
   transition: right .35s ease-in-out;
@@ -857,7 +857,7 @@ header.header-1.sticky .logo img {
   right: 30px;
   width: 45px;
   height: 45px;
-  background-color: #c32637 !important;
+  background-color: #0f172a !important;
   color: #ffffff;
   border-radius: 4px;
   display: flex;
